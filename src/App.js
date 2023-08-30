@@ -1,8 +1,11 @@
+import AuthPage from './pages/auth_page'
 function App() {
+
+
     return (
-        <div>
-            <h1>hi</h1>
-        </div>
+        <>
+            <AuthPage />
+        </>
     );
 }
 
