@@ -1,12 +1,11 @@
-import AuthPage from './pages/auth_page'
+import AuthPage from "./pages/auth_page";
 function App() {
-
-
-    return (
-        <>
-            <AuthPage />
-        </>
-    );
+  return (
+    <>
+      <AuthPage />
+      <div>try</div>
+    </>
+  );
 }
 
 export default App;
