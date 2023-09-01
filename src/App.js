@@ -3,7 +3,6 @@ function App() {
   return (
     <>
       <AuthPage />
-      <div>try</div>
     </>
   );
 }
