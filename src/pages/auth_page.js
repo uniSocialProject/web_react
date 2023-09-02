@@ -13,7 +13,7 @@ function AuthPage() {
       display="flex"
       justifyContent="center"
       alignItems="center"
-      minHeight="98vh"
+      minHeight="100vh"
       sx={{ backgroundColor: "#F7F7F7" }}
     >
       <Grid container>
