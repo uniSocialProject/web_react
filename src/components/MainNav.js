@@ -50,9 +50,6 @@ function ResponsiveAppBar() {
                             <Button
                                 disableRipple
                                 key={page}
-                                onClick={() => {
-                                    console.log('test');
-                                }}
                                 sx={{
                                     fontSize: 16,
                                     my: 2,
