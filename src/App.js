@@ -1,9 +1,15 @@
-import AuthPage from "./pages/auth_page";
+import AuthPage from "./pages/AuthPage";
+import Layout from "./components/Layout/Layout";
+import { Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
 function App() {
   return (
-    <>
-      <AuthPage />
-    </>
+    <Layout>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<AuthPage />} />
+      </Routes>
+    </Layout>
   );
 }
 
