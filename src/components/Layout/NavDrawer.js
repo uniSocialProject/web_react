@@ -24,7 +24,7 @@ const NavDrawer = () => {
                     setIsDrawerOpen(true);
                 }}
             >
-                <MenuIcon />
+                <MenuIcon fontSize='large'  />
             </IconButton>
             <Drawer
                 anchor="right"
@@ -37,8 +37,8 @@ const NavDrawer = () => {
                     <Typography variant="h6" component={'div'}>
                         Deneme
                     </Typography>
-                    <List >
-                        <NavLink to={'/login'} >
+                    <List>
+                        <NavLink to={'/login'}>
                             <ListItemButton
                                 variant="contained"
                                 sx={{

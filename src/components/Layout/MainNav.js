@@ -14,14 +14,14 @@ import NavLinks from './NavLinks';
 import logo from '../../images/navIcon.png';
 
 function ResponsiveAppBar() {
-    const isSmallScreen = useMediaQuery('(max-width:700px)');
+    const isSmallScreen = useMediaQuery('(max-width:850px)');
 
     return (
         <AppBar
             position="fixed"
             style={{ background: 'transparent', boxShadow: 'none' }}
         >
-            <Container maxWidth="xl">
+            <Container maxWidth={'2000'} >
                 <Toolbar
                     disableGutters
                     sx={{ display: 'flex', justifyContent: 'space-between' }}
@@ -31,23 +31,31 @@ function ResponsiveAppBar() {
                             variant="text"
                             sx={{
                                 backgroundColor: 'inherit',
-                                ml: 0,
                                 '&.MuiButtonBase-root:hover': {
                                     bgcolor: 'transparent',
+                                },
+                                width: {
+                                    xs: 200,
+                                    sm: 220,
+                                    md: 240,
+                                    lg: 250,
+                                    xl: 260,
+                                },
+                                ml: {
+                                    xs: 0,
+                                    sm: 1.5,
+                                    md: 2,
+                                    lg: 2.5,
+                                    xl: 3,
                                 },
                             }}
                             disableRipple
                         >
-                            <img
-                                src={logo}
-                                alt="logo"
-                                width={150}
-                                draggable={false}
-                            />
+                            <img src={logo} alt="logo" draggable={false} />
                         </Button>
                     </NavLink>
                     {!isSmallScreen && <NavLinks />}
-                    {isSmallScreen && <NavDrawer />}
+                    {isSmallScreen && <NavDrawer  />}
                 </Toolbar>
             </Container>
         </AppBar>
