@@ -1,13 +1,15 @@
-import React, { Fragment } from "react";
-import MainNav from "./MainNav";
+//components
+import MainNav from './MainNav';
+//packages
+import { Outlet } from 'react-router';
 
 const Layout = (props) => {
-  return (
-    <Fragment>
-      <MainNav />
-      <main>{props.children}</main>
-    </Fragment>
-  );
+    return (
+        <>
+            <MainNav />
+            <Outlet />
+        </>
+    );
 };
 
 export default Layout;

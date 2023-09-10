@@ -1,16 +1,26 @@
-import AuthPage from "./pages/AuthPage";
-import Layout from "./components/Layout/Layout";
-import { Routes, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage";
+//components
+import Layout from './components/Layout/Layout';
+//pages
+import AuthPage from './pages/AuthPage';
+import HomePage from './pages/HomePage';
+import ErrorPage from './pages/ErrorPage';
+//packages
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
+const router = createBrowserRouter([
+    {
+        path: '/',
+        element: <Layout />,
+        errorElement: <ErrorPage />,
+        children: [
+            { index: true, element: <HomePage /> },
+            { path: 'login', element: <AuthPage /> },
+        ],
+    },
+]);
+
 function App() {
-  return (
-    <Layout>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<AuthPage />} />
-      </Routes>
-    </Layout>
-  );
+    return <RouterProvider router={router} />;
 }
 
 export default App;
