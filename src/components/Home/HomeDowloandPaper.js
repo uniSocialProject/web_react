@@ -1,7 +1,7 @@
-import { Grid, IconButton, Typography, useMediaQuery } from '@mui/material';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
+//packages
+import { Grid, IconButton, Typography, useMediaQuery ,Box , Paper } from '@mui/material';
 import '@fontsource/roboto/400.css';
+//icons
 import AppStoreIcon from '../../svgs/AppStoreIcon';
 import googlePlayBadge from '../../images/google-play-badge.png';
 
