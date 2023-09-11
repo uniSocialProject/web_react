@@ -1,8 +1,9 @@
-import React from "react";
+//components
+import HomeDowloandPaper from "../components/Home/HomeDowloandPaper";
 
 const HomePage = () => {
   return (
-    <div className="h-56 grid grid-cols-3 gap-4 content-center">MAIN PAGE</div>
+    <HomeDowloandPaper />
   );
 };
 
