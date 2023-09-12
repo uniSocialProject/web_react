@@ -10,7 +10,6 @@ import {
 //components
 import NavDrawer from './NavDrawer';
 import NavLinks from './NavLinks';
-
 import logo from '../../images/navIcon.png';
 
 function ResponsiveAppBar() {
@@ -19,12 +18,20 @@ function ResponsiveAppBar() {
     return (
         <AppBar
             position="fixed"
-            style={{ background: 'transparent', boxShadow: 'none' }}
+            style={{
+                background: 'transparent',
+                boxShadow: 'none',
+                paddingTop: 15,
+                px: {
+                    xs: 10,
+                    sm: 15,
+                },
+            }}
         >
-            <Container maxWidth={'2000'} >
+            <Container maxWidth={'2000'}>
                 <Toolbar
                     disableGutters
-                    sx={{ display: 'flex', justifyContent: 'space-between' }}
+                    className='flex justify-between'
                 >
                     <NavLink to={'/'}>
                         <Button
@@ -55,7 +62,7 @@ function ResponsiveAppBar() {
                         </Button>
                     </NavLink>
                     {!isSmallScreen && <NavLinks />}
-                    {isSmallScreen && <NavDrawer  />}
+                    {isSmallScreen && <NavDrawer />}
                 </Toolbar>
             </Container>
         </AppBar>

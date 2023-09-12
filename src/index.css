@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
+body {
     margin: 0;
+    /* background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqeZ5mVbarupP8UWVic7UtumtbIyE0GY-ucQ&usqp=CAU'); */
+}
+
+.bg-blur {
+    background: transparent;
+    backdrop-filter: blur(8px);
 }

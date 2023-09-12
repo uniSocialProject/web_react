@@ -6,10 +6,6 @@ import AppStoreIcon from '../../svgs/AppStoreIcon';
 import googlePlayBadge from '../../images/google-play-badge.png';
 
 const HomeDowloandPaper = () => {
-    //Box shadow
-    let elevationNum;
-    const isElevation = useMediaQuery('(max-width:800px)');
-    isElevation ? (elevationNum = 0) : (elevationNum = 24);
 
     return (
         <Grid
@@ -39,13 +35,13 @@ const HomeDowloandPaper = () => {
                             minWidth: {
                                 xs: 250,
                                 sm: 300,
-                                md: 400,
+                                md: 450,
                                 lg: 500,
                             },
                         },
                     }}
                 >
-                    <Paper elevation={elevationNum}>
+                    <Paper elevation={0}>
                         <Typography
                             variant="h2"
                             fontFamily={'roboto'}
@@ -104,11 +100,15 @@ const HomeDowloandPaper = () => {
                                 sx={{
                                     display: 'flex',
                                     flexWrap: 'wrap',
-                                    justifyContent: 'center',
+                                    justifyContent: {
+                                        xs:'center',
+                                        vs:'center',
+                                        md:'left',
+                                    },
                                 }}
                             >
                                 <IconButton disableRipple>
-                                    <AppStoreIcon width={215} height={80} />
+                                    <AppStoreIcon width={205} height={60} />
                                 </IconButton>
                             </Grid>
                             <Grid
@@ -117,7 +117,12 @@ const HomeDowloandPaper = () => {
                                 sx={{
                                     display: 'flex',
                                     flexWrap: 'wrap',
-                                    justifyContent: 'center',
+                                    justifyContent: {
+                                        xs:'center',
+                                        vs:'center',
+                                        md:'left',
+                                        vl:'right'
+                                    },
                                 }}
                             >
                                 <IconButton disableRipple>
@@ -137,3 +142,4 @@ const HomeDowloandPaper = () => {
 };
 
 export default HomeDowloandPaper;
+
