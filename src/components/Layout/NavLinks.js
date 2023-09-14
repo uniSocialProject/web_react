@@ -27,7 +27,7 @@ const NavLinks = () => {
     return (
         <>
             {/* {gets link and text props} */}
-            <NavigationLink text={'item1'} />
+            <NavigationLink link={'login-test'} text={'test-login'} />
             <NavigationLink text={'item2'} />
             <NavigationLink text={'item3'} />
 
