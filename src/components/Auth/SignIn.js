@@ -6,8 +6,6 @@ import {
     Button,
     CssBaseline,
     TextField,
-    FormControlLabel,
-    Checkbox,
     Link,
     Grid,
     Box,
@@ -118,10 +116,10 @@ const SignIn = () => {
                             ),
                         }}
                     />
-                    <FormControlLabel
+                    {/* <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}
                         label="Beni hatırla"
-                    />
+                    /> */}
                     <Button
                         type="submit"
                         fullWidth
@@ -131,7 +129,7 @@ const SignIn = () => {
                         Giriş yap
                     </Button>
                     <Grid container className="justify-center text-center">
-                        <Grid item xs={12} className="mb-2">
+                        <Grid item xs={12} mb={1}>
                             <Link href="#" variant="body2" underline="hover">
                                 Şifreni mi unuttun ?
                             </Link>

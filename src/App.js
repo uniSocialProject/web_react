@@ -4,7 +4,8 @@ import Layout from './components/Layout/Layout';
 import AuthPage from './pages/AuthPage';
 import HomePage from './pages/HomePage';
 import ErrorPage from './pages/ErrorPage';
-import AuthLogin from './pages/AuthLogin';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 //packages
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material';
@@ -34,7 +35,8 @@ const router = createBrowserRouter([
         children: [
             { index: true, element: <HomePage /> },
             { path: 'login', element: <AuthPage /> },
-            { path: 'login-test', element: <AuthLogin /> },
+            { path: 'login-test', element: <LoginPage /> },
+            { path: 'register-test', element: <RegisterPage /> },
         ],
     },
 ]);

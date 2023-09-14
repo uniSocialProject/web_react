@@ -28,8 +28,8 @@ const NavLinks = () => {
         <>
             {/* {gets link and text props} */}
             <NavigationLink link={'login-test'} text={'test-login'} />
-            <NavigationLink text={'item2'} />
-            <NavigationLink text={'item3'} />
+            <NavigationLink link={'register-test'} text={'register-test'} />
+            <NavigationLink link={'forgotten-password'} text={'forgotten-password'} />
 
             {/* {login button} */}
             <NavLink to="/login">
