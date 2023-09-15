@@ -120,7 +120,7 @@ const HomeDowloandPaper = () => {
                                     justifyContent: {
                                         xs:'center',
                                         vs:'center',
-                                        md:'left',
+                                        md:'center',
                                         vl:'right'
                                     },
                                 }}

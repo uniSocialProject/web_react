@@ -13,7 +13,10 @@ const UnivercityOptions = () => {
         <Autocomplete
             id="univercitys"
             options={univercitys}
-            sx={{ width: 350  , mb:2}}
+            sx={{ width: {
+                xs:300,
+                md:350,
+            }  , mb:2}}
             renderInput={(params) => (
                 <TextField {...params} label="Üniversite" />
             )}
