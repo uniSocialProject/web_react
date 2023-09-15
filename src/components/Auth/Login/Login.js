@@ -6,7 +6,6 @@ import {
     Button,
     CssBaseline,
     TextField,
-    Link,
     Grid,
     Box,
     Typography,
@@ -47,7 +46,12 @@ const SignIn = () => {
     const [isPasswordVisible, setIsPasswordVisible] = useState(true);
     const [passwordType, setPasswordType] = useState('password');
 
+
+
     const visibilityToggleHandler = () => {
+        if(isPasswordEntered){
+            setIsPasswordVisible(false)
+        }
         setIsPasswordVisible(!isPasswordVisible);
         passwordType === 'password'
             ? setPasswordType('text')

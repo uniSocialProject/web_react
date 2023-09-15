@@ -1,14 +1,35 @@
-export const emailValidation = (email) => {
+const emailValidation = (email) => {
     var re =
         /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
     return re.test(email);
 };
 
-// -at least 8 characters
-// - must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number
-// - Can contain special characters
+const passwordStrenght = (password) => {
+    let passwordStrenghtPoint = 0;
 
-export const passwordValidation = (password) => {
-    var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
-    return re.test(password);
+    //regexs
+    const isDecimal = /^(?=.*\d)/;
+    const isCapitalLetter = /^(?=.*[A-Z])/;
+    const isSpecialChar =
+        /(?=.*?[!"#\$%&'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~])/;
+
+    //!tests
+    //is Number ?
+    isDecimal.test(password) ? passwordStrenghtPoint++ : passwordStrenghtPoint;
+    //is contain capital letter?
+    isCapitalLetter.test(password)
+        ? passwordStrenghtPoint++
+        : passwordStrenghtPoint;
+    //is contain special char (!,@,<,...)?
+    isSpecialChar.test(password)
+        ? passwordStrenghtPoint++
+        : passwordStrenghtPoint;
+    //is long ?
+    password.trim().length > 8
+        ? passwordStrenghtPoint++
+        : passwordStrenghtPoint;
+
+    return passwordStrenghtPoint;
 };
+
+console.log(passwordStrenght('asdasD@asDDD1231'));

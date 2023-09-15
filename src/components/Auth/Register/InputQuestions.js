@@ -11,7 +11,9 @@ import {
     Switch,
     InputAdornment,
     Tooltip,
+    LinearProgress,
 } from '@mui/material';
+
 //components
 import UnivercityOptions from './UnivercityOptions';
 import DepartmentOptions from './DepartmentOptions';
@@ -19,6 +21,7 @@ import RegisterKvkkForm from './RegisterKvkkForm';
 //icons
 import InfoIcon from '@mui/icons-material/Info';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import PasswordStrengthBar from './PasswordStrengthBar';
 
 const InputQuestions = (props) => {
     //email input tooltip
@@ -37,16 +40,16 @@ const InputQuestions = (props) => {
         );
     };
 
-    //password done icon 
+    //password done icon
     const PasswordEndAdornment = () => {
         return (
             <>
-             <InputAdornment position='end' >
-                <CheckCircleIcon color='success' fontSize='medium' />
-             </InputAdornment>
+                <InputAdornment position="end">
+                    <CheckCircleIcon color="success" fontSize="medium" />
+                </InputAdornment>
             </>
-        )
-    }
+        );
+    };
 
     //kvkk functions
     const [isKvkk, setIsKvkk] = useState(false);
@@ -219,9 +222,12 @@ const InputQuestions = (props) => {
                                         type="password"
                                         id="surname"
                                         InputProps={{
-                                            endAdornment: <PasswordEndAdornment />
+                                            endAdornment: (
+                                                <PasswordEndAdornment />
+                                            ),
                                         }}
                                     />
+                                    <PasswordStrengthBar  password={'aB!aaaaaaaa/2'} />
                                     <FormControlLabel
                                         required
                                         control={<Switch />}
