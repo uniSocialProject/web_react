@@ -18,20 +18,35 @@ import DepartmentOptions from './DepartmentOptions';
 import RegisterKvkkForm from './RegisterKvkkForm';
 //icons
 import InfoIcon from '@mui/icons-material/Info';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 const InputQuestions = (props) => {
     //email input tooltip
-    const EndAdornment = () => {
+    const EmailEndAdornment = () => {
         return (
             <>
                 <InputAdornment position="end">
-                    <Tooltip title={'Üniversite öğrenci e-postanı girmelisin'} placement="top">
+                    <Tooltip
+                        title={'Üniversite öğrenci e-postanı girmelisin'}
+                        placement="top"
+                    >
                         <InfoIcon />
                     </Tooltip>
                 </InputAdornment>
             </>
         );
     };
+
+    //password done icon 
+    const PasswordEndAdornment = () => {
+        return (
+            <>
+             <InputAdornment position='end' >
+                <CheckCircleIcon color='success' fontSize='medium' />
+             </InputAdornment>
+            </>
+        )
+    }
 
     //kvkk functions
     const [isKvkk, setIsKvkk] = useState(false);
@@ -48,65 +63,59 @@ const InputQuestions = (props) => {
                 <Grid item xs={12}>
                     {props.activeStep === 1 && (
                         <>
-                            <Container
-                                component="main"
-                                maxWidth="xs"
-                                className="bg-slate-50 shadow-xl rounded-md p-3 mt-10 "
+                            <CssBaseline />
+                            <Box
+                                sx={{
+                                    p: 2,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                }}
                             >
-                                <CssBaseline />
+                                <Typography component="h1" variant="h5">
+                                    Adınızı ve soyadınızı giriniz
+                                </Typography>
                                 <Box
-                                    sx={{
-                                        p: 2,
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        alignItems: 'center',
-                                    }}
+                                    component="form"
+                                    onSubmit={props.submitHandler}
+                                    noValidate
                                 >
-                                    <Typography component="h1" variant="h5">
-                                        Adınızı ve soyadınızı giriniz
-                                    </Typography>
-                                    <Box
-                                        component="form"
-                                        onSubmit={props.submitHandler}
-                                        noValidate
-                                    >
-                                        <TextField
-                                            margin="normal"
-                                            fullWidth
-                                            id="name"
-                                            label="Ad"
-                                            name="name"
-                                            autoComplete="email"
-                                            autoFocus
-                                        />
-                                        <TextField
-                                            margin="normal"
-                                            fullWidth
-                                            name="Soyad"
-                                            label="Soyad"
-                                            type="text"
-                                            id="surname"
-                                        />
+                                    <TextField
+                                        margin="normal"
+                                        fullWidth
+                                        id="name"
+                                        label="Ad"
+                                        name="name"
+                                        autoComplete="email"
+                                        autoFocus
+                                    />
+                                    <TextField
+                                        margin="normal"
+                                        fullWidth
+                                        name="Soyad"
+                                        label="Soyad"
+                                        type="text"
+                                        id="surname"
+                                    />
 
-                                        <Grid container textAlign={'center'}>
-                                            <Grid item xs={12}>
-                                                <Button
-                                                    variant="contained"
-                                                    onClick={
-                                                        props.activeStepIncrementHandler
-                                                    }
-                                                >
-                                                    Sıradaki Soru
-                                                </Button>
-                                            </Grid>
+                                    <Grid container textAlign={'center'} mt={2}>
+                                        <Grid item xs={12}>
+                                            <Button
+                                                variant="contained"
+                                                onClick={
+                                                    props.activeStepIncrementHandler
+                                                }
+                                            >
+                                                Sıradaki Soru
+                                            </Button>
                                         </Grid>
-                                        <Grid
-                                            container
-                                            className="justify-center text-center"
-                                        ></Grid>
-                                    </Box>
+                                    </Grid>
+                                    <Grid
+                                        container
+                                        className="justify-center text-center"
+                                    ></Grid>
                                 </Box>
-                            </Container>
+                            </Box>
                         </>
                     )}
                 </Grid>
@@ -114,68 +123,58 @@ const InputQuestions = (props) => {
                 <Grid item xs={12}>
                     {props.activeStep === 2 && (
                         <>
-                            <Container
-                                component="main"
-                                maxWidth="xs"
-                                className="bg-slate-50 shadow-xl rounded-md p-3 mt-10"
+                            <CssBaseline />
+                            <Box
+                                sx={{
+                                    p: 2,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                }}
                             >
-                                <CssBaseline />
-                                <Box
-                                    sx={{
-                                        p: 2,
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        alignItems: 'center',
-                                    }}
+                                <Typography
+                                    component="h1"
+                                    variant="h6"
+                                    mb={1.5}
                                 >
-                                    <Typography
-                                        component="h1"
-                                        variant="h5"
-                                        mb={1.5}
-                                    >
-                                        Üniversite ve Bölümünüzü giriniz
-                                    </Typography>
-                                    <Box
-                                        component="form"
-                                        onSubmit={props.submitHandler}
-                                        noValidate
-                                    >
-                                        <UnivercityOptions />
-                                        <DepartmentOptions />
+                                    Üniversitenizi ve Bölümünüzü giriniz
+                                </Typography>
+                                <Box
+                                    component="form"
+                                    onSubmit={props.submitHandler}
+                                    noValidate
+                                >
+                                    <UnivercityOptions />
+                                    <DepartmentOptions />
 
-                                        <Grid
-                                            container
-                                            textAlign={'center'}
-                                            mt={2}
-                                        >
-                                            <Grid item xs={6}>
-                                                <Button
-                                                    variant="contained"
-                                                    onClick={
-                                                        props.activeStepDecrementHandler
-                                                    }
-                                                >
-                                                    Önceki Soru
-                                                </Button>
-                                            </Grid>
-                                            <Grid item xs={6}>
-                                                <Button
-                                                    variant="contained"
-                                                    onClick={
-                                                        props.activeStepIncrementHandler
-                                                    }
-                                                >
-                                                    Sıradaki Soru
-                                                </Button>
-                                            </Grid>
+                                    <Grid container textAlign={'center'} mt={2}>
+                                        <Grid item xs={6}>
+                                            <Button
+                                                variant="contained"
+                                                onClick={
+                                                    props.activeStepDecrementHandler
+                                                }
+                                            >
+                                                Önceki Soru
+                                            </Button>
                                         </Grid>
-                                        <Grid
-                                            container
-                                            className="justify-center text-center"
-                                        ></Grid>
-                                    </Box>
+                                        <Grid item xs={6}>
+                                            <Button
+                                                variant="contained"
+                                                onClick={
+                                                    props.activeStepIncrementHandler
+                                                }
+                                            >
+                                                Sıradaki Soru
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid
+                                        container
+                                        className="justify-center text-center"
+                                    ></Grid>
                                 </Box>
-                            </Container>
+                            </Box>
                         </>
                     )}
                 </Grid>
@@ -183,94 +182,91 @@ const InputQuestions = (props) => {
                 <Grid item xs={12}>
                     {props.activeStep === 3 && (
                         <>
-                            <Container
-                                component="main"
-                                maxWidth="xs"
-                                className="bg-slate-50 shadow-xl rounded-md p-3 mt-10 "
+                            <CssBaseline />
+                            <Box
+                                sx={{
+                                    p: 2,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                }}
                             >
-                                <CssBaseline />
+                                <Typography component="h1" variant="h5">
+                                    E-posta ve Yeni şifrenizi giriniz
+                                </Typography>
                                 <Box
-                                    sx={{
-                                        p: 2,
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        alignItems: 'center',
-                                    }}
+                                    component="form"
+                                    onSubmit={props.submitHandler}
+                                    noValidate
                                 >
-                                    <Typography component="h1" variant="h5">
-                                        Adınızı ve soyadınızı giriniz
-                                    </Typography>
-                                    <Box
-                                        component="form"
-                                        onSubmit={props.submitHandler}
-                                        noValidate
-                                    >
-                                        <TextField
-                                            margin="normal"
-                                            fullWidth
-                                            id="email"
-                                            label="E-mail"
-                                            name="email"
-                                            autoComplete="email"
-                                            autoFocus
-                                            InputProps={{
-                                                endAdornment: <EndAdornment />,
-                                            }}
-                                        />
-                                        <TextField
-                                            margin="normal"
-                                            fullWidth
-                                            name="password"
-                                            label="Şifre"
-                                            type="text"
-                                            id="surname"
-                                        />
-                                        <FormControlLabel
-                                            required
-                                            control={<Switch />}
-                                            label={
-                                                <Typography
-                                                    fontSize={14}
-                                                    color={'GrayText'}
-                                                >
-                                                    Kvkk Kanununu Okudum ve
-                                                    Kabul Ediyorum
-                                                </Typography>
-                                            }
-                                            onClick={kvkkHandler}
-                                            checked={isKvkk}
-                                        />
+                                    <TextField
+                                        margin="normal"
+                                        fullWidth
+                                        id="email"
+                                        label="E-mail"
+                                        name="email"
+                                        autoComplete="email"
+                                        autoFocus
+                                        InputProps={{
+                                            endAdornment: <EmailEndAdornment />,
+                                        }}
+                                    />
+                                    <TextField
+                                        margin="normal"
+                                        fullWidth
+                                        name="password"
+                                        label="Yeni Şifrenizi giriniz"
+                                        type="password"
+                                        id="surname"
+                                        InputProps={{
+                                            endAdornment: <PasswordEndAdornment />
+                                        }}
+                                    />
+                                    <FormControlLabel
+                                        required
+                                        control={<Switch />}
+                                        label={
+                                            <Typography
+                                                fontSize={14}
+                                                color={'GrayText'}
+                                            >
+                                                Kvkk Kanununu Okudum ve Kabul
+                                                Ediyorum
+                                            </Typography>
+                                        }
+                                        onClick={kvkkHandler}
+                                        checked={isKvkk}
+                                    />
 
-                                        <Grid
-                                            container
-                                            textAlign={'center'}
-                                            mt={1.5}
-                                        >
-                                            <Grid item xs={6}>
-                                                <Button
-                                                    variant="contained"
-                                                    onClick={
-                                                        props.activeStepDecrementHandler
-                                                    }
-                                                >
-                                                    Önceki Soru
-                                                </Button>
-                                            </Grid>
-                                            <Grid item xs={6}>
-                                                <Button
-                                                    variant="contained"
-                                                    color="success"
-                                                    onClick={
-                                                        props.activeStepIncrementHandler
-                                                    }
-                                                >
-                                                    Kayıt Ol
-                                                </Button>
-                                            </Grid>
+                                    <Grid
+                                        container
+                                        textAlign={'center'}
+                                        mt={1.5}
+                                    >
+                                        <Grid item xs={6}>
+                                            <Button
+                                                variant="contained"
+                                                onClick={
+                                                    props.activeStepDecrementHandler
+                                                }
+                                            >
+                                                Önceki Soru
+                                            </Button>
                                         </Grid>
-                                    </Box>
+                                        <Grid item xs={6}>
+                                            <Button
+                                                variant="contained"
+                                                color="success"
+                                                onClick={
+                                                    props.activeStepIncrementHandler
+                                                }
+                                            >
+                                                Kayıt Ol
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
                                 </Box>
-                            </Container>
+                            </Box>
                         </>
                     )}
                 </Grid>

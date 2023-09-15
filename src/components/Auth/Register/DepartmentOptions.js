@@ -13,7 +13,7 @@ const DepartmentOptions = () => {
         <Autocomplete
             id="department"
             options={departments}
-            sx={{ width: 300 }}
+            sx={{ width: 350 }}
             renderInput={(params) => <TextField {...params} label="Bölüm" />}
         />
     );

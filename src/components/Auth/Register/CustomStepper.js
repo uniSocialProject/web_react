@@ -88,7 +88,7 @@ const CustomStepper = () => {
     };
 
     return (
-        <Stack sx={{ width: '50%' }}  mt={20}>
+        <Stack sx={{ width: '100%' }}>
             <Stepper
                 alternativeLabel
                 activeStep={currentIconIndex}
