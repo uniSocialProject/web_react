@@ -48,7 +48,7 @@ const SignIn = () => {
         setIsPasswordEntered(event.currentTarget.value.length !== 0);
     };
 
-    const handleSubmit = (event) => {
+    const submitHandler = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         console.log({
@@ -61,7 +61,7 @@ const SignIn = () => {
         <Container
             component="main"
             maxWidth="xs"
-            className="bg-slate-50 shadow-xl rounded-md p-3 mt-20"
+            className="bg-slate-50 shadow-xl rounded-md p-3 mt-28"
         >
             <CssBaseline />
             <Box
@@ -77,14 +77,11 @@ const SignIn = () => {
                 </Typography>
                 <Box
                     component="form"
-                    onSubmit={handleSubmit}
+                    onSubmit={submitHandler}
                     noValidate
                     sx={{ mt: 1 }}
                 >
                     <TextField
-                        onChange={(event) =>
-                            console.log(event.currentTarget.value)
-                        }
                         required
                         margin="normal"
                         fullWidth
@@ -116,10 +113,6 @@ const SignIn = () => {
                             ),
                         }}
                     />
-                    {/* <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
-                        label="Beni hatırla"
-                    /> */}
                     <Button
                         type="submit"
                         fullWidth
@@ -140,7 +133,9 @@ const SignIn = () => {
                         <Grid item marginY={2}>
                             <Button
                                 variant="contained"
-                                sx={{ bgcolor: 'green', pt: '4' }}
+                                sx={{ bgcolor: '#42b72a', pt: '4' ,':hover' : {
+                                    bgcolor:'#2D8D1A'
+                                }}}
                             >
                                 Yeni hesap oluştur
                             </Button>

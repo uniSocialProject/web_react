@@ -24,15 +24,16 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
             backgroundColor: '#ccc',
         },
     },
+    //connector between icons
     [`&.${stepConnectorClasses.completed}`]: {
         [`& .${stepConnectorClasses.line}`]: {
-            backgroundColor: 'blue',
+            backgroundColor: '#4583BD',
         },
     },
     [`& .${stepConnectorClasses.line}`]: {
         height: 3,
         border: 0,
-        backgroundColor: theme.palette.mode === 'dark' ? 'blue' : '#eaeaf0',
+        backgroundColor: '#eaeaf0',
         borderRadius: 1,
     },
 }));
@@ -48,11 +49,13 @@ const ColorlibStepIconRoot = styled('div')(({ theme, ownerState }) => ({
     borderRadius: '50%',
     justifyContent: 'center',
     alignItems: 'center',
+    //next step
     ...(ownerState.active && {
         backgroundColor: '#ccc',
     }),
+    // completed step
     ...(ownerState.completed && {
-        backgroundColor: 'blue',
+        backgroundColor: '#1976d2',
     }),
 }));
 
@@ -85,7 +88,7 @@ const CustomStepper = () => {
     };
 
     return (
-        <Stack sx={{ width: '50%' }} spacing={4} mt={20}>
+        <Stack sx={{ width: '50%' }}  mt={20}>
             <Stepper
                 alternativeLabel
                 activeStep={currentIconIndex}
