@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
     Grid,
     Container,
@@ -6,15 +7,44 @@ import {
     Typography,
     TextField,
     Button,
+    FormControlLabel,
+    Switch,
+    InputAdornment,
+    Tooltip,
 } from '@mui/material';
 //components
 import UnivercityOptions from './UnivercityOptions';
 import DepartmentOptions from './DepartmentOptions';
+import RegisterKvkkForm from './RegisterKvkkForm';
+//icons
+import InfoIcon from '@mui/icons-material/Info';
 
 const InputQuestions = (props) => {
+    //email input tooltip
+    const EndAdornment = () => {
+        return (
+            <>
+                <InputAdornment position="end">
+                    <Tooltip title={'Üniversite öğrenci e-postanı girmelisin'} placement="top">
+                        <InfoIcon />
+                    </Tooltip>
+                </InputAdornment>
+            </>
+        );
+    };
+
+    //kvkk functions
+    const [isKvkk, setIsKvkk] = useState(false);
+    const kvkkHandler = () => {
+        setIsKvkk((prev) => !prev);
+    };
+
     return (
         <>
+            {/* {kvkk submit modal} */}
+            {isKvkk && <RegisterKvkkForm />}
             <Grid container display={'flex'} justifyContent={'center'}>
+                {/* {first questions} */}
                 <Grid item xs={12}>
                     {props.activeStep === 1 && (
                         <>
@@ -80,6 +110,7 @@ const InputQuestions = (props) => {
                         </>
                     )}
                 </Grid>
+                {/* {second questions} */}
                 <Grid item xs={12}>
                     {props.activeStep === 2 && (
                         <>
@@ -148,6 +179,7 @@ const InputQuestions = (props) => {
                         </>
                     )}
                 </Grid>
+                {/* {third question} */}
                 <Grid item xs={12}>
                     {props.activeStep === 3 && (
                         <>
@@ -176,23 +208,45 @@ const InputQuestions = (props) => {
                                         <TextField
                                             margin="normal"
                                             fullWidth
-                                            id="name"
-                                            label="Ad"
-                                            name="name"
+                                            id="email"
+                                            label="E-mail"
+                                            name="email"
                                             autoComplete="email"
                                             autoFocus
+                                            InputProps={{
+                                                endAdornment: <EndAdornment />,
+                                            }}
                                         />
                                         <TextField
                                             margin="normal"
                                             fullWidth
-                                            name="Soyad"
-                                            label="Soyad"
+                                            name="password"
+                                            label="Şifre"
                                             type="text"
                                             id="surname"
                                         />
+                                        <FormControlLabel
+                                            required
+                                            control={<Switch />}
+                                            label={
+                                                <Typography
+                                                    fontSize={14}
+                                                    color={'GrayText'}
+                                                >
+                                                    Kvkk Kanununu Okudum ve
+                                                    Kabul Ediyorum
+                                                </Typography>
+                                            }
+                                            onClick={kvkkHandler}
+                                            checked={isKvkk}
+                                        />
 
-                                        <Grid container textAlign={'center'}>
-                                        <Grid item xs={6}>
+                                        <Grid
+                                            container
+                                            textAlign={'center'}
+                                            mt={1.5}
+                                        >
+                                            <Grid item xs={6}>
                                                 <Button
                                                     variant="contained"
                                                     onClick={
@@ -205,7 +259,7 @@ const InputQuestions = (props) => {
                                             <Grid item xs={6}>
                                                 <Button
                                                     variant="contained"
-                                                    color='success'
+                                                    color="success"
                                                     onClick={
                                                         props.activeStepIncrementHandler
                                                     }
