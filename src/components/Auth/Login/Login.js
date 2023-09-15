@@ -36,7 +36,7 @@ const EndAdornment = (props) => {
 
 const SignIn = () => {
     //forgotten password statements
-    const [isModalOpen, setIsModalOpen] = useState(true);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const forgotPasswordHandler = () => {
         setIsModalOpen((prev) => !prev)
