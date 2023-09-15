@@ -21,7 +21,7 @@ function ResponsiveAppBar() {
             style={{
                 background: 'transparent',
                 boxShadow: 'none',
-                paddingTop: 15,
+                backdropFilter:'blur(4px)',
                 px: {
                     xs: 10,
                     sm: 15,
@@ -32,6 +32,7 @@ function ResponsiveAppBar() {
                 <Toolbar
                     disableGutters
                     className='flex justify-between'
+                    sx={{py:2}}
                 >
                     <NavLink to={'/'}>
                         <Button
