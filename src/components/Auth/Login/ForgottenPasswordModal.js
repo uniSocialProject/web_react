@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import CustomizedSwitches from './SmsEmailSwitch';
 //functions
 import { loginActions } from '../../../store/loginSlice';
+import TelephoneInput from './TelephoneInput';
 
 const ForgottenPasswordModal = (props) => {
     const dispatch = useDispatch();
@@ -38,19 +39,18 @@ const ForgottenPasswordModal = (props) => {
                         şifreni yenileyebilirsin
                     </DialogContentText>
                     <CustomizedSwitches />
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="name"
-                        label={
-                            isSms
-                                ? 'Telefon numaranızı yazınız'
-                                : 'Üniversite e-postanızı yazınız'
-                        }
-                        type={isSms ? 'number' : 'email'}
-                        fullWidth
-                        variant="standard"
-                    />
+                    {!isSms && (
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            id="email"
+                            label="Üniversite e-postanızı giriniz"
+                            type="email"
+                            fullWidth
+                            variant="standard"
+                        />
+                    )}
+                    {isSms && <TelephoneInput />}
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={closeBtnHandler}>İptal</Button>
