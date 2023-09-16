@@ -16,8 +16,11 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 //hooks
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 //components
 import ForgottenPasswordModal from './ForgottenPasswordModal';
+//functions
+import { loginActions } from '../../../store/loginSlice';
 
 //Visibility Icon
 const EndAdornment = (props) => {
@@ -34,23 +37,22 @@ const EndAdornment = (props) => {
 };
 
 const SignIn = () => {
+    const dispatch = useDispatch();
     //forgotten password statements
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const isModalOpen = useSelector((state) => state.login.isModalOpen);
 
     const forgotPasswordHandler = () => {
-        setIsModalOpen((prev) => !prev)
-    }
+        dispatch(loginActions.modalToggleHandler());
+    };
 
     //password eye icon statements
     const [isPasswordEntered, setIsPasswordEntered] = useState(false);
     const [isPasswordVisible, setIsPasswordVisible] = useState(true);
     const [passwordType, setPasswordType] = useState('password');
 
-
-
     const visibilityToggleHandler = () => {
-        if(isPasswordEntered){
-            setIsPasswordVisible(false)
+        if (isPasswordEntered) {
+            setIsPasswordVisible(false);
         }
         setIsPasswordVisible(!isPasswordVisible);
         passwordType === 'password'
@@ -138,13 +140,19 @@ const SignIn = () => {
                             Giriş yap
                         </Button>
                         <Grid container className="justify-center text-center">
-                            <Grid item xs={12} >
-                                <Button disableRipple onClick={forgotPasswordHandler} size='small' sx={{
-                                    ':hover' : {
-                                        bgcolor:'transparent'
-                                    }
-                                }} >
-                                    redux olana kadar çalışmıyor ?
+                            <Grid item xs={12}>
+                                <Button
+                                    disableRipple
+                                    onClick={forgotPasswordHandler}
+                                    size="medium"
+                                    sx={{
+                                        textTransform: 'capitalize',
+                                        ':hover': {
+                                            bgcolor: 'transparent',
+                                        },
+                                    }}
+                                >
+                                    Şifreni mi unuttun ?
                                 </Button>
                             </Grid>
                             <Divider

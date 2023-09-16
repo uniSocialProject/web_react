@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
     Grid,
     styled,
@@ -8,6 +7,11 @@ import {
     Stack,
     Typography,
 } from '@mui/material';
+//hooks
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+//functions
+import { loginActions } from '../../../store/loginSlice';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
@@ -55,10 +59,11 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 }));
 
 export default function CustomizedSwitches() {
-    const [isSms, setIsSms] = useState(true);
+    const dispatch = useDispatch();
+    const isSms = useSelector((state) => state.login.isSms);
 
     const switchHandler = () => {
-        setIsSms((prev) => !prev);
+        dispatch(loginActions.smsOrEmailToggleHandler())
     };
 
     return (
@@ -67,7 +72,7 @@ export default function CustomizedSwitches() {
                 <Grid item xs={6} display={'flex'} justifyContent={'right'}>
                     <FormControlLabel
                         control={
-                            <MaterialUISwitch sx={{ my: 2 }} defaultChecked />
+                            <MaterialUISwitch sx={{ my: 2 }}  />
                         }
                         onClick={switchHandler}
                     />
@@ -81,7 +86,7 @@ export default function CustomizedSwitches() {
                 >
                     <Typography>
                         {isSms
-                            ? 'Sms ile Şifreyi Yenile'
+                            ? 'Sms ile Şifremi Yenile'
                             : 'Öğrenci e-postası ile şifremi yenile'}
                     </Typography>
                 </Grid>

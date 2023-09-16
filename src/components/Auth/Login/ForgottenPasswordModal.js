@@ -1,5 +1,4 @@
-import React from 'react';
-
+//packages
 import {
     Button,
     TextField,
@@ -9,25 +8,29 @@ import {
     DialogContentText,
     DialogTitle,
 } from '@mui/material';
-
+//hooks
+import { useDispatch, useSelector } from 'react-redux';
+//components
 import CustomizedSwitches from './SmsEmailSwitch';
+//functions
+import { loginActions } from '../../../store/loginSlice';
 
 const ForgottenPasswordModal = (props) => {
-    const [open, setOpen] = React.useState(false);
+    const dispatch = useDispatch();
+    const isModalOpen = useSelector((state) => state.login.isModalOpen);
+    const isSms = useSelector((state) => state.login.isSms);
 
-    const handleClickOpen = () => {
-        //redux modal opener
-        setOpen(true);
+    const closeBtnHandler = () => {
+        dispatch(loginActions.modalToggleHandler());
     };
 
-    const handleClose = () => {
-        //redux modal closer
-        setOpen(false);
+    const submitBtnHandler = () => {
+        console.log('test');
     };
 
     return (
         <div>
-            <Dialog open={props.open} onClose={handleClose}>
+            <Dialog open={isModalOpen} onClose={closeBtnHandler}>
                 <DialogTitle>Şifremi yenile</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
@@ -39,15 +42,19 @@ const ForgottenPasswordModal = (props) => {
                         autoFocus
                         margin="dense"
                         id="name"
-                        label="Email Address"
-                        type="tel"
+                        label={
+                            isSms
+                                ? 'Telefon numaranızı yazınız'
+                                : 'Üniversite e-postanızı yazınız'
+                        }
+                        type={isSms ? 'number' : 'email'}
                         fullWidth
                         variant="standard"
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>İptal</Button>
-                    <Button onClick={handleClose}>Onayla</Button>
+                    <Button onClick={closeBtnHandler}>İptal</Button>
+                    <Button onClick={submitBtnHandler}>Onayla</Button>
                 </DialogActions>
             </Dialog>
         </div>
