@@ -48,16 +48,24 @@ const SignIn = () => {
 
     //email redux statements
     const [enteredEmail, setEnteredEmail] = useState('');
-    const emailBlurHandler = (event) => {
-        setEnteredEmail(event.currentTarget.value)
+
+    const emailBlurHandler = () => {
         dispatch(loginActions.emailChanger(enteredEmail));
     };
 
-    //password eye icon statements
+    const emailChangeHandler = (event) => {
+        setEnteredEmail(event.currentTarget.value);
+    };
+
+    //password redux statements
     const [isPasswordEntered, setIsPasswordEntered] = useState(false);
     const [isPasswordVisible, setIsPasswordVisible] = useState(true);
     const [passwordType, setPasswordType] = useState('password');
 
+    const passwordBlurHandler = (event) => {
+        dispatch(loginActions.passwordChanger(event.currentTarget.value));
+        dispatch(loginActions.isPasswordEntered(isPasswordEntered));
+    };
     const visibilityToggleHandler = () => {
         if (isPasswordEntered) {
             setIsPasswordVisible(false);
@@ -72,7 +80,9 @@ const SignIn = () => {
         setIsPasswordEntered(event.currentTarget.value.length !== 0);
     };
 
+    //submit redux statementss
     const submitHandler = (event) => {
+        dispatch(loginActions.emailChanger(enteredEmail));
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         console.log({
@@ -112,15 +122,14 @@ const SignIn = () => {
                             margin="normal"
                             fullWidth
                             id="email"
+                            type="email"
                             label="E-posta adresi"
                             name="email"
                             autoComplete="email"
-                            autoFocus
                             onBlur={emailBlurHandler}
-                            onBlurCapture={() => console.log('test2')}
+                            onChange={emailChangeHandler}
                         />
                         <TextField
-                            onChange={passwordChangeHandler}
                             required
                             margin="normal"
                             fullWidth
@@ -129,6 +138,8 @@ const SignIn = () => {
                             type={passwordType}
                             id="password"
                             autoComplete="current-password"
+                            onChange={passwordChangeHandler}
+                            onBlur={passwordBlurHandler}
                             InputProps={{
                                 endAdornment: (
                                     <EndAdornment

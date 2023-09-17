@@ -8,12 +8,12 @@ const loginSlice = createSlice({
         isSms: false,
         telNo: '',
         //email
-        isEmailEntered: false,
-        isEmailCorrect: false,
+        isEmailEntered: null,
+        isEmailValid: null,
         emailValue: '',
         //password
-        isPasswordEntered: false,
-        isPasswordCorrect: false,
+        isPasswordEntered: null,
+        isPasswordValid: null,
         passwordValue: '',
     },
     reducers: {
@@ -26,9 +26,28 @@ const loginSlice = createSlice({
         telNoChanger(state, action) {
             state.telNo = action.payload;
         },
-        emailChanger(state,action){
-            state.emailValue = action.payload
-        }
+
+        //email functions
+        emailChanger(state, action) {
+            state.emailValue = action.payload;
+        },
+        isEmailEntered(state, action) {
+            state.isEmailEntered = action.payload;
+        },
+        isEmailValid(state, action) {
+            state.isEmailValid = action.payload;
+        },
+        //password functions
+
+        passwordChanger(state, action) {
+            state.passwordValue = action.payload;
+        },
+        isPasswordEntered(state, action) {
+            state.isPasswordEntered = action.payload;
+        },
+        isPasswordValid(state, action) {
+            state.isPasswordValid = action.payload;
+        },
     },
 });
 
