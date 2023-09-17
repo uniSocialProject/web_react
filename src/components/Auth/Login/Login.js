@@ -43,14 +43,15 @@ const SignIn = () => {
     const isModalOpen = useSelector((state) => state.login.isModalOpen);
     const forgotPasswordHandler = () => {
         dispatch(loginActions.modalToggleHandler());
+        dispatch(loginActions.emailChanger(enteredEmail));
     };
 
     //email redux statements
-    const [enteredEmail , setEnteredEmail] = useState('');
+    const [enteredEmail, setEnteredEmail] = useState('');
     const emailBlurHandler = (event) => {
         setEnteredEmail(event.currentTarget.value)
-        dispatch(loginActions.emailChanger(enteredEmail))
-    }
+        dispatch(loginActions.emailChanger(enteredEmail));
+    };
 
     //password eye icon statements
     const [isPasswordEntered, setIsPasswordEntered] = useState(false);
@@ -116,6 +117,7 @@ const SignIn = () => {
                             autoComplete="email"
                             autoFocus
                             onBlur={emailBlurHandler}
+                            onBlurCapture={() => console.log('test2')}
                         />
                         <TextField
                             onChange={passwordChangeHandler}

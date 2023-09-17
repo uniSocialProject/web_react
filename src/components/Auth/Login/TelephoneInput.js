@@ -24,9 +24,9 @@ const TelephoneInput = () => {
             let updatedTel = enteredTel.split(' ').join('');
             console.log(updatedTel);
             if (updatedTel.length > 10) {
-                setIsInvalidTel(false)
+                setIsInvalidTel(true)
             }else{
-                setIsInvalidTel(true);
+                setIsInvalidTel(false);
             }
             dispatch(loginActions.telNoChanger(enteredTel));
         }
@@ -34,7 +34,7 @@ const TelephoneInput = () => {
 
     return (
         <>
-            {!isInvalidTel && (
+            {isInvalidTel && (
                 <Alert severity="error">
                     Telefon numaranızın 10 haneli olması gerekmektedir , lütfen
                     başına 0 koymadan deneyiniz
