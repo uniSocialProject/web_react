@@ -1,5 +1,5 @@
 //packages
-import { TextField } from '@mui/material';
+import { Alert, TextField } from '@mui/material';
 //functions
 import { loginActions } from '../../../store/loginSlice';
 //hooks
@@ -9,6 +9,7 @@ import { useState } from 'react';
 const TelephoneInput = () => {
     const dispatch = useDispatch();
     const [enteredTel, setEnteredTel] = useState('');
+    const [isInvalidTel, setIsInvalidTel] = useState(false);
 
     const textChangeHandler = (event) => {
         if (enteredTel.length === 2 || enteredTel.length === 6) {
@@ -19,13 +20,26 @@ const TelephoneInput = () => {
     };
 
     const textBlurHandler = () => {
-        if (enteredTel.length === 12) {
+        if (enteredTel.trim().length === 12) {
+            let updatedTel = enteredTel.split(' ').join('');
+            console.log(updatedTel);
+            if (updatedTel.length > 10) {
+                setIsInvalidTel(false)
+            }else{
+                setIsInvalidTel(true);
+            }
             dispatch(loginActions.telNoChanger(enteredTel));
         }
     };
 
     return (
         <>
+            {!isInvalidTel && (
+                <Alert severity="error">
+                    Telefon numaranızın 10 haneli olması gerekmektedir , lütfen
+                    başına 0 koymadan deneyiniz
+                </Alert>
+            )}
             <TextField
                 fullWidth
                 autoFocus
