@@ -4,7 +4,7 @@
 const Background = () => {
   return (
     
-      <ul class="background">
+      <ul className="background">
         <li></li>
         <li></li>
         <li></li>

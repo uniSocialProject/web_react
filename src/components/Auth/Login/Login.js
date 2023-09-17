@@ -1,8 +1,6 @@
 //packages
 import {
     Divider,
-    IconButton,
-    InputAdornment,
     Button,
     CssBaseline,
     TextField,
@@ -11,9 +9,7 @@ import {
     Typography,
     Container,
 } from '@mui/material';
-//icons
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+
 //hooks
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,20 +17,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import ForgottenPasswordModal from './ForgottenPasswordModal';
 //functions
 import { loginActions } from '../../../store/loginSlice';
-
-//Visibility Icon
-const EndAdornment = (props) => {
-    return (
-        <InputAdornment position="end">
-            <IconButton onClick={props.visibilityToggleHandler}>
-                {props.isPasswordVisible && props.visible && <VisibilityIcon />}
-                {!props.isPasswordVisible && props.visible && (
-                    <VisibilityOffIcon />
-                )}
-            </IconButton>
-        </InputAdornment>
-    );
-};
+//adornments
+import { EyeEndAdornment, SuccessAdornment } from './Adornments';
 
 const SignIn = () => {
     const dispatch = useDispatch();
@@ -43,7 +27,6 @@ const SignIn = () => {
     const isModalOpen = useSelector((state) => state.login.isModalOpen);
     const forgotPasswordHandler = () => {
         dispatch(loginActions.modalToggleHandler());
-        dispatch(loginActions.emailChanger(enteredEmail));
     };
 
     //email redux statements
@@ -51,6 +34,8 @@ const SignIn = () => {
 
     const emailBlurHandler = () => {
         dispatch(loginActions.emailChanger(enteredEmail));
+        dispatch(loginActions.isEmailValid(enteredEmail));
+        dispatch(loginActions.isEmailEntered(enteredEmail));
     };
 
     const emailChangeHandler = (event) => {
@@ -58,13 +43,16 @@ const SignIn = () => {
     };
 
     //password redux statements
-    const [isPasswordEntered, setIsPasswordEntered] = useState(false);
     const [isPasswordVisible, setIsPasswordVisible] = useState(true);
+    const [enteredPassword, setEnteredPassword] = useState('');
     const [passwordType, setPasswordType] = useState('password');
+    const isPasswordEntered = useSelector(
+        (state) => state.login.isPasswordEntered
+    );
 
     const passwordBlurHandler = (event) => {
         dispatch(loginActions.passwordChanger(event.currentTarget.value));
-        dispatch(loginActions.isPasswordEntered(isPasswordEntered));
+        dispatch(loginActions.isPasswordEntered());
     };
     const visibilityToggleHandler = () => {
         if (isPasswordEntered) {
@@ -77,12 +65,14 @@ const SignIn = () => {
     };
 
     const passwordChangeHandler = (event) => {
-        setIsPasswordEntered(event.currentTarget.value.length !== 0);
+        setEnteredPassword(event.currentTarget.value);
+        dispatch(loginActions.passwordChanger(enteredPassword));
+        dispatch(loginActions.isPasswordEntered());
+        dispatch(loginActions.isPasswordValid(enteredPassword));
     };
 
     //submit redux statementss
     const submitHandler = (event) => {
-        dispatch(loginActions.emailChanger(enteredEmail));
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         console.log({
@@ -142,7 +132,7 @@ const SignIn = () => {
                             onBlur={passwordBlurHandler}
                             InputProps={{
                                 endAdornment: (
-                                    <EndAdornment
+                                    <EyeEndAdornment
                                         isPasswordVisible={isPasswordVisible}
                                         visibilityToggleHandler={
                                             visibilityToggleHandler
