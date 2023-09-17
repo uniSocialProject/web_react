@@ -41,7 +41,7 @@ const HomeDowloandPaper = () => {
                         },
                     }}
                 >
-                    <Paper elevation={0}>
+                    <Paper elevation={0} sx={{bgcolor:'transparent'}} >
                         <Typography
                             variant="h2"
                             fontFamily={'roboto'}
