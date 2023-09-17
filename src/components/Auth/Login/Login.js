@@ -38,12 +38,19 @@ const EndAdornment = (props) => {
 
 const SignIn = () => {
     const dispatch = useDispatch();
+
     //forgotten password statements
     const isModalOpen = useSelector((state) => state.login.isModalOpen);
-
     const forgotPasswordHandler = () => {
         dispatch(loginActions.modalToggleHandler());
     };
+
+    //email redux statements
+    const [enteredEmail , setEnteredEmail] = useState('');
+    const emailBlurHandler = (event) => {
+        setEnteredEmail(event.currentTarget.value)
+        dispatch(loginActions.emailChanger(enteredEmail))
+    }
 
     //password eye icon statements
     const [isPasswordEntered, setIsPasswordEntered] = useState(false);
@@ -108,6 +115,7 @@ const SignIn = () => {
                             name="email"
                             autoComplete="email"
                             autoFocus
+                            onBlur={emailBlurHandler}
                         />
                         <TextField
                             onChange={passwordChangeHandler}

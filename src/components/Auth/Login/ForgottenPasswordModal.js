@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 //hooks
 import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 //components
 import CustomizedSwitches from './SmsEmailSwitch';
 //functions
@@ -20,13 +21,24 @@ const ForgottenPasswordModal = (props) => {
     const dispatch = useDispatch();
     const isModalOpen = useSelector((state) => state.login.isModalOpen);
     const isSms = useSelector((state) => state.login.isSms);
+    const enteredTel = useSelector((state) => state.login.telNo);
+    const enteredEmail = useSelector((state) => state.login.emailValue);
 
+    //email change statements
+    const [email, setEmail] = useState(enteredEmail);
+    const emailChangeHandler = (event) => {
+        setEmail(event.currentTarget.value);
+    };
+
+    //modal close function
     const closeBtnHandler = () => {
         dispatch(loginActions.modalToggleHandler());
     };
 
+    //form submit function
     const submitBtnHandler = () => {
-        console.log('test');
+        //enteredTel variable contains spaces , must removed with splice() method
+        console.log(enteredTel || email);
     };
 
     return (
@@ -48,9 +60,13 @@ const ForgottenPasswordModal = (props) => {
                             type="email"
                             fullWidth
                             variant="standard"
+                            value={email}
+                            onChange={emailChangeHandler}
                         />
                     )}
-                    {isSms && <TelephoneInput />}
+                    {isSms && (
+                        <TelephoneInput submitHandler={props.submitHandler} />
+                    )}
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={closeBtnHandler}>İptal</Button>

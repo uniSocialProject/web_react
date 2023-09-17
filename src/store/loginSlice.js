@@ -5,7 +5,8 @@ const loginSlice = createSlice({
     initialState: {
         //forgotten password modal
         isModalOpen: false,
-        isSms: false, //isSms false means email option is selected
+        isSms: false,
+        telNo: '',
         //email
         isEmailEntered: false,
         isEmailCorrect: false,
@@ -22,9 +23,15 @@ const loginSlice = createSlice({
         smsOrEmailToggleHandler(state) {
             state.isSms = !state.isSms;
         },
+        telNoChanger(state, action) {
+            state.telNo = action.payload;
+        },
+        emailChanger(state,action){
+            state.emailValue = action.payload
+        }
     },
 });
 
-export const loginActions = loginSlice.actions
+export const loginActions = loginSlice.actions;
 
 export default loginSlice;

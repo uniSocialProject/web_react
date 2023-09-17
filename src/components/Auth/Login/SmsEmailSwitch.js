@@ -4,12 +4,10 @@ import {
     FormGroup,
     FormControlLabel,
     Switch,
-    Stack,
     Typography,
 } from '@mui/material';
 //hooks
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
 //functions
 import { loginActions } from '../../../store/loginSlice';
 
@@ -63,7 +61,7 @@ export default function CustomizedSwitches() {
     const isSms = useSelector((state) => state.login.isSms);
 
     const switchHandler = () => {
-        dispatch(loginActions.smsOrEmailToggleHandler())
+        dispatch(loginActions.smsOrEmailToggleHandler());
     };
 
     return (
@@ -71,10 +69,9 @@ export default function CustomizedSwitches() {
             <Grid container>
                 <Grid item xs={6} display={'flex'} justifyContent={'right'}>
                     <FormControlLabel
-                        control={
-                            <MaterialUISwitch sx={{ my: 2 }}  />
-                        }
+                        control={<MaterialUISwitch sx={{ my: 2 }} />}
                         onClick={switchHandler}
+                        checked={isSms}
                     />
                 </Grid>
                 <Grid
