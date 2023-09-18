@@ -37,8 +37,7 @@ const ForgottenPasswordModal = (props) => {
 
     //form submit function
     const submitBtnHandler = () => {
-        //enteredTel variable contains spaces , must removed with splice() method
-        console.log(enteredTel || email);
+        isSms ? console.log(enteredTel) : console.log(email);
     };
 
     return (

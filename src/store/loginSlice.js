@@ -24,7 +24,8 @@ const loginSlice = createSlice({
             state.isSms = !state.isSms;
         },
         telNoChanger(state, action) {
-            state.telNo = action.payload;
+
+            state.telNo = action.payload.split(' ').join('')
         },
 
         //email functions

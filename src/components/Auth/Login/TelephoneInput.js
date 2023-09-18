@@ -1,35 +1,24 @@
 //packages
 import { Alert, TextField } from '@mui/material';
+import InputMask from 'react-input-mask';
 //functions
 import { loginActions } from '../../../store/loginSlice';
 //hooks
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 
 const TelephoneInput = () => {
     const dispatch = useDispatch();
+    const isSms = useSelector((state) => state.login.isSms);
     const [enteredTel, setEnteredTel] = useState('');
     const [isInvalidTel, setIsInvalidTel] = useState(false);
 
     const textChangeHandler = (event) => {
-        if (enteredTel.length === 2 || enteredTel.length === 6) {
-            setEnteredTel(event.currentTarget.value + ' ');
-        } else {
-            setEnteredTel(event.currentTarget.value);
-        }
+        setEnteredTel(event.target.value);
     };
 
     const textBlurHandler = () => {
-        if (enteredTel.trim().length === 12) {
-            let updatedTel = enteredTel.split(' ').join('');
-            console.log(updatedTel);
-            if (updatedTel.length > 10) {
-                setIsInvalidTel(true)
-            }else{
-                setIsInvalidTel(false);
-            }
-            dispatch(loginActions.telNoChanger(enteredTel));
-        }
+        dispatch(loginActions.telNoChanger(enteredTel));
     };
 
     return (
@@ -40,19 +29,25 @@ const TelephoneInput = () => {
                     başına 0 koymadan deneyiniz
                 </Alert>
             )}
-            <TextField
-                fullWidth
-                autoFocus
-                margin="dense"
-                id="telephone"
-                label="Telefon numaranızı giriniz"
-                type="telephone"
-                variant="standard"
-                onChange={textChangeHandler}
-                onBlur={textBlurHandler}
-                value={enteredTel}
-                inputProps={{ maxLength: 12 }}
-            />
+            {
+                <InputMask
+                    mask="999 999 99 99"
+                    maskChar=""
+                    onChange={textChangeHandler}
+                    onBlur={textBlurHandler}
+                    value={enteredTel}
+                >
+                    {() => (
+                        <TextField
+                            fullWidth
+                            autoFocus
+                            margin="dense"
+                            id="telephone"
+                            label="Telefon numaranızı giriniz"
+                        />
+                    )}
+                </InputMask>
+            }
         </>
     );
 };
