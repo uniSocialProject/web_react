@@ -3,7 +3,7 @@ import { Grid, IconButton, Typography, useMediaQuery ,Box , Paper } from '@mui/m
 import '@fontsource/roboto/400.css';
 //icons
 import AppStoreIcon from '../../svgs/AppStoreIcon';
-import googlePlayBadge from '../../images/google-play-badge.png';
+import googlePlayBadge from '../../assets/images/google-play-badge.png';
 
 const HomeDowloandPaper = () => {
 

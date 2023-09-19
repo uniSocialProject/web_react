@@ -6,7 +6,7 @@ import {
     Button,
     useMediaQuery,
 } from '@mui/material';
-import image from '../images/logo.png';
+import image from '../assets/images/logo.png';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 

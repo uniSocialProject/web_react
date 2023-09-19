@@ -10,7 +10,7 @@ import {
 //components
 import NavDrawer from './NavDrawer';
 import NavLinks from './NavLinks';
-import logo from '../../images/navIcon.png';
+import logo from '../../assets/images/navIcon.png';
 
 function ResponsiveAppBar() {
     const isSmallScreen = useMediaQuery('(max-width:850px)');
