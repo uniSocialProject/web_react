@@ -9,7 +9,7 @@ const loginSlice = createSlice({
         telNo: '',
         //email
         isEmailEntered: null,
-        isEmailValid: null,
+        isEmailValid: false,
         emailValue: '',
         //password
         isPasswordEntered: null,

@@ -18,6 +18,7 @@ import LoginEmailInput from './LoginEmailInput';
 import LoginPasswordInput from './LoginPasswordInput';
 //functions
 import { loginActions } from '../../../store/loginSlice';
+import { login } from '../../../util/loginReq';
 
 //invalid credentials shake animation
 const spin = keyframes`
@@ -67,10 +68,15 @@ const SignIn = () => {
         }
 
         const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        if (isEmailValid && isPasswordValid) {
+            
+            login(data.get('email'), data.get('password'));
+
+            console.log({
+                email: data.get('email'),
+                password: data.get('password'),
+            });
+        }
     };
 
     return (
