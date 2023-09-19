@@ -3,25 +3,46 @@ import {
     Divider,
     Button,
     CssBaseline,
-    TextField,
     Grid,
     Box,
     Typography,
     Container,
+    keyframes,
 } from '@mui/material';
-
 //hooks
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 //components
 import ForgottenPasswordModal from './ForgottenPasswordModal';
+import LoginEmailInput from './LoginEmailInput';
+import LoginPasswordInput from './LoginPasswordInput';
 //functions
 import { loginActions } from '../../../store/loginSlice';
-//adornments
-import { EyeEndAdornment, SuccessAdornment } from './Adornments';
+
+//invalid credentials shake animation
+const spin = keyframes`
+    25% {
+        transform: translateX(5px)
+    }
+    50% {
+        transform: translateX(-5px)
+    }
+    75% {
+        transform: translateX(5px)
+    }
+    100% {
+        transform: translateX(-5px)
+    }
+`;
 
 const SignIn = () => {
     const dispatch = useDispatch();
+    //is credentials invalid
+    const isEmailValid = useSelector((state) => state.login.isEmailValid);
+    const isPasswordValid = useSelector((state) => state.login.isPasswordValid);
+
+    const [isEmailShake, setIsEmailShake] = useState(false);
+    const [isPasswordShake, setIsPasswordShake] = useState(false);
 
     //forgotten password statements
     const isModalOpen = useSelector((state) => state.login.isModalOpen);
@@ -29,51 +50,22 @@ const SignIn = () => {
         dispatch(loginActions.modalToggleHandler());
     };
 
-    //email redux statements
-    const [enteredEmail, setEnteredEmail] = useState('');
-
-    const emailBlurHandler = () => {
-        dispatch(loginActions.emailChanger(enteredEmail));
-        dispatch(loginActions.isEmailValid(enteredEmail));
-        dispatch(loginActions.isEmailEntered(enteredEmail));
-    };
-
-    const emailChangeHandler = (event) => {
-        setEnteredEmail(event.currentTarget.value);
-    };
-
-    //password redux statements
-    const [isPasswordVisible, setIsPasswordVisible] = useState(true);
-    const [enteredPassword, setEnteredPassword] = useState('');
-    const [passwordType, setPasswordType] = useState('password');
-    const isPasswordEntered = useSelector(
-        (state) => state.login.isPasswordEntered
-    );
-
-    const passwordBlurHandler = (event) => {
-        dispatch(loginActions.passwordChanger(event.currentTarget.value));
-        dispatch(loginActions.isPasswordEntered());
-    };
-    const visibilityToggleHandler = () => {
-        if (isPasswordEntered) {
-            setIsPasswordVisible(false);
-        }
-        setIsPasswordVisible(!isPasswordVisible);
-        passwordType === 'password'
-            ? setPasswordType('text')
-            : setPasswordType('password');
-    };
-
-    const passwordChangeHandler = (event) => {
-        setEnteredPassword(event.currentTarget.value);
-        dispatch(loginActions.passwordChanger(enteredPassword));
-        dispatch(loginActions.isPasswordEntered());
-        dispatch(loginActions.isPasswordValid(enteredPassword));
-    };
-
     //submit redux statementss
     const submitHandler = (event) => {
         event.preventDefault();
+        if (!isEmailValid) {
+            setIsEmailShake(true);
+            setTimeout(() => {
+                setIsEmailShake(false);
+            }, 500);
+        }
+        if (!isPasswordValid) {
+            setIsPasswordShake(true);
+            setTimeout(() => {
+                setIsPasswordShake(false);
+            }, 500);
+        }
+
         const data = new FormData(event.currentTarget);
         console.log({
             email: data.get('email'),
@@ -107,41 +99,10 @@ const SignIn = () => {
                         noValidate
                         sx={{ mt: 1 }}
                     >
-                        <TextField
-                            required
-                            margin="normal"
-                            fullWidth
-                            id="email"
-                            type="email"
-                            label="E-posta adresi"
-                            name="email"
-                            autoComplete="email"
-                            onBlur={emailBlurHandler}
-                            onChange={emailChangeHandler}
-                        />
-                        <TextField
-                            required
-                            margin="normal"
-                            fullWidth
-                            name="password"
-                            label="Şifre"
-                            type={passwordType}
-                            id="password"
-                            autoComplete="current-password"
-                            onChange={passwordChangeHandler}
-                            onBlur={passwordBlurHandler}
-                            InputProps={{
-                                endAdornment: (
-                                    <EyeEndAdornment
-                                        isPasswordVisible={isPasswordVisible}
-                                        visibilityToggleHandler={
-                                            visibilityToggleHandler
-                                        }
-                                        visible={isPasswordEntered}
-                                    />
-                                ),
-                            }}
-                        />
+                        {/* {login Inputs} */}
+                        <LoginEmailInput isEmailShake={isEmailShake} />
+                        <LoginPasswordInput isPasswordShake={isPasswordShake} />
+
                         <Button
                             type="submit"
                             fullWidth

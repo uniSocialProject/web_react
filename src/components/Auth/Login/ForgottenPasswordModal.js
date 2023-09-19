@@ -38,6 +38,7 @@ const ForgottenPasswordModal = (props) => {
     //form submit function
     const submitBtnHandler = () => {
         isSms ? console.log(enteredTel) : console.log(email);
+        dispatch(loginActions.modalToggleHandler());
     };
 
     return (
