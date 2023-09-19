@@ -4,6 +4,7 @@ const registerSlice = createSlice({
     name: 'register',
     initialState: {
         step: 1,
+        isKvkk:false,
         //first step constants
         nameValue: '',
         isNameEntered: false,
@@ -24,8 +25,11 @@ const registerSlice = createSlice({
         isKvkkSubmitted: false,
     },
     reducers: {
-        stepChangeHandler(state,action){
-            state.step = action.payload
+        stepChangeHandler(state, action) {
+            state.step = action.payload;
+        },
+        kvkkToggleHandler(state){
+            state.isKvkk = !state.isKvkk
         }
     },
 });

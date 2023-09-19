@@ -1,25 +1,32 @@
-import { useState } from 'react';
+//packages
 import { Grid } from '@mui/material';
-import InputQuestions from './InputQuestions';
+//hooks
 import { useDispatch, useSelector } from 'react-redux';
+//functions
 import { registerActions } from '../../../store/registerSlice';
-
+//components
+import Inputs1 from './questions/Inputs1';
+import Inputs2 from './questions/Inputs2';
+import Inputs3 from './questions/Inputs3';
+import RegisterKvkkForm from './RegisterKvkkForm';
 const RegisterInput = () => {
-    let activeStep = useSelector((state) => state.register.step);
     const dispatch = useDispatch();
+
+    let activeStep = useSelector((state) => state.register.step);
+    let isKvkk = useSelector((state) => state.register.isKvkk);
 
     const activeStepIncrementHandler = () => {
         if (activeStep === 3) {
             return;
         }
-        activeStep++
+        activeStep++;
         dispatch(registerActions.stepChangeHandler(activeStep));
     };
     const activeStepDecrementHandler = () => {
         if (activeStep === 1) {
             return;
         }
-        activeStep--
+        activeStep--;
         dispatch(registerActions.stepChangeHandler(activeStep));
     };
 
@@ -28,15 +35,32 @@ const RegisterInput = () => {
     return (
         <>
             <Grid container>
-                <Grid container>
-                    <InputQuestions
-                        activeStepIncrementHandler={activeStepIncrementHandler}
+                {/* {kvkk modal} */}
+                {isKvkk && <RegisterKvkkForm />}
+
+                {/* {first step} */}
+                {activeStep === 1 && (
+                    <Inputs1
                         activeStepDecrementHandler={activeStepDecrementHandler}
-                        submitHandler={submitHandler}
-                        activeStep={activeStep}
-                        xs={12}
+                        activeStepIncrementHandler={activeStepIncrementHandler}
                     />
-                </Grid>
+                )}
+
+                {/* {second step} */}
+                {activeStep === 2 && (
+                    <Inputs2
+                        activeStepDecrementHandler={activeStepDecrementHandler}
+                        activeStepIncrementHandler={activeStepIncrementHandler}
+                    />
+                )}
+
+                {/* {third step} */}
+                {activeStep === 3 && (
+                    <Inputs3
+                        activeStepDecrementHandler={activeStepDecrementHandler}
+                        activeStepIncrementHandler={activeStepIncrementHandler}
+                    />
+                )}
             </Grid>
         </>
     );
