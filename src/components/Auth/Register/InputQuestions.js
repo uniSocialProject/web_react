@@ -57,6 +57,17 @@ const InputQuestions = (props) => {
         setIsKvkk((prev) => !prev);
     };
 
+    //password functions
+    const [passwordValue, setPasswordValue] = useState('');
+    const [isPasswordEntered, setIsPasswordEntered] = useState(false);
+    const [isStrenghtBarOpen , setIsStrenghtBarOpen] = useState(false);
+    const passwordChangeHandler = (event) => {
+        setPasswordValue(event.currentTarget.value);
+        event.currentTarget.value
+            ? setIsStrenghtBarOpen(true)
+            : setIsStrenghtBarOpen(false);
+    };
+
     return (
         <>
             {/* {kvkk submit modal} */}
@@ -221,13 +232,19 @@ const InputQuestions = (props) => {
                                         label="Yeni Şifrenizi giriniz"
                                         type="password"
                                         id="surname"
+                                        onChange={passwordChangeHandler}
+                                        value={passwordValue}
                                         InputProps={{
                                             endAdornment: (
                                                 <PasswordEndAdornment />
                                             ),
                                         }}
                                     />
-                                    <PasswordStrengthBar  password={'aB!aaaaaaaa/2'} />
+                                    {isStrenghtBarOpen && (
+                                        <PasswordStrengthBar
+                                            password={passwordValue}
+                                        />
+                                    )}
                                     <FormControlLabel
                                         required
                                         control={<Switch />}

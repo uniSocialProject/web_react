@@ -12,15 +12,19 @@ const PasswordStrengthBar = ({ password }) => {
             score += 10;
         }
         if (length >= 8) {
+            score += 25;
+        }
+
+        if (
+            /(?=.*?[!"#\$%&'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~])/.test(
+                password
+            )
+        ) {
             score += 10;
         }
 
-        if(/(?=.*?[!"#\$%&'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~])/.test(password)){
-            score += 20
-        }
-
         if (/[a-z]/.test(password) && /[A-Z]/.test(password)) {
-            score += 20;
+            score += 15;
         }
 
         if (/\d/.test(password)) {

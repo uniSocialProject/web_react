@@ -1,6 +1,8 @@
 //hooks
 import { useState } from 'react';
 import { styled } from '@mui/material/styles';
+import { useDispatch, useSelector } from 'react-redux';
+import { registerActions } from '../../../store/registerSlice';
 //material ui components
 import {
     Stack,
@@ -81,17 +83,18 @@ function ColorlibStepIcon(props) {
 const steps = ['Öğrenci bilgileri', 'Üniversite Bilgileri', 'Giriş Bilgileri'];
 
 const CustomStepper = () => {
-    const [currentIconIndex, setCurrentIconIndex] = useState(1);
+    const dispatch = useDispatch();
+    const activeStep = useSelector((state) => state.register.step)
 
     const stepHandler = (index) => {
-        setCurrentIconIndex(index + 1);
+        dispatch(registerActions.stepChangeHandler(index + 1));
     };
 
     return (
         <Stack sx={{ width: '100%' }}>
             <Stepper
                 alternativeLabel
-                activeStep={currentIconIndex}
+                activeStep={activeStep}
                 connector={<ColorlibConnector />}
             >
                 {steps.map((label, index) => (

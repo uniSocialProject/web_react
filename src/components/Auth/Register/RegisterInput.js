@@ -1,21 +1,26 @@
 import { useState } from 'react';
 import { Grid } from '@mui/material';
 import InputQuestions from './InputQuestions';
+import { useDispatch, useSelector } from 'react-redux';
+import { registerActions } from '../../../store/registerSlice';
 
 const RegisterInput = () => {
-    const [activeStep, setActiveStep] = useState(1);
+    let activeStep = useSelector((state) => state.register.step);
+    const dispatch = useDispatch();
 
     const activeStepIncrementHandler = () => {
         if (activeStep === 3) {
             return;
         }
-        setActiveStep((prevState) => prevState + 1);
+        activeStep++
+        dispatch(registerActions.stepChangeHandler(activeStep));
     };
     const activeStepDecrementHandler = () => {
         if (activeStep === 1) {
             return;
         }
-        setActiveStep((prevState) => prevState - 1);
+        activeStep--
+        dispatch(registerActions.stepChangeHandler(activeStep));
     };
 
     const submitHandler = () => {};
