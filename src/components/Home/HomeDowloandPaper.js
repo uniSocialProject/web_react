@@ -7,7 +7,10 @@ import googlePlayBadge from '../../assets/images/google-play-badge.png';
 
 const HomeDowloandPaper = () => {
 
+    const token = localStorage.getItem('token');
+
     return (
+        
         <Grid
             container
             sx={{
@@ -41,6 +44,7 @@ const HomeDowloandPaper = () => {
                         },
                     }}
                 >
+                    {token && <p>{token}</p>}
                     <Paper elevation={0} sx={{bgcolor:'transparent'}} >
                         <Typography
                             variant="h2"

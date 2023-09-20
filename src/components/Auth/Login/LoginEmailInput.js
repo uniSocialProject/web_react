@@ -1,4 +1,4 @@
-import { TextField, Typography, keyframes } from '@mui/material';
+import { TextField,keyframes } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { loginActions } from '../../../store/loginSlice';
@@ -36,6 +36,7 @@ const LoginEmailInput = (props) => {
         setEnteredEmail(event.currentTarget.value);
         dispatch(loginActions.isEmailValid());
     };
+
     return (
         <>
             <TextField
