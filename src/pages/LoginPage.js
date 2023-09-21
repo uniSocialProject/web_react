@@ -1,7 +1,7 @@
-import SignIn from "../components/Auth/Login/Login"
+import Login from "../components/Auth/Login/Login"
 
 const AuthLogin = () => {
-    return <SignIn />
+    return <Login />
     
 }
 

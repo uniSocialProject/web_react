@@ -1,4 +1,4 @@
-import { TextField,keyframes } from '@mui/material';
+import { TextField, keyframes } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { loginActions } from '../../../store/loginSlice';
@@ -53,7 +53,13 @@ const LoginEmailInput = (props) => {
                 sx={{
                     animation: props.isEmailShake ? `${spin} 0.3s 2 ease` : '',
                 }}
+                className={props.isEmailShake ? '' : ''}
                 InputProps={{
+                    classes: {
+                        notchedOutline: {
+                            'border-color': 'red !important',
+                        },
+                    },
                     endAdornment:
                         !isEmailValid && isEmailEntered ? (
                             <ErrorAdornment />

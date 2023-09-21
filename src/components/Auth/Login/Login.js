@@ -21,7 +21,7 @@ import { loginActions } from '../../../store/loginSlice';
 import { loginRequest } from '../../../util/authService';
 
 //invalid credentials shake animation
-const SignIn = () => {
+const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -152,4 +152,4 @@ const SignIn = () => {
     );
 };
 
-export default SignIn;
+export default Login;

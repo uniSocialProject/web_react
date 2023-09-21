@@ -1,5 +1,5 @@
 import axios from 'axios';
-export async function register(data) {
+export async function registerRequest(data) {
     const { name, surname, university, department, email, password } = data;
 
     try {

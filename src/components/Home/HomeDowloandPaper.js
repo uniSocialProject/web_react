@@ -1,5 +1,5 @@
 //packages
-import { Grid, IconButton, Typography, useMediaQuery ,Box , Paper } from '@mui/material';
+import { Grid, IconButton, Typography,Box , Paper } from '@mui/material';
 import '@fontsource/roboto/400.css';
 //icons
 import AppStoreIcon from '../../assets/svgs/AppStoreIcon';
