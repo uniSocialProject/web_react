@@ -2,8 +2,8 @@
 import { Grid, IconButton, Typography,Box , Paper } from '@mui/material';
 import '@fontsource/roboto/400.css';
 //icons
-import AppStoreIcon from '../../assets/svgs/AppStoreIcon';
-import googlePlayBadge from '../../assets/images/google-play-badge.png';
+import AppStoreIcon from '../../../assets/svgs/AppStoreIcon';
+import googlePlayBadge from '../../../assets/images/google-play-badge.png';
 
 const HomeDowloandPaper = () => {
 
