@@ -1,11 +1,7 @@
 //components
 import Layout from './layouts/Layout';
 //pages
-import AuthPage from './pages/AuthPage';
-import HomePage from './pages/Home/HomePage';
-import ErrorPage from './pages/ErrorPage';
-import LoginPage from './pages/Login/LoginPage';
-import RegisterPage from './pages/Register/RegisterPage';
+import { ErrorPage, RegisterPage, LoginPage, HomePage } from './pages';
 //packages
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material';
