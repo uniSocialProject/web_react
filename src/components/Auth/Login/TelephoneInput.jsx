@@ -9,7 +9,6 @@ import { useState } from 'react';
 
 const TelephoneInput = () => {
     const dispatch = useDispatch();
-    const isSms = useSelector((state) => state.login.isSms);
     const [enteredTel, setEnteredTel] = useState('');
     const [isInvalidTel, setIsInvalidTel] = useState(false);
 
@@ -41,6 +40,7 @@ const TelephoneInput = () => {
                         <TextField
                             fullWidth
                             autoFocus
+                            variant='standard'
                             margin="dense"
                             id="telephone"
                             label="Telefon numaranızı giriniz"

@@ -21,7 +21,7 @@ function ResponsiveAppBar() {
             style={{
                 background: 'transparent',
                 boxShadow: 'none',
-                backdropFilter:'blur(4px)',
+                backdropFilter: 'blur(4px)',
                 px: {
                     xs: 10,
                     sm: 15,
@@ -31,8 +31,11 @@ function ResponsiveAppBar() {
             <Container maxWidth={'2000'}>
                 <Toolbar
                     disableGutters
-                    className='flex justify-between'
-                    sx={{py:2}}
+                    sx={{
+                        py: 2,
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                    }}
                 >
                     <NavLink to={'/'}>
                         <Button
@@ -50,16 +53,21 @@ function ResponsiveAppBar() {
                                     xl: 260,
                                 },
                                 ml: {
-                                    xs: 0,
-                                    sm: 1.5,
-                                    md: 2,
-                                    lg: 2.5,
-                                    xl: 3,
+                                    xs: 2,
+                                    sm: 2.5,
+                                    md: 3,
+                                    lg: 3.5,
+                                    xl: 4,
                                 },
                             }}
                             disableRipple
                         >
-                            <img src={logo} alt="logo" draggable={false} />
+                            <img
+                                src={logo}
+                                alt="logo"
+                                draggable={false}
+                                style={{ maxWidth: '240px' }}
+                            />
                         </Button>
                     </NavLink>
                     {!isSmallScreen && <NavLinks />}
