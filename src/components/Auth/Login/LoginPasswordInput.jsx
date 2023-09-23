@@ -63,8 +63,9 @@ const LoginPasswordInput = (props) => {
             onChange={passwordChangeHandler}
             onBlur={passwordBlurHandler}
             value={enteredPassword}
+            error={props.isPasswordShake}
             sx={{
-                animation: props.isPasswordShake ? `${spin} 0.3s 2 ease` : '',
+                animation: props.isPasswordShake ? `${spin} 0.3s 4 ease` : '',
             }}
             InputProps={{
                 endAdornment: (

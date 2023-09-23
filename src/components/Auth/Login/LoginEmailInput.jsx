@@ -50,8 +50,9 @@ const LoginEmailInput = (props) => {
                 autoComplete="email"
                 onBlur={emailBlurHandler}
                 onChange={emailChangeHandler}
+                error={props.isEmailShake}
                 sx={{
-                    animation: props.isEmailShake ? `${spin} 0.3s 2 ease` : '',
+                    animation: props.isEmailShake ? `${spin} 0.3s 4 ease` : '',
                 }}
                 className={props.isEmailShake ? '' : ''}
                 InputProps={{
