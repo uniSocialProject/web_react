@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 //functions
 import { registerActions } from '../../../store/registerSlice';
 //components
-import Inputs1 from './questions/Inputs1';
-import Inputs2 from './questions/Inputs2';
-import Inputs3 from './questions/Inputs3';
+import Inputs1 from './steps/Inputs1';
+import Inputs2 from './steps/Inputs2';
+import Inputs3 from './steps/Inputs3';
 import RegisterKvkkForm from './RegisterKvkkForm';
 const RegisterInput = () => {
     const dispatch = useDispatch();

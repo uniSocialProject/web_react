@@ -4,13 +4,14 @@ const registerSlice = createSlice({
     name: 'register',
     initialState: {
         step: 1,
-        isKvkk:false,
+        isKvkk: false,
         //first step constants
         nameValue: '',
         isNameEntered: false,
         surnameValue: '',
         isSurnameEntered: false,
         //second step constants
+        univercityId: 0,
         univercityValue: '',
         isUnivercitySelected: false,
         departmentValue: '',
@@ -28,9 +29,13 @@ const registerSlice = createSlice({
         stepChangeHandler(state, action) {
             state.step = action.payload;
         },
-        kvkkToggleHandler(state){
-            state.isKvkk = !state.isKvkk
-        }
+        kvkkToggleHandler(state) {
+            state.isKvkk = !state.isKvkk;
+        },
+        univercityValueHandler(state, action) {
+            state.univercityId = action.payload.id - 1;
+            state.univercityValue = action.payload.name;
+        },
     },
 });
 

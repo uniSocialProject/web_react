@@ -9,24 +9,7 @@ import data from '../../../data/univercities.json';
 //functions
 import { registerActions } from '../../../store/registerSlice';
 
-const univercities = [];
-
-for (let i = 0; i < data.length; i++) {
-    univercities.push({ label: data[i].universities[0].name, id: data[i].id });
-}
-const UnivercityOptions = () => {
-    const dispatch = useDispatch();
-    const [value, setValue] = useState(null);
-
-    if (value) {
-        dispatch(
-            registerActions.univercityValueHandler({
-                id: value.id,
-                name: value.label,
-            })
-        );
-    }
-
+const UnivercitySelect = () => {
     return (
         <Autocomplete
             id="univercitys"
@@ -50,4 +33,30 @@ const UnivercityOptions = () => {
     );
 };
 
-export default UnivercityOptions;
+const DepartmentOptions = () => {
+    return (
+        <>
+            <Autocomplete
+                id="Faculties"
+                options={departments}
+                value={value}
+                freeSolo
+                onChange={(event, newValue) => {
+                    setValue(newValue);
+                }}
+                sx={{
+                    width: {
+                        xs: 300,
+                        md: 350,
+                    },
+                    mb: 2,
+                }}
+                renderInput={(params) => (
+                    <TextField {...params} label="Bölüm" />
+                )}
+            />
+        </>
+    );
+};
+
+export { UnivercitySelect, DepartmentOptions };
