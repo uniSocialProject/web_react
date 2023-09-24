@@ -41,7 +41,6 @@ const RegisterInput = () => {
                 {/* {first step} */}
                 {activeStep === 1 && (
                     <Inputs1
-                        activeStepDecrementHandler={activeStepDecrementHandler}
                         activeStepIncrementHandler={activeStepIncrementHandler}
                     />
                 )}

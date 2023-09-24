@@ -13,7 +13,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 //components
-import { LoginEmailInput, LoginPasswordInput } from './components';
+import {
+    LoginEmailInput,
+    LoginPasswordInput,
+    ForgottenPasswordModal,
+} from './components';
 //functions
 import { loginActions } from '../../store/loginSlice';
 import { loginRequest } from '../../util/authService';

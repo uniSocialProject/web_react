@@ -6,28 +6,33 @@ import {
     TextField,
     Button,
 } from '@mui/material';
+//hooks
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+//functions
+import { registerActions } from '../../../../store/registerSlice';
 
 const Inputs1 = (props) => {
+    const dispatch = useDispatch();
+    const enteredNameRedux = useSelector((state) => state.register.nameValue);
+    const enteredSurnameRedux = useSelector(
+        (state) => state.register.surnameValue
+    );
+
     //name statements
-
-    const [enteredName, setEnteredName] = useState('');
-    const [isNameEntered, setIsNameEntered] = useState(false);
-    const nameChangeHandler = (event) => {
-        setEnteredName(event.currentTarget.value.trimStart());
-        event.currentTarget.value.length > 1
-            ? setIsNameEntered(true)
-            : setIsNameEntered(false);
-    };
-
+    const [enteredName, setEnteredName] = useState(enteredNameRedux);
     //surname statements
-    const [enteredSurname, setEnteredSurname] = useState('');
-    const [isSurnameEntered, setIsSurnameEntered] = useState(false);
-    const surnameChangeHandler = (event) => {
-        setEnteredSurname(event.currentTarget.value.trim());
-        event.currentTarget.value.length > 1
-            ? setIsSurnameEntered(true)
-            : setIsSurnameEntered(false);
+    const [enteredSurname, setEnteredSurname] = useState(enteredSurnameRedux);
+
+    //button handler
+    const buttonHandler = () => {
+        props.activeStepIncrementHandler();
+        dispatch(
+            registerActions.nameAndSurnameChangeHandler({
+                name: enteredName,
+                surname: enteredSurname,
+            })
+        );
     };
 
     return (
@@ -54,7 +59,11 @@ const Inputs1 = (props) => {
                         autoComplete="email"
                         autoFocus
                         value={enteredName}
-                        onChange={nameChangeHandler}
+                        onChange={(event) => {
+                            setEnteredName(
+                                event.currentTarget.value.trimStart()
+                            );
+                        }}
                     />
                     <TextField
                         margin="normal"
@@ -64,15 +73,17 @@ const Inputs1 = (props) => {
                         type="text"
                         id="surname"
                         value={enteredSurname}
-                        onChange={surnameChangeHandler}
+                        onChange={(event) => {
+                            setEnteredSurname(event.currentTarget.value.trim());
+                        }}
                     />
 
                     <Grid container textAlign={'center'} mt={2}>
                         <Grid item xs={12}>
                             <Button
-                                disabled={!isNameEntered || !isSurnameEntered}
+                                disabled={!enteredName || !enteredSurname}
                                 variant="contained"
-                                onClick={props.activeStepIncrementHandler}
+                                onClick={buttonHandler}
                             >
                                 Sıradaki Soru
                             </Button>

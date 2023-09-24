@@ -1,15 +1,10 @@
-import {
-    Grid,
-    CssBaseline,
-    Box,
-    Typography,
-    Button,
-} from '@mui/material';
+import { Grid, CssBaseline, Box, Typography, Button } from '@mui/material';
 
-import UnivercityOptions from '../UnivercityOptions';
-import DepartmentOptions from '../DepartmentOptions';
+import  UnivercitySelect  from '../DepartmentSelection';
+import { useSelector } from 'react-redux';
 
 const Inputs2 = (props) => {
+    const isDone =  useSelector((state) => state.register.isStep2Done);
     return (
         <>
             <CssBaseline />
@@ -25,8 +20,7 @@ const Inputs2 = (props) => {
                     Üniversitenizi ve Bölümünüzü giriniz
                 </Typography>
                 <Box component="form" onSubmit={props.submitHandler} noValidate>
-                    <UnivercityOptions />
-                    <DepartmentOptions />
+                    <UnivercitySelect />
 
                     <Grid container textAlign={'center'} mt={2}>
                         <Grid item xs={6}>
@@ -41,6 +35,7 @@ const Inputs2 = (props) => {
                             <Button
                                 variant="contained"
                                 onClick={props.activeStepIncrementHandler}
+                                disabled={!isDone}
                             >
                                 Sıradaki Soru
                             </Button>

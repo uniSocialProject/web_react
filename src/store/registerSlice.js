@@ -7,15 +7,11 @@ const registerSlice = createSlice({
         isKvkk: false,
         //first step constants
         nameValue: '',
-        isNameEntered: false,
         surnameValue: '',
-        isSurnameEntered: false,
         //second step constants
-        univercityId: 0,
         univercityValue: '',
-        isUnivercitySelected: false,
         departmentValue: '',
-        isDepartmenSelected: false,
+        isStep2Done: false,
         //third step constants
         emailValue: '',
         isEmailEntered: false,
@@ -29,12 +25,21 @@ const registerSlice = createSlice({
         stepChangeHandler(state, action) {
             state.step = action.payload;
         },
+        step2DoneToggleHandler(state, action) {
+            state.isStep2Done = action.payload;
+        },
         kvkkToggleHandler(state) {
             state.isKvkk = !state.isKvkk;
         },
-        univercityValueHandler(state, action) {
-            state.univercityId = action.payload.id - 1;
-            state.univercityValue = action.payload.name;
+        univercityNameChangeHandler(state, action) {
+            state.univercityValue = action.payload;
+        },
+        departmenNameChangeHandler(state, action) {
+            state.departmentValue = action.payload;
+        },
+        nameAndSurnameChangeHandler(state, action) {
+            state.nameValue = action.payload.name;
+            state.surnameValue = action.payload.surname;
         },
     },
 });
