@@ -17,6 +17,7 @@ const UnivercitySelect = (props) => {
     const departmentRedux = useSelector(
         (state) => state.register.departmentValue
     );
+    const isDisabled = useSelector((state) => state.register.isDisabled);
 
     let SELECTED_UNIVERCITY;
     //univercity section
@@ -73,8 +74,10 @@ const UnivercitySelect = (props) => {
     useEffect(() => {
         if (department && value) {
             props.nextBtnToggleHandler(true);
+            dispatch(registerActions.isDisabledChangeHandler(false));
         } else {
             props.nextBtnToggleHandler(false);
+            dispatch(registerActions.isDisabledChangeHandler(true));
         }
     }, [department, value]);
 
@@ -84,6 +87,7 @@ const UnivercitySelect = (props) => {
                 id="univercities"
                 options={univercities}
                 value={univercityRedux}
+                freeSolo
                 isOptionEqualToValue={(option, value) => option.id === value.id}
                 onChange={univercityChangeHandler}
                 sx={{
@@ -105,6 +109,7 @@ const UnivercitySelect = (props) => {
                 isOptionEqualToValue={(option, value) => option.id === value.id}
                 onChange={departmentChangeHandler}
                 disabled={false}
+                freeSolo
                 sx={{
                     width: {
                         xs: 300,

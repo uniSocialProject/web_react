@@ -6,8 +6,8 @@ import { useSelector } from 'react-redux';
 
 const Inputs2 = (props) => {
     const [isBtnActive, setIsBtnActive] = useState(false);
+    const isDisabled = useSelector((state) => state.register.isDisabled);
 
-    
     const nextBtnToggleHandler = (bool) => {
         setIsBtnActive(bool);
     };
@@ -44,7 +44,7 @@ const Inputs2 = (props) => {
                             <Button
                                 variant="contained"
                                 onClick={props.activeStepIncrementHandler}
-                                disabled={!isBtnActive}
+                                disabled={isDisabled}
                             >
                                 Sıradaki Soru
                             </Button>
