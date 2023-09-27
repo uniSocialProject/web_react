@@ -2,14 +2,14 @@
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 //hooks
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 //datas
 import data from '../../../data/univercities.json';
 //functions
 import { registerActions } from '../../../store/registerSlice';
 
-const UnivercitySelect = () => {
+const UnivercitySelect = (props) => {
     const dispatch = useDispatch();
 
     let SELECTED_UNIVERCITY;
@@ -65,12 +65,14 @@ const UnivercitySelect = () => {
         }
     };
 
-    //is button active
-    if (department && value) {
-        dispatch(registerActions.step2DoneToggleHandler(true));
-    } else {
-        dispatch(registerActions.step2DoneToggleHandler(false));
-    }
+    // is button active
+    useEffect(() => {
+        if (department && value) {
+            props.nextBtnToggleHandler(true);
+        } else {
+            props.nextBtnToggleHandler(false);
+        }
+    }, [department, value]);
 
     return (
         <>

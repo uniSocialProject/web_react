@@ -6,8 +6,8 @@ const registerSlice = createSlice({
         step: 1,
         isKvkk: false,
         //first step constants
-        nameValue: '',
-        surnameValue: '',
+        nameValue: 'Murat',
+        surnameValue: 'Öztürk',
         //second step constants
         univercityValue: '',
         departmentValue: '',

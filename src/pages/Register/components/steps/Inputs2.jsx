@@ -1,10 +1,15 @@
 import { Grid, CssBaseline, Box, Typography, Button } from '@mui/material';
 
-import  UnivercitySelect  from '../DepartmentSelection';
-import { useSelector } from 'react-redux';
+import UnivercitySelect from '../DepartmentSelection';
+import { useState } from 'react';
 
 const Inputs2 = (props) => {
-    const isDone =  useSelector((state) => state.register.isStep2Done);
+    const [isBtnActive , setIsBtnActive] = useState(false);
+
+    const nextBtnToggleHandler = (bool) => {
+        setIsBtnActive(bool)
+    };
+
     return (
         <>
             <CssBaseline />
@@ -20,7 +25,9 @@ const Inputs2 = (props) => {
                     Üniversitenizi ve Bölümünüzü giriniz
                 </Typography>
                 <Box component="form" onSubmit={props.submitHandler} noValidate>
-                    <UnivercitySelect />
+                    <UnivercitySelect
+                        nextBtnToggleHandler={nextBtnToggleHandler}
+                    />
 
                     <Grid container textAlign={'center'} mt={2}>
                         <Grid item xs={6}>
@@ -35,7 +42,7 @@ const Inputs2 = (props) => {
                             <Button
                                 variant="contained"
                                 onClick={props.activeStepIncrementHandler}
-                                disabled={!isDone}
+                                disabled={!isBtnActive}
                             >
                                 Sıradaki Soru
                             </Button>
