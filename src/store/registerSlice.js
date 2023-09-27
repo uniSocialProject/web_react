@@ -38,8 +38,12 @@ const registerSlice = createSlice({
             state.nameValue = action.payload.name;
             state.surnameValue = action.payload.surname;
         },
-        isDisabledChangeHandler(state, action) {
-            state.isDisabled = action.payload;
+        isDisabledToggleHandler(state) {
+            if (state.departmentValue && state.univercityValue) {
+                state.isDisabled = false;
+            } else {
+                state.isDisabled = true;
+            }
         },
     },
 });

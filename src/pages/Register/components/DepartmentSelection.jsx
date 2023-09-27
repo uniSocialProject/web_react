@@ -73,11 +73,9 @@ const UnivercitySelect = (props) => {
     // is button active
     useEffect(() => {
         if (department && value) {
-            props.nextBtnToggleHandler(true);
-            dispatch(registerActions.isDisabledChangeHandler(false));
+            dispatch(registerActions.isDisabledToggleHandler());
         } else {
-            props.nextBtnToggleHandler(false);
-            dispatch(registerActions.isDisabledChangeHandler(true));
+            dispatch(registerActions.isDisabledToggleHandler());
         }
     }, [department, value]);
 

@@ -5,12 +5,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 const Inputs2 = (props) => {
-    const [isBtnActive, setIsBtnActive] = useState(false);
     const isDisabled = useSelector((state) => state.register.isDisabled);
-
-    const nextBtnToggleHandler = (bool) => {
-        setIsBtnActive(bool);
-    };
 
     return (
         <>
@@ -27,9 +22,7 @@ const Inputs2 = (props) => {
                     Üniversitenizi ve Bölümünüzü giriniz
                 </Typography>
                 <Box component="form" onSubmit={props.submitHandler} noValidate>
-                    <UnivercitySelect
-                        nextBtnToggleHandler={nextBtnToggleHandler}
-                    />
+                    <UnivercitySelect />
 
                     <Grid container textAlign={'center'} mt={2}>
                         <Grid item xs={6}>
