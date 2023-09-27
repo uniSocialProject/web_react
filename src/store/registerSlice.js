@@ -11,7 +11,6 @@ const registerSlice = createSlice({
         //second step constants
         univercityValue: '',
         departmentValue: '',
-        isStep2Done: false,
         //third step constants
         emailValue: '',
         isEmailEntered: false,
@@ -24,9 +23,6 @@ const registerSlice = createSlice({
     reducers: {
         stepChangeHandler(state, action) {
             state.step = action.payload;
-        },
-        step2DoneToggleHandler(state, action) {
-            state.isStep2Done = action.payload;
         },
         kvkkToggleHandler(state) {
             state.isKvkk = !state.isKvkk;

@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 //hooks
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 //datas
 import data from '../../../data/univercities.json';
 //functions
@@ -11,6 +11,12 @@ import { registerActions } from '../../../store/registerSlice';
 
 const UnivercitySelect = (props) => {
     const dispatch = useDispatch();
+    const univercityRedux = useSelector(
+        (state) => state.register.univercityValue
+    );
+    const departmentRedux = useSelector(
+        (state) => state.register.departmentValue
+    );
 
     let SELECTED_UNIVERCITY;
     //univercity section
@@ -35,9 +41,6 @@ const UnivercitySelect = (props) => {
     const univercityChangeHandler = (event, newValue) => {
         setValue(newValue);
         setDepartment(null);
-        if (department) {
-            dispatch(registerActions.departmenNameChangeHandler(''));
-        }
     };
     //department section
     let departments = [];
@@ -51,6 +54,7 @@ const UnivercitySelect = (props) => {
             })
         );
     }
+
     const [department, setDepartment] = useState(null);
 
     const departmentChangeHandler = (event, newValue) => {
@@ -77,13 +81,10 @@ const UnivercitySelect = (props) => {
     return (
         <>
             <Autocomplete
-                id="univercitys"
+                id="univercities"
                 options={univercities}
-                value={value}
-                isOptionEqualToValue={(option, value) =>
-                    option.name === value.name
-                }
-                autoHighlight={false}
+                value={univercityRedux}
+                isOptionEqualToValue={(option, value) => option.id === value.id}
                 onChange={univercityChangeHandler}
                 sx={{
                     width: {
@@ -96,28 +97,25 @@ const UnivercitySelect = (props) => {
                     <TextField {...params} label="Üniversite" />
                 )}
             />
-            <div style={{ display: 'flex', alignItems: 'flex-end' }}>
-                <Autocomplete
-                    id="departments"
-                    options={departments}
-                    value={department}
-                    disabled={!SELECTED_UNIVERCITY}
-                    onChange={departmentChangeHandler}
-                    isOptionEqualToValue={(option, value) =>
-                        option.name === value.name
-                    }
-                    sx={{
-                        width: {
-                            xs: 300,
-                            md: 350,
-                        },
-                        mb: 2,
-                    }}
-                    renderInput={(params) => (
-                        <TextField {...params} label="Bölüm" />
-                    )}
-                />
-            </div>
+
+            <Autocomplete
+                id="departments"
+                options={departments}
+                value={departmentRedux}
+                isOptionEqualToValue={(option, value) => option.id === value.id}
+                onChange={departmentChangeHandler}
+                disabled={false}
+                sx={{
+                    width: {
+                        xs: 300,
+                        md: 350,
+                    },
+                    mb: 2,
+                }}
+                renderInput={(params) => (
+                    <TextField {...params} label="Bölüm" />
+                )}
+            />
         </>
     );
 };

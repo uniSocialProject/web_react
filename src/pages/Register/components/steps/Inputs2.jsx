@@ -1,13 +1,15 @@
 import { Grid, CssBaseline, Box, Typography, Button } from '@mui/material';
 
 import UnivercitySelect from '../DepartmentSelection';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const Inputs2 = (props) => {
-    const [isBtnActive , setIsBtnActive] = useState(false);
+    const [isBtnActive, setIsBtnActive] = useState(false);
 
+    
     const nextBtnToggleHandler = (bool) => {
-        setIsBtnActive(bool)
+        setIsBtnActive(bool);
     };
 
     return (
