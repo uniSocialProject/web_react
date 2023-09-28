@@ -1,7 +1,6 @@
 import { Grid, CssBaseline, Box, Typography, Button } from '@mui/material';
 
 import UnivercitySelect from '../DepartmentSelection';
-import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 const Inputs2 = (props) => {

@@ -11,13 +11,14 @@ import { registerActions } from '../../../store/registerSlice';
 
 const UnivercitySelect = (props) => {
     const dispatch = useDispatch();
+    
+    //redux statements
     const univercityRedux = useSelector(
         (state) => state.register.univercityValue
     );
     const departmentRedux = useSelector(
         (state) => state.register.departmentValue
     );
-    const isDisabled = useSelector((state) => state.register.isDisabled);
 
     let SELECTED_UNIVERCITY;
     //univercity section
@@ -42,6 +43,12 @@ const UnivercitySelect = (props) => {
     const univercityChangeHandler = (event, newValue) => {
         setValue(newValue);
         setDepartment(null);
+        dispatch(
+            registerActions.univercityNameChangeHandler(
+                SELECTED_UNIVERCITY.label
+            )
+        );
+        dispatch(registerActions.departmenNameChangeHandler(''));
     };
     //department section
     let departments = [];
