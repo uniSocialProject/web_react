@@ -1,16 +1,12 @@
 //packages
-import { Grid, IconButton, Typography,Box , Paper } from '@mui/material';
+import { Grid, IconButton, Typography, Box, Paper } from '@mui/material';
 import '@fontsource/roboto/400.css';
 //icons
 import AppStoreIcon from '../../../assets/svgs/AppStoreIcon';
 import googlePlayBadge from '../../../assets/images/google-play-badge.png';
 
 const HomeDowloandPaper = () => {
-
-    const token = localStorage.getItem('token');
-
     return (
-        
         <Grid
             container
             sx={{
@@ -44,8 +40,7 @@ const HomeDowloandPaper = () => {
                         },
                     }}
                 >
-                    {token && <p>{token}</p>}
-                    <Paper elevation={0} sx={{bgcolor:'transparent'}} >
+                    <Paper elevation={0} sx={{ bgcolor: 'transparent' }}>
                         <Typography
                             variant="h2"
                             fontFamily={'roboto'}
@@ -105,9 +100,9 @@ const HomeDowloandPaper = () => {
                                     display: 'flex',
                                     flexWrap: 'wrap',
                                     justifyContent: {
-                                        xs:'center',
-                                        vs:'center',
-                                        md:'left',
+                                        xs: 'center',
+                                        vs: 'center',
+                                        md: 'left',
                                     },
                                 }}
                             >
@@ -122,10 +117,10 @@ const HomeDowloandPaper = () => {
                                     display: 'flex',
                                     flexWrap: 'wrap',
                                     justifyContent: {
-                                        xs:'center',
-                                        vs:'center',
-                                        md:'center',
-                                        vl:'right'
+                                        xs: 'center',
+                                        vs: 'center',
+                                        md: 'center',
+                                        vl: 'right',
                                     },
                                 }}
                             >
@@ -146,4 +141,3 @@ const HomeDowloandPaper = () => {
 };
 
 export default HomeDowloandPaper;
-

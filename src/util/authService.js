@@ -4,9 +4,9 @@ export async function registerRequest(data) {
 
     try {
         const response = await axios.post(
-            import.meta.env.REACT_APP_BASE_URL + 'auth/register',
+            import.meta.env.VITE_BASE_URL + 'auth/register',
             {
-                name: name + surname,
+                name: name,
                 email: email,
                 password: password,
                 university: university,
@@ -23,7 +23,7 @@ export async function registerRequest(data) {
 export const loginRequest = async (email, password) => {
     try {
         const response = await axios.post(
-            import.meta.env.REACT_APP_BASE_URL + 'auth/login',
+            import.meta.env.VITE_BASE_URL + 'auth/login',
             {
                 email: email,
                 password: password,

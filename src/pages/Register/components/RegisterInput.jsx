@@ -4,11 +4,13 @@ import { Grid } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 //functions
 import { registerActions } from '../../../store/registerSlice';
+import { registerRequest } from '../../../util/authService';
 //components
 import Inputs1 from './steps/Inputs1';
 import Inputs2 from './steps/Inputs2';
 import Inputs3 from './steps/Inputs3';
 import RegisterKvkkForm from './RegisterKvkkForm';
+
 const RegisterInput = () => {
     const dispatch = useDispatch();
 
@@ -30,7 +32,26 @@ const RegisterInput = () => {
         dispatch(registerActions.stepChangeHandler(activeStep));
     };
 
-    const submitHandler = () => {};
+    //form submit section
+
+    const name = useSelector((state) => state.register.nameValue);
+    const surname = useSelector((state) => state.register.surnameValue);
+    const university = useSelector((state) => state.register.univercityValue);
+    const department = useSelector((state) => state.register.departmentValue);
+    const email = useSelector((state) => state.register.emailValue);
+    const password = useSelector((state) => state.register.passwordValue);
+
+    const data = {
+        name: name + '+' + surname,
+        email: email,
+        password: password,
+        university: university,
+        department: department,
+    };
+    const formSubmit = () => {
+        console.log(data.name);
+        registerRequest(data);
+    };
 
     return (
         <>
@@ -56,8 +77,8 @@ const RegisterInput = () => {
                 {/* {third step} */}
                 {activeStep === 3 && (
                     <Inputs3
+                        formSubmit={formSubmit}
                         activeStepDecrementHandler={activeStepDecrementHandler}
-                        activeStepIncrementHandler={activeStepIncrementHandler}
                     />
                 )}
             </Grid>

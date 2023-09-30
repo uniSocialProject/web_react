@@ -18,6 +18,12 @@ import { registerActions } from '../../../../store/registerSlice';
 
 const Inputs3 = (props) => {
     const dispatch = useDispatch();
+    const emailRedux = useSelector((state) => state.register.emailValue);
+    const passwordRedux = useSelector((state) => state.register.passwordValue);
+    const isEmailValid = useSelector((state) => state.register.isEmailValid);
+    const isPasswordValid = useSelector(
+        (state) => state.register.isPasswordValid
+    );
 
     //kvkk actions
     const isKvkk = useSelector((state) => state.register.isKvkk);
@@ -25,16 +31,34 @@ const Inputs3 = (props) => {
         dispatch(registerActions.kvkkToggleHandler());
     };
 
+    //email functions
+    const [enteredEmail, setEnteredEmail] = useState(emailRedux);
+    const [isEmailEntered, setIsEmailEntered] = useState(false);
+
+    const emailChangeHandler = (event) => {
+        setEnteredEmail(event.currentTarget.value);
+        enteredEmail ? setIsEmailEntered(true) : setIsEmailEntered(false);
+    };
+    const emailBlurHandler = () => {
+        dispatch(registerActions.emailChangeHandler(enteredEmail));
+        dispatch(registerActions.isEmailValid());
+    };
+
     //password functions
-    const [passwordValue, setPasswordValue] = useState('');
+    const [enteredPassword, setEnteredPassword] = useState(passwordRedux);
     const [isStrenghtBarOpen, setIsStrenghtBarOpen] = useState(false);
+
     const passwordChangeHandler = (event) => {
-        setPasswordValue(event.currentTarget.value);
+        setEnteredPassword(event.currentTarget.value);
         event.currentTarget.value
             ? setIsStrenghtBarOpen(true)
             : setIsStrenghtBarOpen(false);
     };
 
+    const passwordBlurHandler = () => {
+        dispatch(registerActions.passwordChangeHandler(enteredPassword));
+        dispatch(registerActions.isPasswordValid());
+    };
     return (
         <>
             <Box
@@ -56,6 +80,16 @@ const Inputs3 = (props) => {
                         label="E-mail"
                         name="email"
                         autoComplete="email"
+                        value={enteredEmail}
+                        onChange={emailChangeHandler}
+                        onBlur={emailBlurHandler}
+                        error={!isEmailValid && isEmailEntered}
+                        // inputProps={{
+                        //     style: { border:'1px solid ' , borderRadius:'5px'},
+                        // }}
+                        // InputLabelProps={{
+                        //     style: { backgroundColor:'white'}
+                        // }}
                         autoFocus
                     />
                     <TextField
@@ -65,12 +99,17 @@ const Inputs3 = (props) => {
                         label="Yeni Şifrenizi giriniz"
                         type="password"
                         id="surname"
+                        error={!isPasswordValid && isStrenghtBarOpen}
                         onChange={passwordChangeHandler}
-                        value={passwordValue}
+                        onBlur={passwordBlurHandler}
+                        value={enteredPassword}
                     />
-                    {isStrenghtBarOpen && (
-                        <PasswordStrengthBar password={passwordValue} />
-                    )}
+
+                    <PasswordStrengthBar
+                        password={enteredPassword}
+                        isStrenghtBarOpen={isStrenghtBarOpen}
+                    />
+
                     <FormControlLabel
                         required
                         control={<Switch />}
@@ -96,7 +135,7 @@ const Inputs3 = (props) => {
                             <Button
                                 variant="contained"
                                 color="success"
-                                onClick={props.activeStepIncrementHandler}
+                                onClick={props.formSubmit}
                             >
                                 Kayıt Ol
                             </Button>

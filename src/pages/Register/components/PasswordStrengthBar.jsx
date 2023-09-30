@@ -3,7 +3,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 import { Grid } from '@mui/material';
 import GppGoodIcon from '@mui/icons-material/GppGood';
 
-const PasswordStrengthBar = ({ password }) => {
+const PasswordStrengthBar = ({ password, isStrenghtBarOpen }) => {
     const calculateStrength = (password) => {
         const length = password.length;
         let score = 0;
@@ -56,7 +56,14 @@ const PasswordStrengthBar = ({ password }) => {
     return (
         <div>
             <Grid container display={'flex'} alignItems={'center'} my={1}>
-                <Grid item xs={1} display={'flex'} justifyContent={'center'}>
+                <Grid
+                    item
+                    xs={1}
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                    }}
+                >
                     <GppGoodIcon color={strengthColor} />
                 </Grid>
                 <Grid item xs={11}>
