@@ -11,7 +11,7 @@ import { registerActions } from '../../../store/registerSlice';
 
 const UnivercitySelect = (props) => {
     const dispatch = useDispatch();
-    
+
     //redux statements
     const univercityRedux = useSelector(
         (state) => state.register.univercityValue
@@ -31,30 +31,25 @@ const UnivercitySelect = (props) => {
     }
     const [value, setValue] = useState(null);
 
-    if (value) {
-        SELECTED_UNIVERCITY = { label: value.label, id: value.id };
-        dispatch(
-            registerActions.univercityNameChangeHandler(
-                SELECTED_UNIVERCITY.label
-            )
-        );
-    }
+    useEffect(() => {
+        if (value) {
+            dispatch(registerActions.univercityNameChangeHandler(value.label));
+        }
+    }, [value]);
 
     const univercityChangeHandler = (event, newValue) => {
         setValue(newValue);
         setDepartment(null);
-        dispatch(
-            registerActions.univercityNameChangeHandler(
-                SELECTED_UNIVERCITY.label
-            )
-        );
+        if (value) {
+            dispatch(registerActions.univercityNameChangeHandler(value.label));
+        }
         dispatch(registerActions.departmenNameChangeHandler(''));
     };
     //department section
     let departments = [];
 
-    if (SELECTED_UNIVERCITY) {
-        data[SELECTED_UNIVERCITY.id - 1].universities[0].faculties.map((e) =>
+    if (value) {
+        data[value.id - 1].universities[0].faculties.map((e) =>
             e.departments.forEach((e) => {
                 if (e) {
                     departments.push({ label: e.name });
