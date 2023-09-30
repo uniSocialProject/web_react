@@ -1,6 +1,7 @@
 //packages
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+import { Button, Box } from '@mui/material';
 //hooks
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,6 +12,7 @@ import { registerActions } from '../../../store/registerSlice';
 
 const UnivercitySelect = (props) => {
     const dispatch = useDispatch();
+    const [isDisable, setIsDisable] = useState(true);
 
     //redux statements
     const univercityRedux = useSelector(
@@ -20,7 +22,6 @@ const UnivercitySelect = (props) => {
         (state) => state.register.departmentValue
     );
 
-    let SELECTED_UNIVERCITY;
     //univercity section
     const univercities = [];
     for (let i = 0; i < data.length; i++) {
@@ -74,12 +75,25 @@ const UnivercitySelect = (props) => {
 
     // is button active
     useEffect(() => {
+        console.log('çalıştı');
+
         if (department && value) {
             dispatch(registerActions.isDisabledToggleHandler());
         } else {
             dispatch(registerActions.isDisabledToggleHandler());
         }
     }, [department, value]);
+
+    const univercityInputChangeHandler = () => {
+        if (univercities && value) {
+            univercities.forEach((e) => {
+                if (e.label !== value.label) {
+                    setIsDisable(false);
+                    console.log(isDisable)
+                }
+            });
+        }
+    };
 
     return (
         <>
@@ -90,6 +104,7 @@ const UnivercitySelect = (props) => {
                 freeSolo
                 isOptionEqualToValue={(option, value) => option.id === value.id}
                 onChange={univercityChangeHandler}
+                onInputChange={univercityInputChangeHandler}
                 sx={{
                     width: {
                         xs: 300,
@@ -121,6 +136,26 @@ const UnivercitySelect = (props) => {
                     <TextField {...params} label="Bölüm" />
                 )}
             />
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                }}
+            >
+                <Button
+                    variant="contained"
+                    onClick={props.activeStepDecrementHandler}
+                >
+                    Önceki Soru
+                </Button>
+                <Button
+                    variant="contained"
+                    onClick={props.activeStepIncrementHandler}
+                    disabled={isDisable}
+                >
+                    Sıradaki Soru
+                </Button>
+            </Box>
         </>
     );
 };
