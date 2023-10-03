@@ -75,12 +75,10 @@ const UnivercitySelect = (props) => {
 
     // is button active
     useEffect(() => {
-        console.log('çalıştı');
-
         if (department && value) {
-            dispatch(registerActions.isDisabledToggleHandler());
+            setIsDisable(false);
         } else {
-            dispatch(registerActions.isDisabledToggleHandler());
+            setIsDisable(true);
         }
     }, [department, value]);
 
@@ -89,7 +87,7 @@ const UnivercitySelect = (props) => {
             univercities.forEach((e) => {
                 if (e.label !== value.label) {
                     setIsDisable(false);
-                    console.log(isDisable)
+                    console.log(isDisable);
                 }
             });
         }
