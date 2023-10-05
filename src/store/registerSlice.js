@@ -15,10 +15,10 @@ const registerSlice = createSlice({
         //third step constants
         emailValue: '',
         isEmailEntered: false,
-        isEmailValid: false,
+        isEmailValid: null,
         passwordValue: '',
         isPasswordEntered: false,
-        isPasswordValid: false,
+        isPasswordValid: null,
         isKvkkSubmitted: false,
     },
     reducers: {

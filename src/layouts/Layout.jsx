@@ -6,7 +6,7 @@ import { Outlet } from 'react-router';
 const Layout = (props) => {
     return (
         <>
-            <MainNav />
+            {/* <MainNav /> */}
             <Outlet />
         </>
     );

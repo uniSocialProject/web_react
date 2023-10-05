@@ -56,11 +56,6 @@ const LoginEmailInput = (props) => {
                 }}
                 className={props.isEmailShake ? '' : ''}
                 InputProps={{
-                    classes: {
-                        notchedOutline: {
-                            'border-color': 'red !important',
-                        },
-                    },
                     endAdornment:
                         !isEmailValid && isEmailEntered ? (
                             <ErrorAdornment />

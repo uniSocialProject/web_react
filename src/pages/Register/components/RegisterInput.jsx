@@ -30,6 +30,7 @@ const RegisterInput = () => {
         }
         activeStep--;
         dispatch(registerActions.stepChangeHandler(activeStep));
+        // dispatch(registerActions.isDisabledToggleHandler())
     };
 
     //form submit section

@@ -15,6 +15,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 //functions
 import { registerActions } from '../../../../store/registerSlice';
+//adornments
+import {
+    ErrorAdornment,
+    EyeEndAdornment,
+} from '../../adornments/InputErrorAdornment';
 
 const Inputs3 = (props) => {
     const dispatch = useDispatch();
@@ -37,16 +42,19 @@ const Inputs3 = (props) => {
 
     const emailChangeHandler = (event) => {
         setEnteredEmail(event.currentTarget.value);
-        enteredEmail ? setIsEmailEntered(true) : setIsEmailEntered(false);
     };
     const emailBlurHandler = () => {
+        enteredEmail ? setIsEmailEntered(true) : setIsEmailEntered(true);
         dispatch(registerActions.emailChangeHandler(enteredEmail));
         dispatch(registerActions.isEmailValid());
     };
 
     //password functions
     const [enteredPassword, setEnteredPassword] = useState(passwordRedux);
+    const [isPasswordEntered, setIsPasswordEntered] = useState(false);
     const [isStrenghtBarOpen, setIsStrenghtBarOpen] = useState(false);
+    const [passwordType, setPasswordType] = useState('password');
+    const [isPasswordVisible, setIsPasswordVisible] = useState(true);
 
     const passwordChangeHandler = (event) => {
         setEnteredPassword(event.currentTarget.value);
@@ -56,9 +64,23 @@ const Inputs3 = (props) => {
     };
 
     const passwordBlurHandler = () => {
+        enteredPassword
+            ? setIsPasswordEntered(true)
+            : setIsPasswordEntered(true);
         dispatch(registerActions.passwordChangeHandler(enteredPassword));
         dispatch(registerActions.isPasswordValid());
     };
+
+    const visibilityToggleHandler = () => {
+        if (isPasswordEntered) {
+            setIsPasswordVisible(false);
+        }
+        setIsPasswordVisible(!isPasswordVisible);
+        passwordType === 'password'
+            ? setPasswordType('text')
+            : setPasswordType('password');
+    };
+
     return (
         <>
             <Box
@@ -83,13 +105,15 @@ const Inputs3 = (props) => {
                         value={enteredEmail}
                         onChange={emailChangeHandler}
                         onBlur={emailBlurHandler}
-                        error={!isEmailValid && isEmailEntered}
-                        // inputProps={{
-                        //     style: { border:'1px solid ' , borderRadius:'5px'},
-                        // }}
-                        // InputLabelProps={{
-                        //     style: { backgroundColor:'white'}
-                        // }}
+                        error={isEmailEntered && !isEmailValid}
+                        InputProps={{
+                            endAdornment:
+                                !isEmailValid && isEmailEntered ? (
+                                    <ErrorAdornment />
+                                ) : (
+                                    ''
+                                ),
+                        }}
                         autoFocus
                     />
                     <TextField
@@ -97,12 +121,23 @@ const Inputs3 = (props) => {
                         fullWidth
                         name="password"
                         label="Yeni Şifrenizi giriniz"
-                        type="password"
+                        type={passwordType}
                         id="surname"
-                        error={!isPasswordValid && isStrenghtBarOpen}
+                        error={!isPasswordValid && isPasswordEntered}
                         onChange={passwordChangeHandler}
                         onBlur={passwordBlurHandler}
                         value={enteredPassword}
+                        InputProps={{
+                            endAdornment: (
+                                <EyeEndAdornment
+                                    isPasswordVisible={isPasswordVisible}
+                                    visibilityToggleHandler={
+                                        visibilityToggleHandler
+                                    }
+                                    visible={enteredPassword}
+                                />
+                            ),
+                        }}
                     />
 
                     <PasswordStrengthBar
@@ -136,6 +171,7 @@ const Inputs3 = (props) => {
                                 variant="contained"
                                 color="success"
                                 onClick={props.formSubmit}
+                                disabled
                             >
                                 Kayıt Ol
                             </Button>

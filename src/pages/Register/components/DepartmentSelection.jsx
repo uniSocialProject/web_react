@@ -77,21 +77,12 @@ const UnivercitySelect = (props) => {
     useEffect(() => {
         if (department && value) {
             setIsDisable(false);
+            dispatch(registerActions.isDisabledToggleHandler(false));
         } else {
             setIsDisable(true);
+            dispatch(registerActions.isDisabledToggleHandler(true));
         }
     }, [department, value]);
-
-    const univercityInputChangeHandler = () => {
-        if (univercities && value) {
-            univercities.forEach((e) => {
-                if (e.label !== value.label) {
-                    setIsDisable(false);
-                    console.log(isDisable);
-                }
-            });
-        }
-    };
 
     return (
         <>
@@ -102,7 +93,6 @@ const UnivercitySelect = (props) => {
                 freeSolo
                 isOptionEqualToValue={(option, value) => option.id === value.id}
                 onChange={univercityChangeHandler}
-                onInputChange={univercityInputChangeHandler}
                 sx={{
                     width: {
                         xs: 300,
