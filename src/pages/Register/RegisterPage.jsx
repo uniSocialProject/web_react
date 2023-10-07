@@ -2,7 +2,8 @@
 import CustomStepper from '../Register/components/CustomStepper';
 import RegisterInput from '../Register/components/RegisterInput';
 //material ui components
-import { Grid,Container } from '@mui/material';
+import { Grid, Container } from '@mui/material';
+// import {UnivercitySelect as UnivercitySelect } from './components/DepartmentSelection';
 
 const RegisterPage = () => {
     return (
