@@ -1,7 +1,6 @@
-import { Grid, CssBaseline, Box, Typography, Button } from '@mui/material';
+import { CssBaseline, Box, Typography } from '@mui/material';
 
-import UnivercitySelect from '../Deneme';
-import { useSelector } from 'react-redux';
+import UnivercitySelect from '../UnivercityDepartmentSelect';
 
 const Inputs2 = (props) => {
     return (
@@ -19,15 +18,14 @@ const Inputs2 = (props) => {
                     Üniversitenizi ve Bölümünüzü giriniz
                 </Typography>
                 <Box component="form" onSubmit={props.submitHandler} noValidate>
-                    <UnivercitySelect />
-                    {/* <UnivercitySelect
+                    <UnivercitySelect
                         activeStepDecrementHandler={
                             props.activeStepDecrementHandler
                         }
                         activeStepIncrementHandler={
                             props.activeStepIncrementHandler
                         }
-                    /> */}
+                    />
                 </Box>
             </Box>
         </>

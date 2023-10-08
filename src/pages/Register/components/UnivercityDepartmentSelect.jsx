@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import {
     Box,
     FormControl,
@@ -8,6 +8,7 @@ import {
     ListSubheader,
     TextField,
     InputAdornment,
+    Button,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import data from '../../../data/univercities.json';
@@ -15,7 +16,7 @@ import data from '../../../data/univercities.json';
 const containsText = (text, searchUniText) =>
     text.toLowerCase().indexOf(searchUniText.toLowerCase()) > -1;
 
-const UnivercitySelect = () => {
+const UnivercitySelect = (props) => {
     //univercity section
     const [selectedUniOption, setSelectedUniOption] = useState('');
     const [searchUniText, setSearchUniText] = useState('');
@@ -38,13 +39,14 @@ const UnivercitySelect = () => {
     const departments = [];
     let selectedUniIndex;
 
-    const displayedDepOptions = useMemo(
-        () =>
-            departments.filter((selected) =>
-                containsText(selected, searchDepText)
-            ),
-        [searchDepText]
-    );
+    const [displayedDepOptions, setDisplayedDepOptions] = useState([]);
+
+    useEffect(() => {
+        const depOptions = departments.filter((selected) =>
+            containsText(selected, searchDepText)
+        );
+        setDisplayedDepOptions(depOptions);
+    }, [searchDepText, selectedUniOption]);
 
     if (selectedUniOption) {
         for (let i = 0; i < data.length; i++) {
@@ -64,6 +66,16 @@ const UnivercitySelect = () => {
         }
     }
 
+    //is disable
+    const [isDisable, setIsDisable] = useState(true);
+    useEffect(() => {
+        if (selectedUniOption && selectedDepOption) {
+            setIsDisable(false);
+        } else {
+            setIsDisable(true);
+        }
+    }, [selectedUniOption, selectedDepOption]);
+
     return (
         <>
             <Box sx={{ width: 350, my: 2.5 }}>
@@ -72,31 +84,26 @@ const UnivercitySelect = () => {
                         Üniversite
                     </InputLabel>
                     <Select
-                        // Disables auto focus on MenuItems and allows TextField to be in focus
                         MenuProps={{ autoFocus: false }}
                         labelId="search-select-label"
                         id="search-select"
                         fullWidth={true}
                         value={selectedUniOption}
                         label="Options"
+                        defaultValue=""
                         onChange={(e) => setSelectedUniOption(e.target.value)}
                         onClose={() => setSearchUniText('')}
-                        // This prevents rendering empty string in Select's value
-                        // if search text would exclude currently selected option.
                         renderValue={() => selectedUniOption}
                     >
-                        {/* TextField is put into ListSubheader so that it doesn't
-              act as a selectable item in the menu
-              i.e. we can click the TextField without triggering any selection.*/}
                         <ListSubheader>
                             <TextField
                                 size="small"
-                                // Autofocus on textfield
                                 autoFocus
                                 placeholder="Type to search..."
                                 fullWidth
                                 sx={{ my: 1 }}
                                 variant="standard"
+                                defaultValue=""
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
@@ -109,7 +116,6 @@ const UnivercitySelect = () => {
                                 }
                                 onKeyDown={(e) => {
                                     if (e.key !== 'Escape') {
-                                        // Prevents autoselecting item while typing (default Select behaviour)
                                         e.stopPropagation();
                                     }
                                 }}
@@ -129,7 +135,6 @@ const UnivercitySelect = () => {
                         Bölüm
                     </InputLabel>
                     <Select
-                        // Disables auto focus on MenuItems and allows TextField to be in focus
                         MenuProps={{ autoFocus: false }}
                         disabled={!selectedUniOption}
                         labelId="search-select-label"
@@ -137,6 +142,7 @@ const UnivercitySelect = () => {
                         fullWidth={true}
                         value={selectedDepOption}
                         label="Options"
+                        defaultValue=""
                         onChange={(e) => setSelectedDepOption(e.target.value)}
                         onClose={() => setSearchDepText('')}
                         // This prevents rendering empty string in Select's value
@@ -173,7 +179,6 @@ const UnivercitySelect = () => {
                                 }}
                             />
                         </ListSubheader>
-
                         {displayedDepOptions.map((option, i) => (
                             <MenuItem key={i} value={option}>
                                 {option}
@@ -181,6 +186,27 @@ const UnivercitySelect = () => {
                         ))}
                     </Select>
                 </FormControl>
+            </Box>
+            <Box
+                sx={{
+                    my: 3,
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                }}
+            >
+                <Button
+                    variant="contained"
+                    onClick={props.activeStepDecrementHandler}
+                >
+                    Önceki Soru
+                </Button>
+                <Button
+                    variant="contained"
+                    onClick={props.activeStepIncrementHandler}
+                    disabled={isDisable}
+                >
+                    Sıradaki Soru
+                </Button>
             </Box>
         </>
     );
