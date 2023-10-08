@@ -1,4 +1,7 @@
+//hooks
 import React, { useState, useMemo, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+//packages
 import {
     Box,
     FormControl,
@@ -10,44 +13,59 @@ import {
     InputAdornment,
     Button,
 } from '@mui/material';
+//functions
+import { registerActions } from '../../../store/registerSlice';
+//icons
 import SearchIcon from '@mui/icons-material/Search';
+//datas
 import data from '../../../data/univercities.json';
 
 const containsText = (text, searchUniText) =>
     text.toLowerCase().indexOf(searchUniText.toLowerCase()) > -1;
 
 const UnivercitySelect = (props) => {
+    const universityRedux = useSelector(
+        (state) => state.register.univercityValue
+    );
+    const departmentRedux = useSelector(
+        (state) => state.register.departmentValue
+    );
+    const dispatch = useDispatch();
     //univercity section
-    const [selectedUniOption, setSelectedUniOption] = useState('');
+    const [selectedUniOption, setSelectedUniOption] = useState(universityRedux);
     const [searchUniText, setSearchUniText] = useState('');
 
     const university = [];
 
+    //fetch all university data
     for (let i = 0; i < data.length; i++) {
         university.push(data[i].universities[0].name);
     }
+    //univercity search filter function
     const displayedUniOptions = useMemo(
         () =>
             university.filter((option) => containsText(option, searchUniText)),
         [searchUniText]
     );
 
+    const univercityChangeHandler = (event) => {
+        setSelectedUniOption(event.target.value);
+        setSelectedDepOption('');
+        dispatch(
+            registerActions.univercityNameChangeHandler(event.target.value)
+        );
+        dispatch(registerActions.departmenNameChangeHandler(''));
+    };
+
     //department section
-    const [selectedDepOption, setSelectedDepOption] = useState('');
+    const [selectedDepOption, setSelectedDepOption] = useState(departmentRedux);
     const [searchDepText, setSearchDepText] = useState('');
+    const [displayedDepOptions, setDisplayedDepOptions] = useState([]);
 
     const departments = [];
     let selectedUniIndex;
 
-    const [displayedDepOptions, setDisplayedDepOptions] = useState([]);
-
-    useEffect(() => {
-        const depOptions = departments.filter((selected) =>
-            containsText(selected, searchDepText)
-        );
-        setDisplayedDepOptions(depOptions);
-    }, [searchDepText, selectedUniOption]);
-
+    //fetching all departments of the selected univercity
     if (selectedUniOption) {
         for (let i = 0; i < data.length; i++) {
             const allUniversities = data[i].universities;
@@ -65,6 +83,21 @@ const UnivercitySelect = (props) => {
             });
         }
     }
+
+    const departmentChangeHandler = (event) => {
+        setSelectedDepOption(event.target.value);
+        dispatch(
+            registerActions.departmenNameChangeHandler(event.target.value)
+        );
+    };
+
+    //department search filter function
+    useEffect(() => {
+        const depOptions = departments.filter((selected) =>
+            containsText(selected, searchDepText)
+        );
+        setDisplayedDepOptions(depOptions);
+    }, [searchDepText, selectedUniOption]);
 
     //is disable
     const [isDisable, setIsDisable] = useState(true);
@@ -91,7 +124,7 @@ const UnivercitySelect = (props) => {
                         value={selectedUniOption}
                         label="Options"
                         defaultValue=""
-                        onChange={(e) => setSelectedUniOption(e.target.value)}
+                        onChange={univercityChangeHandler}
                         onClose={() => setSearchUniText('')}
                         renderValue={() => selectedUniOption}
                     >
@@ -143,7 +176,7 @@ const UnivercitySelect = (props) => {
                         value={selectedDepOption}
                         label="Options"
                         defaultValue=""
-                        onChange={(e) => setSelectedDepOption(e.target.value)}
+                        onChange={departmentChangeHandler}
                         onClose={() => setSearchDepText('')}
                         // This prevents rendering empty string in Select's value
                         // if search text would exclude currently selected option.

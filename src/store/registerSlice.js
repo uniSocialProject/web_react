@@ -11,7 +11,6 @@ const registerSlice = createSlice({
         //second step constants
         univercityValue: '',
         departmentValue: '',
-        isDisabled: true,
         //third step constants
         emailValue: '',
         isEmailEntered: false,
@@ -37,9 +36,6 @@ const registerSlice = createSlice({
         nameAndSurnameChangeHandler(state, action) {
             state.nameValue = action.payload.name;
             state.surnameValue = action.payload.surname;
-        },
-        isDisabledToggleHandler(state, action) {
-            state.isDisabled = action.payload;
         },
         emailChangeHandler(state, action) {
             state.emailValue = action.payload;
