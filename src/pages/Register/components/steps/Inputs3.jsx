@@ -121,6 +121,14 @@ const Inputs3 = (props) => {
         delay: 200,
     });
 
+    const passwordStrenghtBarAnimation = useSpring({
+        opacity: isStrenghtBarOpen ? 1 : 0,
+        marginTop: isStrenghtBarOpen ? 3 : 0,
+        config: {
+            duration: 600,
+        },
+    });
+
     return (
         <>
             <Box
@@ -192,10 +200,16 @@ const Inputs3 = (props) => {
                         />
                     </animated.div>
 
-                    <PasswordStrengthBar
-                        password={enteredPassword}
-                        isStrenghtBarOpen={isStrenghtBarOpen}
-                    />
+                    <animated.div
+                        style={{
+                            ...passwordStrenghtBarAnimation,
+                        }}
+                    >
+                        <PasswordStrengthBar
+                            password={enteredPassword}
+                            isStrenghtBarOpen={isStrenghtBarOpen}
+                        />
+                    </animated.div>
 
                     <FormControlLabel
                         required

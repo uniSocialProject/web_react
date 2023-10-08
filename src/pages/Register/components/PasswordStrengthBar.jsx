@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { registerActions } from '../../../store/registerSlice';
 
-const PasswordStrengthBar = ({ password }) => {
+const PasswordStrengthBar = ({ password, isStrenghtBarOpen }) => {
     const dispatch = useDispatch();
 
     const calculateStrength = (password) => {
@@ -65,7 +65,11 @@ const PasswordStrengthBar = ({ password }) => {
 
     return (
         <div>
-            <Grid container display={'flex'} alignItems={'center'} my={1}>
+            <Grid
+                container
+                display={'flex'}
+                alignItems={'center'}
+            >
                 <Grid
                     item
                     xs={1}
