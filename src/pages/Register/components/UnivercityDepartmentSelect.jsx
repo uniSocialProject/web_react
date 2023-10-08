@@ -1,6 +1,7 @@
 //hooks
 import React, { useState, useMemo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { animated, useSpring } from '@react-spring/web';
 //packages
 import {
     Box,
@@ -109,117 +110,139 @@ const UnivercitySelect = (props) => {
         }
     }, [selectedUniOption, selectedDepOption]);
 
+    //animations
+    const univercityAnimation = useSpring({
+        from: { opacity: 0, x: -100 },
+        to: { opacity: 1, x: 0 },
+    });
+    const departmentAnimation = useSpring({
+        from: { opacity: 0, x: -100 },
+        to: { opacity: 1, x: 0 },
+        delay: 200,
+    });
+
     return (
         <>
-            <Box sx={{ width: 350, my: 2.5 }}>
-                <FormControl fullWidth>
-                    <InputLabel id="search-select-label" sx={{ fontSize: 14 }}>
-                        Üniversite
-                    </InputLabel>
-                    <Select
-                        MenuProps={{ autoFocus: false }}
-                        labelId="search-select-label"
-                        id="search-select"
-                        fullWidth={true}
-                        value={selectedUniOption}
-                        label="Options"
-                        defaultValue=""
-                        onChange={univercityChangeHandler}
-                        onClose={() => setSearchUniText('')}
-                        renderValue={() => selectedUniOption}
-                    >
-                        <ListSubheader>
-                            <TextField
-                                size="small"
-                                autoFocus
-                                placeholder="Type to search..."
-                                fullWidth
-                                sx={{ my: 1 }}
-                                variant="standard"
-                                defaultValue=""
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <SearchIcon />
-                                        </InputAdornment>
-                                    ),
-                                }}
-                                onChange={(e) =>
-                                    setSearchUniText(e.target.value)
-                                }
-                                onKeyDown={(e) => {
-                                    if (e.key !== 'Escape') {
-                                        e.stopPropagation();
+            <animated.div
+                style={{
+                    ...univercityAnimation,
+                }}
+            >
+                <Box sx={{ width: 350, my: 2.5 }}>
+                    <FormControl fullWidth>
+                        <InputLabel
+                            id="search-select-label"
+                            sx={{ fontSize: 14 }}
+                        >
+                            Üniversite
+                        </InputLabel>
+                        <Select
+                            MenuProps={{ autoFocus: false }}
+                            labelId="search-select-label"
+                            id="search-select"
+                            fullWidth={true}
+                            value={selectedUniOption}
+                            label="Options"
+                            defaultValue=""
+                            onChange={univercityChangeHandler}
+                            onClose={() => setSearchUniText('')}
+                            renderValue={() => selectedUniOption}
+                        >
+                            <ListSubheader>
+                                <TextField
+                                    size="small"
+                                    autoFocus
+                                    placeholder="Type to search..."
+                                    fullWidth
+                                    sx={{ my: 1 }}
+                                    variant="standard"
+                                    defaultValue=""
+                                    InputProps={{
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                                <SearchIcon />
+                                            </InputAdornment>
+                                        ),
+                                    }}
+                                    onChange={(e) =>
+                                        setSearchUniText(e.target.value)
                                     }
-                                }}
-                            />
-                        </ListSubheader>
-                        {displayedUniOptions.map((option, i) => (
-                            <MenuItem key={i} value={option}>
-                                {option}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
-            </Box>
-            <Box sx={{ width: 350 }}>
-                <FormControl fullWidth>
-                    <InputLabel id="search-select-label" sx={{ fontSize: 14 }}>
-                        Bölüm
-                    </InputLabel>
-                    <Select
-                        MenuProps={{ autoFocus: false }}
-                        disabled={!selectedUniOption}
-                        labelId="search-select-label"
-                        id="search-select"
-                        fullWidth={true}
-                        value={selectedDepOption}
-                        label="Options"
-                        defaultValue=""
-                        onChange={departmentChangeHandler}
-                        onClose={() => setSearchDepText('')}
-                        // This prevents rendering empty string in Select's value
-                        // if search text would exclude currently selected option.
-                        renderValue={() => selectedDepOption}
-                    >
-                        {/* TextField is put into ListSubheader so that it doesn't
-              act as a selectable item in the menu
-              i.e. we can click the TextField without triggering any selection.*/}
-                        <ListSubheader>
-                            <TextField
-                                size="small"
-                                // Autofocus on textfield
-                                autoFocus
-                                placeholder="Type to search..."
-                                fullWidth
-                                sx={{ my: 1 }}
-                                variant="standard"
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <SearchIcon />
-                                        </InputAdornment>
-                                    ),
-                                }}
-                                onChange={(e) =>
-                                    setSearchDepText(e.target.value)
-                                }
-                                onKeyDown={(e) => {
-                                    if (e.key !== 'Escape') {
-                                        // Prevents autoselecting item while typing (default Select behaviour)
-                                        e.stopPropagation();
+                                    onKeyDown={(e) => {
+                                        if (e.key !== 'Escape') {
+                                            e.stopPropagation();
+                                        }
+                                    }}
+                                />
+                            </ListSubheader>
+                            {displayedUniOptions.map((option, i) => (
+                                <MenuItem key={i} value={option}>
+                                    {option}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+                </Box>
+            </animated.div>
+            <animated.div
+                style={{
+                    ...departmentAnimation,
+                }}
+            >
+                <Box sx={{ width: 350 }}>
+                    <FormControl fullWidth>
+                        <InputLabel
+                            id="search-select-label"
+                            sx={{ fontSize: 14 }}
+                        >
+                            Bölüm
+                        </InputLabel>
+                        <Select
+                            MenuProps={{ autoFocus: false }}
+                            disabled={!selectedUniOption}
+                            labelId="search-select-label"
+                            id="search-select"
+                            fullWidth={true}
+                            value={selectedDepOption}
+                            label="Options"
+                            defaultValue=""
+                            onChange={departmentChangeHandler}
+                            onClose={() => setSearchDepText('')}
+                            renderValue={() => selectedDepOption}
+                        >
+                            <ListSubheader>
+                                <TextField
+                                    size="small"
+                                    autoFocus
+                                    placeholder="Type to search..."
+                                    fullWidth
+                                    sx={{ my: 1 }}
+                                    variant="standard"
+                                    InputProps={{
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                                <SearchIcon />
+                                            </InputAdornment>
+                                        ),
+                                    }}
+                                    onChange={(e) =>
+                                        setSearchDepText(e.target.value)
                                     }
-                                }}
-                            />
-                        </ListSubheader>
-                        {displayedDepOptions.map((option, i) => (
-                            <MenuItem key={i} value={option}>
-                                {option}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
-            </Box>
+                                    onKeyDown={(e) => {
+                                        if (e.key !== 'Escape') {
+                                            e.stopPropagation();
+                                        }
+                                    }}
+                                />
+                            </ListSubheader>
+                            {displayedDepOptions.map((option, i) => (
+                                <MenuItem key={i} value={option}>
+                                    {option}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+                </Box>
+            </animated.div>
             <Box
                 sx={{
                     my: 3,

@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
 import LinearProgress from '@mui/material/LinearProgress';
 import { Grid } from '@mui/material';
 import GppGoodIcon from '@mui/icons-material/GppGood';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { registerActions } from '../../../store/registerSlice';
 
-const PasswordStrengthBar = ({ password, isStrenghtBarOpen }) => {
+const PasswordStrengthBar = ({ password }) => {
+    const dispatch = useDispatch();
+
     const calculateStrength = (password) => {
         const length = password.length;
         let score = 0;
@@ -52,6 +56,12 @@ const PasswordStrengthBar = ({ password, isStrenghtBarOpen }) => {
 
     const passwordStrength = calculateStrength(password);
     const strengthColor = getPasswordStrengthColor(passwordStrength);
+
+    useEffect(() => {
+        dispatch(
+            registerActions.passwordStrenghtChangeHandler(passwordStrength)
+        );
+    }, [passwordStrength]);
 
     return (
         <div>

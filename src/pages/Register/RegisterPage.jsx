@@ -3,25 +3,48 @@ import CustomStepper from '../Register/components/CustomStepper';
 import RegisterInput from '../Register/components/RegisterInput';
 //material ui components
 import { Grid, Container } from '@mui/material';
-// import {UnivercitySelect as UnivercitySelect } from './components/DepartmentSelection';
+import { useSpring, animated } from '@react-spring/web';
 
 const RegisterPage = () => {
+    const boxAximation = useSpring({
+        from: { opacity: 0, scale: 0.8 },
+        to: { opacity: 1, scale: 1 },
+    });
+
+
     return (
-        <Container
-            component="main"
-            maxWidth="xs"
-            sx={{ mt: 15 }}
-            className="bg-slate-50 shadow-xl rounded-md p-3 "
+        <animated.div
+            style={{
+                ...boxAximation,
+            }}
         >
-            <Grid container mt={5}>
-                <Grid item xs={12} display={'flex'} justifyContent={'center'}>
-                    <CustomStepper />
+            <Container
+                component="main"
+                maxWidth="xs"
+                sx={{ mt: 15 }}
+                className="bg-slate-50 shadow-xl rounded-md p-3 "
+            >
+                <Grid container mt={5}>
+                    <Grid
+                        item
+                        xs={12}
+                        display={'flex'}
+                        justifyContent={'center'}
+                    >
+                        <CustomStepper />
+                    </Grid>
+
+                    <Grid
+                        item
+                        xs={12}
+                        display={'flex'}
+                        justifyContent={'center'}
+                    >
+                        <RegisterInput />
+                    </Grid>
                 </Grid>
-                <Grid item xs={12} display={'flex'} justifyContent={'center'}>
-                    <RegisterInput />
-                </Grid>
-            </Grid>
-        </Container>
+            </Container>
+        </animated.div>
     );
 };
 

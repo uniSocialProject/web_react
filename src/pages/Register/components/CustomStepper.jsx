@@ -1,5 +1,4 @@
 //hooks
-import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerActions } from '../../../store/registerSlice';
