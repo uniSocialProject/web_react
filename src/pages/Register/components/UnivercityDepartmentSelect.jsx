@@ -115,10 +115,22 @@ const UnivercitySelect = (props) => {
         from: { opacity: 0, x: -100 },
         to: { opacity: 1, x: 0 },
     });
+
     const departmentAnimation = useSpring({
         from: { opacity: 0, x: -100 },
         to: { opacity: 1, x: 0 },
         delay: 200,
+    });
+
+    const prevButtonAnimation = useSpring({
+        from: { opacity: 0, scale: 0.8 },
+        to: { opacity: 1, scale: 1 },
+        delay: 400,
+    });
+    const nextButtonAnimation = useSpring({
+        from: { opacity: 0, scale: 0.8 },
+        to: { opacity: 1, scale: 1 },
+        delay: 600,
     });
 
     return (
@@ -250,19 +262,23 @@ const UnivercitySelect = (props) => {
                     justifyContent: 'space-between',
                 }}
             >
-                <Button
-                    variant="contained"
-                    onClick={props.activeStepDecrementHandler}
-                >
-                    Önceki Soru
-                </Button>
-                <Button
-                    variant="contained"
-                    onClick={props.activeStepIncrementHandler}
-                    disabled={isDisable}
-                >
-                    Sıradaki Soru
-                </Button>
+                <animated.div style={{ ...prevButtonAnimation }}>
+                    <Button
+                        variant="contained"
+                        onClick={props.activeStepDecrementHandler}
+                    >
+                        Önceki Soru
+                    </Button>
+                </animated.div>
+                <animated.div style={{ ...nextButtonAnimation }}>
+                    <Button
+                        variant="contained"
+                        onClick={props.activeStepIncrementHandler}
+                        disabled={isDisable}
+                    >
+                        Sıradaki Soru
+                    </Button>
+                </animated.div>
             </Box>
         </>
     );

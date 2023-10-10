@@ -40,7 +40,6 @@ const Inputs1 = (props) => {
     const isFirstLoad = useSelector((state) => state.register.isFirstLoad);
 
     useEffect(() => {
-        console.log(isFirstLoad);
         setTimeout(() => {
             dispatch(registerActions.isFirstLoadHandler(false));
         }, 1000);
@@ -61,13 +60,13 @@ const Inputs1 = (props) => {
     const surnameInputAnimation = useSpring({
         from: { opacity: 0, x: -100 },
         to: { opacity: 1, x: 0 },
-        delay: isFirstLoad ? 950 : 400,
+        delay: isFirstLoad ? 950 : 500,
     });
 
     const buttonAnimation = useSpring({
-        from: { opacity: 0 },
-        to: { opacity: 1 },
-        delay: isFirstLoad ? 1200 : 550,
+        from: { opacity: 0, scale: 0.8 },
+        to: { opacity: 1, scale: 1},
+        delay: isFirstLoad ? 1200 : 650,
     });
 
     return (

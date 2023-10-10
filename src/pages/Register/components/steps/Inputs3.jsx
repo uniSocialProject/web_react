@@ -93,7 +93,6 @@ const Inputs3 = (props) => {
     const [isPasswordValid, setIsPasswordValid] = useState(false);
 
     useEffect(() => {
-        console.log(passwordStrenght);
         if (passwordStrenght >= 25) {
             setIsPasswordValid(true);
         } else {
