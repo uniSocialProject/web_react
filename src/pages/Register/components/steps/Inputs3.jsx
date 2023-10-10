@@ -93,10 +93,15 @@ const Inputs3 = (props) => {
     const [isPasswordValid, setIsPasswordValid] = useState(false);
 
     useEffect(() => {
-        enteredPassword.length > 5
-            ? setIsPasswordValid(true)
-            : setIsPasswordValid(false);
+        console.log(passwordStrenght);
+        if (passwordStrenght >= 25) {
+            setIsPasswordValid(true);
+        } else {
+            setIsPasswordValid(false);
+        }
+    }, [passwordStrenght]);
 
+    useEffect(() => {
         let emailValidation = emailRegex.test(enteredEmail);
         setIsEmailValid(emailValidation);
 
@@ -108,7 +113,7 @@ const Inputs3 = (props) => {
         if (!enteredEmail || !enteredPassword) {
             setIsFormValid(false);
         }
-    }, [enteredEmail, enteredPassword]);
+    }, [enteredEmail, enteredPassword, isPasswordValid, isEmailValid]);
 
     //animations
     const emailAnimation = useSpring({
