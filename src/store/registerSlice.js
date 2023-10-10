@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const registerSlice = createSlice({
     name: 'register',
     initialState: {
+        isFirstLoad: true,
         step: 1,
         isKvkk: false,
         //first step constants
@@ -45,6 +46,9 @@ const registerSlice = createSlice({
         },
         passwordStrenghtChangeHandler(state, action) {
             state.passwordStrenght = action.payload;
+        },
+        isFirstLoadHandler(state, action) {
+            state.isFirstLoad = action.payload;
         },
     },
 });

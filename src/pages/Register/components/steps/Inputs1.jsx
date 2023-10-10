@@ -7,7 +7,7 @@ import {
     Button,
 } from '@mui/material';
 //hooks
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { animated, useSpring } from '@react-spring/web';
 //functions
@@ -37,28 +37,37 @@ const Inputs1 = (props) => {
     };
 
     //animations
+    const isFirstLoad = useSelector((state) => state.register.isFirstLoad);
+
+    useEffect(() => {
+        console.log(isFirstLoad);
+        setTimeout(() => {
+            dispatch(registerActions.isFirstLoadHandler(false));
+        }, 1000);
+    }, [isFirstLoad]);
+
     const textAnimation = useSpring({
         from: { opacity: 0 },
         to: { opacity: 1 },
-        delay: 600,
+        delay: isFirstLoad ? 700 : 150,
     });
 
     const nameInputAnimation = useSpring({
         from: { opacity: 0, x: -100 },
         to: { opacity: 1, x: 0 },
-        delay: 650,
+        delay: isFirstLoad ? 800 : 300,
     });
 
     const surnameInputAnimation = useSpring({
         from: { opacity: 0, x: -100 },
         to: { opacity: 1, x: 0 },
-        delay: 850,
+        delay: isFirstLoad ? 950 : 400,
     });
 
     const buttonAnimation = useSpring({
         from: { opacity: 0 },
         to: { opacity: 1 },
-        delay: 1000,
+        delay: isFirstLoad ? 1200 : 550,
     });
 
     return (

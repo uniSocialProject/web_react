@@ -1,12 +1,15 @@
 import { CssBaseline, Box, Typography } from '@mui/material';
 //hooks
-
-
+import { animated, useSpring } from '@react-spring/web';
+//components
 import UnivercitySelect from '../UnivercityDepartmentSelect';
 
 const Inputs2 = (props) => {
-
-
+    //animations
+    const textAnimation = useSpring({
+        from: { opacity: 0 },
+        to: { opacity: 1 },
+    });
 
     return (
         <>
@@ -19,9 +22,11 @@ const Inputs2 = (props) => {
                     alignItems: 'center',
                 }}
             >
-                <Typography component="h1" variant="h6" mb={1.5}>
-                    Üniversitenizi ve Bölümünüzü giriniz
-                </Typography>
+                <animated.div style={{ ...textAnimation }}>
+                    <Typography component="h1" variant="h6" mb={1.5}>
+                        Üniversitenizi ve Bölümünüzü giriniz
+                    </Typography>
+                </animated.div>
                 <Box component="form" onSubmit={props.submitHandler} noValidate>
                     <UnivercitySelect
                         activeStepDecrementHandler={
