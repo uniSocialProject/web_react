@@ -122,10 +122,10 @@ const Inputs3 = (props) => {
     });
 
     const passwordStrenghtBarAnimation = useSpring({
+        scale: isStrenghtBarOpen ? 1 : 0,
         opacity: isStrenghtBarOpen ? 1 : 0,
-        marginTop: isStrenghtBarOpen ? 3 : 0,
         config: {
-            duration: 600,
+            duration: 200,
         },
     });
 
