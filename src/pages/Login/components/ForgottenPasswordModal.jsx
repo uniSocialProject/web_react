@@ -11,6 +11,7 @@ import {
 //hooks
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
+import { animated, useSpring } from '@react-spring/web';
 //components
 import CustomizedSwitches from './SmsEmailSwitch';
 //functions
@@ -42,38 +43,36 @@ const ForgottenPasswordModal = (props) => {
     };
 
     return (
-        <div>
-            <Dialog open={isModalOpen} onClose={closeBtnHandler}>
-                <DialogTitle>Şifremi yenile</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        Üniversite e-postanı veya telefon numaranı kullanarak
-                        şifreni yenileyebilirsin
-                    </DialogContentText>
-                    <CustomizedSwitches />
-                    {!isSms && (
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="email"
-                            label="Üniversite e-postanızı giriniz"
-                            type="email"
-                            fullWidth
-                            variant="standard"
-                            value={email}
-                            onChange={emailChangeHandler}
-                        />
-                    )}
-                    {isSms && (
-                        <TelephoneInput submitHandler={props.submitHandler} />
-                    )}
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={closeBtnHandler}>İptal</Button>
-                    <Button onClick={submitBtnHandler}>Onayla</Button>
-                </DialogActions>
-            </Dialog>
-        </div>
+        <Dialog open={isModalOpen} onClose={closeBtnHandler}>
+            <DialogTitle>Şifremi yenile</DialogTitle>
+            <DialogContent>
+                <DialogContentText>
+                    Üniversite e-postanı veya telefon numaranı kullanarak
+                    şifreni yenileyebilirsin
+                </DialogContentText>
+                <CustomizedSwitches />
+                {!isSms && (
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="email"
+                        label="Üniversite e-postanızı giriniz"
+                        type="email"
+                        fullWidth
+                        variant="standard"
+                        value={email}
+                        onChange={emailChangeHandler}
+                    />
+                )}
+                {isSms && (
+                    <TelephoneInput submitHandler={props.submitHandler} />
+                )}
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={closeBtnHandler}>İptal</Button>
+                <Button onClick={submitBtnHandler}>Onayla</Button>
+            </DialogActions>
+        </Dialog>
     );
 };
 

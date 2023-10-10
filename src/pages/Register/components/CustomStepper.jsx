@@ -113,16 +113,16 @@ const CustomStepper = () => {
     });
     const step2animation = useSpring({
         scale: loaded ? 1 : 0,
-        delay: 400,
+        delay: 300,
     });
     const step3animation = useSpring({
         scale: loaded ? 1 : 0,
-        delay: 600,
+        delay: 450,
     });
 
     const connectorAnimation = useSpring({
         opacity: loaded ? 1 : 0,
-        delay: 800,
+        delay: 550,
     });
 
     return (
@@ -136,7 +136,7 @@ const CustomStepper = () => {
                     </animated.div>
                 }
             >
-                <Step key={'label'}>
+                <Step key={'Öğrenci Bilgileri'}>
                     <animated.div
                         style={{
                             ...step1animation,
@@ -146,11 +146,11 @@ const CustomStepper = () => {
                             onClick={stepHandler.bind(null, 0)}
                             StepIconComponent={ColorlibStepIcon}
                         >
-                            {'label'}
+                            {'Öğrenci Bilgileri'}
                         </StepLabel>
                     </animated.div>
                 </Step>
-                <Step key={'mer'}>
+                <Step key={'Üniversite Bilgileri'}>
                     <animated.div
                         style={{
                             ...step2animation,
@@ -160,11 +160,11 @@ const CustomStepper = () => {
                             onClick={stepHandler.bind(null, 1)}
                             StepIconComponent={ColorlibStepIcon}
                         >
-                            {'mer'}
+                            {'Üniversite Bilgileri'}
                         </StepLabel>
                     </animated.div>
                 </Step>
-                <Step key={'ser'}>
+                <Step key={'Giriş Bilgileri'}>
                     <animated.div
                         style={{
                             ...step3animation,
@@ -174,7 +174,7 @@ const CustomStepper = () => {
                             onClick={stepHandler.bind(null, 2)}
                             StepIconComponent={ColorlibStepIcon}
                         >
-                            {'ser'}
+                            {'Giriş Bilgileri'}
                         </StepLabel>
                     </animated.div>
                 </Step>

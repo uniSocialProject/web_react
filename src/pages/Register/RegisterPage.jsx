@@ -4,13 +4,27 @@ import RegisterInput from '../Register/components/RegisterInput';
 //material ui components
 import { Grid, Container } from '@mui/material';
 import { useSpring, animated } from '@react-spring/web';
+//hooks
+import { useState, useEffect } from 'react';
 
 const RegisterPage = () => {
-    const boxAximation = useSpring({
-        from: { opacity: 0, scale: 0.8 },
-        to: { opacity: 1, scale: 1 },
-    });
+    //wait for page loading
+    const [loaded, setLoaded] = useState(false);
+    useEffect(() => {
+        window.addEventListener('load', () => {
+            setLoaded(true);
+        });
+        return () => {
+            window.removeEventListener('load', () => {
+                setLoaded(true);
+            });
+        };
+    }, []);
 
+    const boxAximation = useSpring({
+        opacity: loaded ? 1 : 0,
+        scale: loaded ? 1 : 0.7,
+    });
 
     return (
         <animated.div

@@ -37,15 +37,28 @@ const Inputs1 = (props) => {
     };
 
     //animations
+    const textAnimation = useSpring({
+        from: { opacity: 0 },
+        to: { opacity: 1 },
+        delay: 600,
+    });
+
     const nameInputAnimation = useSpring({
         from: { opacity: 0, x: -100 },
         to: { opacity: 1, x: 0 },
+        delay: 650,
     });
 
     const surnameInputAnimation = useSpring({
         from: { opacity: 0, x: -100 },
         to: { opacity: 1, x: 0 },
-        delay: 200,
+        delay: 850,
+    });
+
+    const buttonAnimation = useSpring({
+        from: { opacity: 0 },
+        to: { opacity: 1 },
+        delay: 1000,
     });
 
     return (
@@ -59,9 +72,11 @@ const Inputs1 = (props) => {
                     alignItems: 'center',
                 }}
             >
-                <Typography component="h1" variant="h5">
-                    Adınızı ve soyadınızı giriniz
-                </Typography>
+                <animated.div style={{ ...textAnimation }}>
+                    <Typography component="h1" variant="h5">
+                        Adınızı ve soyadınızı giriniz
+                    </Typography>
+                </animated.div>
                 <Box component="form" onSubmit={props.submitHandler} noValidate>
                     <animated.div
                         style={{
@@ -109,13 +124,15 @@ const Inputs1 = (props) => {
 
                     <Grid container textAlign={'center'} mt={2}>
                         <Grid item xs={12}>
-                            <Button
-                                disabled={!enteredName || !enteredSurname}
-                                variant="contained"
-                                onClick={buttonHandler}
-                            >
-                                Sıradaki Soru
-                            </Button>
+                            <animated.div style={{ ...buttonAnimation }}>
+                                <Button
+                                    disabled={!enteredName || !enteredSurname}
+                                    variant="contained"
+                                    onClick={buttonHandler}
+                                >
+                                    Sıradaki Soru
+                                </Button>
+                            </animated.div>
                         </Grid>
                     </Grid>
                     <Grid

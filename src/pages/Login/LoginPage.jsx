@@ -12,6 +12,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { animated, useSpring } from '@react-spring/web';
 //components
 import {
     LoginEmailInput,
@@ -68,87 +69,160 @@ const LoginPage = () => {
             console.log(error.message);
         }
     };
+    //animations
+    const emailInputAnimation = useSpring({
+        from: { opacity: 0, x: -100 },
+        to: { opacity: 1, x: 0 },
+        delay: 100,
+    });
+
+    const passwordInputAnimation = useSpring({
+        from: { opacity: 0, x: -100 },
+        to: { opacity: 1, x: 0 },
+        delay: 250,
+    });
+
+    const entireBoxAnimation = useSpring({
+        from: { opacity: 0, scale: 0.8 },
+        to: { opacity: 1, scale: 1 },
+    });
+
+    const loginButtonAnimation = useSpring({
+        from: { opacity: 0, scale: 0.8 },
+        to: { opacity: 1, scale: 1 },
+        delay: 600,
+    });
+
+    const forgottenPasswordAnimation = useSpring({
+        from: { opacity: 0, scale: 0.8 },
+        to: { opacity: 1, scale: 1 },
+        delay: 750,
+    });
+
+    const dividerAnimation = useSpring({
+        from: { opacity: 0, scale: 0.8 },
+        to: { opacity: 1, scale: 1 },
+        delay: 850,
+    });
+
+    const registerButtonAnimation = useSpring({
+        from: { opacity: 0, scale: 0.8 },
+        to: { opacity: 1, scale: 1 },
+        delay: 900,
+    });
 
     return (
         <>
             {isModalOpen && <ForgottenPasswordModal open={isModalOpen} />}
-            <Container
-                component="main"
-                maxWidth="xs"
-                className="bg-slate-50 shadow-xl rounded-md p-3 mt-28"
-            >
-                <CssBaseline />
-                <Box
-                    sx={{
-                        marginTop: 5,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}
+            <animated.div style={{ ...entireBoxAnimation }}>
+                <Container
+                    component="main"
+                    maxWidth="xs"
+                    className="bg-slate-50 shadow-xl rounded-md p-3 mt-28"
                 >
-                    <Typography component="h1" variant="h5">
-                        Giriş yap
-                    </Typography>
+                    <CssBaseline />
                     <Box
-                        component="form"
-                        onSubmit={submitHandler}
-                        noValidate
-                        sx={{ mt: 1 }}
+                        sx={{
+                            marginTop: 5,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                        }}
                     >
-                        {/* {login Inputs} */}
-                        <LoginEmailInput isEmailShake={isEmailShake} />
-                        <LoginPasswordInput isPasswordShake={isPasswordShake} />
-
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2, textTransform: 'capitalize' }}
-                        >
+                        <Typography component="h1" variant="h5">
                             Giriş yap
-                        </Button>
-                        <Grid container className="justify-center text-center">
-                            <Grid item xs={12}>
-                                <Button
-                                    disableRipple
-                                    onClick={forgotPasswordHandler}
-                                    size="medium"
-                                    sx={{
-                                        textTransform: 'capitalize',
-                                        ':hover': {
-                                            bgcolor: 'transparent',
-                                        },
-                                    }}
-                                >
-                                    Şifreni mi unuttun ?
-                                </Button>
-                            </Grid>
-                            <Divider
-                                sx={{
-                                    bgcolor: '#e3e5e8',
-                                    px: 25,
-                                    py: 0.05,
-                                    my: 1,
+                        </Typography>
+                        <Box
+                            component="form"
+                            onSubmit={submitHandler}
+                            noValidate
+                            sx={{ mt: 1 }}
+                        >
+                            {/* {login Inputs} */}
+                            <animated.div
+                                style={{
+                                    ...emailInputAnimation,
                                 }}
-                            />
-                            <Grid item marginY={2}>
+                            >
+                                <LoginEmailInput isEmailShake={isEmailShake} />
+                            </animated.div>
+                            <animated.div style={{ ...passwordInputAnimation }}>
+                                <LoginPasswordInput
+                                    isPasswordShake={isPasswordShake}
+                                />
+                            </animated.div>
+                            <animated.div style={{ ...loginButtonAnimation }}>
                                 <Button
+                                    type="submit"
+                                    fullWidth
                                     variant="contained"
                                     sx={{
-                                        bgcolor: '#42b72a',
-                                        pt: '4',
-                                        ':hover': {
-                                            bgcolor: '#2D8D1A',
-                                        },
+                                        mt: 3,
+                                        mb: 2,
+                                        textTransform: 'capitalize',
                                     }}
                                 >
-                                    Yeni hesap oluştur
+                                    Giriş yap
                                 </Button>
+                            </animated.div>
+                            <Grid
+                                container
+                                className="justify-center text-center"
+                            >
+                                <Grid item xs={12}>
+                                    <animated.div
+                                        style={{
+                                            ...forgottenPasswordAnimation,
+                                        }}
+                                    >
+                                        <Button
+                                            disableRipple
+                                            onClick={forgotPasswordHandler}
+                                            size="medium"
+                                            sx={{
+                                                textTransform: 'capitalize',
+                                                ':hover': {
+                                                    bgcolor: 'transparent',
+                                                },
+                                            }}
+                                        >
+                                            Şifreni mi unuttun ?
+                                        </Button>
+                                    </animated.div>
+                                </Grid>
+                                <animated.div style={{ ...dividerAnimation }}>
+                                    <Divider
+                                        sx={{
+                                            bgcolor: '#e3e5e8',
+                                            px: 25,
+                                            py: 0.05,
+                                            my: 1,
+                                        }}
+                                    />
+                                </animated.div>
+                                <Grid item marginY={2}>
+                                    <animated.div
+                                        style={{ ...registerButtonAnimation }}
+                                    >
+                                        <Button
+                                            variant="contained"
+                                            sx={{
+                                                bgcolor: '#42b72a',
+                                                pt: '4',
+                                                ':hover': {
+                                                    bgcolor: '#2D8D1A',
+                                                },
+                                            }}
+                                        >
+                                            Yeni hesap oluştur
+                                        </Button>
+                                    </animated.div>
+                                </Grid>
                             </Grid>
-                        </Grid>
+                        </Box>
                     </Box>
-                </Box>
-            </Container>
+                </Container>
+            </animated.div>
         </>
     );
 };
