@@ -2,6 +2,8 @@
 import { styled } from '@mui/material/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerActions } from '../../../store/registerSlice';
+import { animated, useSpring } from '@react-spring/web';
+import { useState, useEffect } from 'react';
 //material ui components
 import {
     Stack,
@@ -19,6 +21,8 @@ import LoginIcon from '@mui/icons-material/Login';
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
     [`&.${stepConnectorClasses.alternativeLabel}`]: {
         top: 22,
+        left: 'calc(-50% + 24px)',
+        right: 'calc(50% + 24px)',
     },
     [`&.${stepConnectorClasses.active}`]: {
         [`& .${stepConnectorClasses.line}`]: {
@@ -34,7 +38,7 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
     [`& .${stepConnectorClasses.line}`]: {
         height: 3,
         border: 0,
-        backgroundColor: '#eaeaf0',
+        backgroundColor: '#ccc',
         borderRadius: 1,
     },
 }));
@@ -83,29 +87,97 @@ const steps = ['Öğrenci bilgileri', 'Üniversite Bilgileri', 'Giriş Bilgileri
 
 const CustomStepper = () => {
     const dispatch = useDispatch();
-    const activeStep = useSelector((state) => state.register.step)
+    const activeStep = useSelector((state) => state.register.step);
 
     const stepHandler = (index) => {
         dispatch(registerActions.stepChangeHandler(index + 1));
     };
+
+    //wait for page loading
+    const [loaded, setLoaded] = useState(false);
+    useEffect(() => {
+        window.addEventListener('load', () => {
+            setLoaded(true);
+        });
+        return () => {
+            window.removeEventListener('load', () => {
+                setLoaded(true);
+            });
+        };
+    }, []);
+
+    //animations
+    const step1animation = useSpring({
+        scale: loaded ? 1 : 0,
+        delay: 150,
+    });
+    const step2animation = useSpring({
+        scale: loaded ? 1 : 0,
+        delay: 400,
+    });
+    const step3animation = useSpring({
+        scale: loaded ? 1 : 0,
+        delay: 600,
+    });
+
+    const connectorAnimation = useSpring({
+        opacity: loaded ? 1 : 0,
+        delay: 800,
+    });
 
     return (
         <Stack sx={{ width: '100%' }}>
             <Stepper
                 alternativeLabel
                 activeStep={activeStep}
-                connector={<ColorlibConnector />}
+                connector={
+                    <animated.div style={{ ...connectorAnimation }}>
+                        <ColorlibConnector />
+                    </animated.div>
+                }
             >
-                {steps.map((label, index) => (
-                    <Step key={label}>
+                <Step key={'label'}>
+                    <animated.div
+                        style={{
+                            ...step1animation,
+                        }}
+                    >
                         <StepLabel
-                            onClick={stepHandler.bind(null, index)}
+                            onClick={stepHandler.bind(null, 0)}
                             StepIconComponent={ColorlibStepIcon}
                         >
-                            {label}
+                            {'label'}
                         </StepLabel>
-                    </Step>
-                ))}
+                    </animated.div>
+                </Step>
+                <Step key={'mer'}>
+                    <animated.div
+                        style={{
+                            ...step2animation,
+                        }}
+                    >
+                        <StepLabel
+                            onClick={stepHandler.bind(null, 1)}
+                            StepIconComponent={ColorlibStepIcon}
+                        >
+                            {'mer'}
+                        </StepLabel>
+                    </animated.div>
+                </Step>
+                <Step key={'ser'}>
+                    <animated.div
+                        style={{
+                            ...step3animation,
+                        }}
+                    >
+                        <StepLabel
+                            onClick={stepHandler.bind(null, 2)}
+                            StepIconComponent={ColorlibStepIcon}
+                        >
+                            {'ser'}
+                        </StepLabel>
+                    </animated.div>
+                </Step>
             </Stepper>
         </Stack>
     );
