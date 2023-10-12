@@ -5,6 +5,7 @@ const registerSlice = createSlice({
     initialState: {
         isFirstLoad: true,
         step: 1,
+        maxStep: 1,
         isKvkk: false,
         //first step constants
         nameValue: 'Murat',
@@ -21,6 +22,9 @@ const registerSlice = createSlice({
     },
     reducers: {
         stepChangeHandler(state, action) {
+            if (state.maxStep < action.payload) {
+                state.maxStep = action.payload;
+            }
             state.step = action.payload;
         },
         kvkkToggleHandler(state) {

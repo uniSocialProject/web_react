@@ -88,9 +88,14 @@ const steps = ['Öğrenci bilgileri', 'Üniversite Bilgileri', 'Giriş Bilgileri
 const CustomStepper = () => {
     const dispatch = useDispatch();
     const activeStep = useSelector((state) => state.register.step);
+    const maxStep = useSelector((state) => state.register.maxStep);
 
     const stepHandler = (index) => {
-        dispatch(registerActions.stepChangeHandler(index + 1));
+        if (maxStep > index) {
+            dispatch(registerActions.stepChangeHandler(index + 1));
+        } else {
+            return;
+        }
     };
 
     //wait for page loading
