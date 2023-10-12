@@ -48,7 +48,7 @@ const Inputs1 = (props) => {
     const textAnimation = useSpring({
         from: { opacity: 0 },
         to: { opacity: 1 },
-        delay: isFirstLoad ? 700 : 150,
+        delay: isFirstLoad ? 700 : 50,
     });
 
     const nameInputAnimation = useSpring({

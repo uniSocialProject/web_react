@@ -115,6 +115,12 @@ const Inputs3 = (props) => {
     }, [enteredEmail, enteredPassword, isPasswordValid, isEmailValid]);
 
     //animations
+    const textAnimation = useSpring({
+        from: { opacity: 0 },
+        to: { opacity: 1 },
+        delay: 50,
+    });
+
     const emailAnimation = useSpring({
         from: { opacity: 0, x: -100 },
         to: { opacity: 1, x: 0 },
@@ -133,6 +139,24 @@ const Inputs3 = (props) => {
         },
     });
 
+    const kvkkAnimation = useSpring({
+        from: { opacity: 0 },
+        to: { opacity: 1 },
+        delay: 400,
+    });
+
+    const prevButtonAnimation = useSpring({
+        from: { opacity: 0, scale: 0.8 },
+        to: { opacity: 1, scale: 1 },
+        delay: 550,
+    });
+
+    const registerButtonAnimation = useSpring({
+        from: { opacity: 0, scale: 0.8 },
+        to: { opacity: 1, scale: 1 },
+        delay: 700,
+    });
+
     return (
         <>
             <Box
@@ -143,9 +167,11 @@ const Inputs3 = (props) => {
                     alignItems: 'center',
                 }}
             >
-                <Typography component="h1" variant="h5">
-                    E-posta ve Yeni şifrenizi giriniz
-                </Typography>
+                <animated.div style={{ ...textAnimation }}>
+                    <Typography component="h1" variant="h5">
+                        E-posta ve Yeni şifrenizi giriniz
+                    </Typography>
+                </animated.div>
                 <Box component="form" onSubmit={props.submitHandler} noValidate>
                     <animated.div
                         style={{
@@ -214,37 +240,53 @@ const Inputs3 = (props) => {
                             isStrenghtBarOpen={isStrenghtBarOpen}
                         />
                     </animated.div>
-
-                    <FormControlLabel
-                        required
-                        control={<Switch />}
-                        label={
-                            <Typography fontSize={14} color={'GrayText'}>
-                                Kvkk Kanununu Okudum ve Kabul Ediyorum
-                            </Typography>
-                        }
-                        onClick={kvkkHandler}
-                        checked={isKvkk}
-                    />
-
+                    <animated.div style={{ ...kvkkAnimation }}>
+                        <FormControlLabel
+                            required
+                            control={<Switch />}
+                            label={
+                                <Typography fontSize={15} color={'GrayText'}>
+                                    Kvkk Kanununu Okudum ve Kabul Ediyorum
+                                </Typography>
+                            }
+                            onClick={kvkkHandler}
+                            checked={isKvkk}
+                        />
+                    </animated.div>
                     <Grid container textAlign={'center'} mt={1.5}>
                         <Grid item xs={6}>
-                            <Button
-                                variant="contained"
-                                onClick={props.activeStepDecrementHandler}
+                            <animated.div
+                                style={{
+                                    ...prevButtonAnimation,
+                                    display: 'flex',
+                                    justifyContent: 'start',
+                                }}
                             >
-                                Önceki Soru
-                            </Button>
+                                <Button
+                                    variant="contained"
+                                    onClick={props.activeStepDecrementHandler}
+                                >
+                                    Önceki Soru
+                                </Button>
+                            </animated.div>
                         </Grid>
                         <Grid item xs={6}>
-                            <Button
-                                variant="contained"
-                                color="success"
-                                onClick={props.formSubmit}
-                                disabled={!isFormValid}
+                            <animated.div
+                                style={{
+                                    ...registerButtonAnimation,
+                                    display: 'flex',
+                                    justifyContent: 'end',
+                                }}
                             >
-                                Kayıt Ol
-                            </Button>
+                                <Button
+                                    variant="contained"
+                                    color="success"
+                                    onClick={props.formSubmit}
+                                    disabled={!isFormValid}
+                                >
+                                    Kayıt Ol
+                                </Button>
+                            </animated.div>
                         </Grid>
                     </Grid>
                 </Box>

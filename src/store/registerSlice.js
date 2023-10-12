@@ -14,10 +14,8 @@ const registerSlice = createSlice({
         departmentValue: '',
         //third step constants
         emailValue: '',
-        isEmailValid: false,
         passwordValue: '',
         isPasswordEntered: false,
-        isPasswordValid: null,
         isKvkkSubmitted: false,
         passwordStrenght: 0,
     },
