@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 //hooks
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { animated, useSpring } from '@react-spring/web';
 //components
@@ -69,45 +69,59 @@ const LoginPage = () => {
             console.log(error.message);
         }
     };
+
+    //is page loaded
+    const [loaded, setLoaded] = useState(false);
+
+    useEffect(() => {
+        window.addEventListener('load', () => {
+            setLoaded(true);
+        });
+        return () => {
+            window.removeEventListener('load', () => {
+                setLoaded(true);
+            });
+        };
+    }, []);
+
     //animations
     const emailInputAnimation = useSpring({
-        from: { opacity: 0, x: -100 },
-        to: { opacity: 1, x: 0 },
-        delay: 100,
+        opacity: loaded ? 1 : 0,
+        x: loaded ? 0 : -100,
     });
 
     const passwordInputAnimation = useSpring({
-        from: { opacity: 0, x: -100 },
-        to: { opacity: 1, x: 0 },
+        opacity: loaded ? 1 : 0,
+        x: loaded ? 0 : -100,
         delay: 250,
     });
 
     const entireBoxAnimation = useSpring({
-        from: { opacity: 0, scale: 0.8 },
-        to: { opacity: 1, scale: 1 },
+        opacity: loaded ? 1 : 0,
+        scale: loaded ? 1 : 0.8,
     });
 
     const loginButtonAnimation = useSpring({
-        from: { opacity: 0, scale: 0.8 },
-        to: { opacity: 1, scale: 1 },
+        opacity: loaded ? 1 : 0,
+        scale: loaded ? 1 : 0.8,
         delay: 600,
     });
 
     const forgottenPasswordAnimation = useSpring({
-        from: { opacity: 0, scale: 0.8 },
-        to: { opacity: 1, scale: 1 },
+        opacity: loaded ? 1 : 0,
+        scale: loaded ? 1 : 0.8,
         delay: 750,
     });
 
     const dividerAnimation = useSpring({
-        from: { opacity: 0, scale: 0.8 },
-        to: { opacity: 1, scale: 1 },
+        opacity: loaded ? 1 : 0,
+        scale: loaded ? 1 : 0.8,
         delay: 850,
     });
 
     const registerButtonAnimation = useSpring({
-        from: { opacity: 0, scale: 0.8 },
-        to: { opacity: 1, scale: 1 },
+        opacity: loaded ? 1 : 0,
+        scale: loaded ? 1 : 0.8,
         delay: 900,
     });
 

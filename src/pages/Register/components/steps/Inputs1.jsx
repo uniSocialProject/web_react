@@ -54,19 +54,19 @@ const Inputs1 = (props) => {
     const nameInputAnimation = useSpring({
         from: { opacity: 0, x: -100 },
         to: { opacity: 1, x: 0 },
-        delay: isFirstLoad ? 800 : 300,
+        delay: isFirstLoad ? 800 : 200,
     });
 
     const surnameInputAnimation = useSpring({
         from: { opacity: 0, x: -100 },
         to: { opacity: 1, x: 0 },
-        delay: isFirstLoad ? 950 : 500,
+        delay: isFirstLoad ? 950 : 400,
     });
 
     const buttonAnimation = useSpring({
         from: { opacity: 0, scale: 0.8 },
         to: { opacity: 1, scale: 1},
-        delay: isFirstLoad ? 1200 : 650,
+        delay: isFirstLoad ? 1200 : 600,
     });
 
     return (
