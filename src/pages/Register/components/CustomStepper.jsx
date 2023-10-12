@@ -113,20 +113,24 @@ const CustomStepper = () => {
 
     //animations
     const step1animation = useSpring({
-        scale: loaded ? 1 : 0,
+        from: { scale: 0 },
+        to: { scale: 1 },
         delay: 150,
     });
     const step2animation = useSpring({
-        scale: loaded ? 1 : 0,
+        from: { scale: 0 },
+        to: { scale: 1 },
         delay: 300,
     });
     const step3animation = useSpring({
-        scale: loaded ? 1 : 0,
+        from: { scale: 0 },
+        to: { scale: 1 },
         delay: 450,
     });
 
     const connectorAnimation = useSpring({
-        opacity: loaded ? 1 : 0,
+        from: { opacity: 0 },
+        to: { opacity: 1 },
         delay: 550,
     });
 

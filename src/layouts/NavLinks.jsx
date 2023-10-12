@@ -1,5 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { Button } from '@mui/material';
+import { registerActions } from '../store/registerSlice';
+import { useDispatch } from 'react-redux';
 
 const navLinksSx = {
     mx: {
@@ -14,9 +16,20 @@ const navLinksSx = {
 };
 
 const NavigationLink = (props) => {
+    const dispatch = useDispatch();
+
+    const buttonHandler = () => {
+        dispatch(registerActions.isFirstLoadHandler(true));
+    };
+
     return (
         <NavLink to={props.link}>
-            <Button variant="text" sx={navLinksSx} disableRipple>
+            <Button
+                variant="text"
+                sx={navLinksSx}
+                disableRipple
+                onClick={buttonHandler}
+            >
                 {props.text}
             </Button>
         </NavLink>
@@ -29,7 +42,10 @@ const NavLinks = () => {
             {/* {gets link and text props} */}
             <NavigationLink link={'login-test'} text={'test-login'} />
             <NavigationLink link={'register-test'} text={'register-test'} />
-            <NavigationLink link={'forgotten-password'} text={'forgotten-password'} />
+            <NavigationLink
+                link={'forgotten-password'}
+                text={'forgotten-password'}
+            />
 
             {/* {login button} */}
             <NavLink to="/login">

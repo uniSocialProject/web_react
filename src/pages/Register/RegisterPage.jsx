@@ -22,8 +22,8 @@ const RegisterPage = () => {
     }, []);
 
     const boxAximation = useSpring({
-        opacity: loaded ? 1 : 0,
-        scale: loaded ? 1 : 0.7,
+        from: { opacity: 0, scale: 0.7 },
+        to: { opacity: 1, scale: 1 },
     });
 
     return (

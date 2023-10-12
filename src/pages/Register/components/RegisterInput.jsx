@@ -17,6 +17,8 @@ const RegisterInput = () => {
     let activeStep = useSelector((state) => state.register.step);
     let isKvkk = useSelector((state) => state.register.isKvkk);
 
+    
+
     const activeStepIncrementHandler = () => {
         if (activeStep === 3) {
             return;

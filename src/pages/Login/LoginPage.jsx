@@ -86,43 +86,43 @@ const LoginPage = () => {
 
     //animations
     const emailInputAnimation = useSpring({
-        opacity: loaded ? 1 : 0,
-        x: loaded ? 0 : -100,
+        from: { opacity: 0, x: -100 },
+        to: { opacity: 1, x: 0 },
     });
 
     const passwordInputAnimation = useSpring({
-        opacity: loaded ? 1 : 0,
-        x: loaded ? 0 : -100,
+        from: { opacity: 0, x: -100 },
+        to: { opacity: 1, x: 0 },
         delay: 250,
     });
 
     const entireBoxAnimation = useSpring({
-        opacity: loaded ? 1 : 0,
-        scale: loaded ? 1 : 0.8,
+        from: { opacity: 0, scale: 0.7 },
+        to: { opacity: 1, scale: 1 },
     });
 
     const loginButtonAnimation = useSpring({
-        opacity: loaded ? 1 : 0,
-        scale: loaded ? 1 : 0.8,
-        delay: 600,
+        from: { opacity: 0, scale: 0.8 },
+        to: { opacity: 1, scale: 1 },
+        delay: 500,
     });
 
     const forgottenPasswordAnimation = useSpring({
-        opacity: loaded ? 1 : 0,
-        scale: loaded ? 1 : 0.8,
-        delay: 750,
+        from: { opacity: 0, scale: 0.8 },
+        to: { opacity: 1, scale: 1 },
+        delay: 650,
     });
 
     const dividerAnimation = useSpring({
-        opacity: loaded ? 1 : 0,
-        scale: loaded ? 1 : 0.8,
-        delay: 850,
+        from: { opacity: 0, scale: 0.7 },
+        to: { opacity: 1, scale: 1 },
+        delay: 750,
     });
 
     const registerButtonAnimation = useSpring({
-        opacity: loaded ? 1 : 0,
-        scale: loaded ? 1 : 0.8,
-        delay: 900,
+        from: { opacity: 0, scale: 0.8 },
+        to: { opacity: 1, scale: 1 },
+        delay: 800,
     });
 
     return (
