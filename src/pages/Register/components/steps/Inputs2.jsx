@@ -23,7 +23,11 @@ const Inputs2 = (props) => {
                 }}
             >
                 <animated.div style={{ ...textAnimation }}>
-                    <Typography component="h1" variant="h6" mb={1.5}>
+                    <Typography
+                        component="h1"
+                        variant="h6"
+                        sx={{ userSelect: 'none' }}
+                    >
                         Üniversitenizi ve Bölümünüzü giriniz
                     </Typography>
                 </animated.div>

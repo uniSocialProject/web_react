@@ -21,10 +21,11 @@ const spin = keyframes`
 
 const LoginEmailInput = (props) => {
     const dispatch = useDispatch();
-
-    const [enteredEmail, setEnteredEmail] = useState('');
     const isEmailValid = useSelector((state) => state.login.isEmailValid);
     const isEmailEntered = useSelector((state) => state.login.isEmailEntered);
+    const emailRedux = useSelector((state) => state.login.emailValue);
+
+    const [enteredEmail, setEnteredEmail] = useState(emailRedux);
 
     const emailBlurHandler = () => {
         dispatch(loginActions.emailChanger(enteredEmail));
@@ -51,6 +52,7 @@ const LoginEmailInput = (props) => {
                 onBlur={emailBlurHandler}
                 onChange={emailChangeHandler}
                 error={props.isEmailShake}
+                value={enteredEmail}
                 sx={{
                     animation: props.isEmailShake ? `${spin} 0.3s 4 ease` : '',
                 }}

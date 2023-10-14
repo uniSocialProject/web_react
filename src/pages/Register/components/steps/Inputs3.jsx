@@ -168,7 +168,11 @@ const Inputs3 = (props) => {
                 }}
             >
                 <animated.div style={{ ...textAnimation }}>
-                    <Typography component="h1" variant="h5">
+                    <Typography
+                        component="h1"
+                        variant="h5"
+                        sx={{ userSelect: 'none' }}
+                    >
                         E-posta ve Yeni şifrenizi giriniz
                     </Typography>
                 </animated.div>
@@ -249,6 +253,7 @@ const Inputs3 = (props) => {
                                     Kvkk Kanununu Okudum ve Kabul Ediyorum
                                 </Typography>
                             }
+                            sx={{ userSelect: 'none' }}
                             onClick={kvkkHandler}
                             checked={isKvkk}
                         />

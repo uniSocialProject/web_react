@@ -11,7 +11,7 @@ import {
 //hooks
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 //components
 import ForgottenPasswordModal from './ForgottenPasswordModal';
 import LoginEmailInput from './LoginEmailInput';
@@ -61,8 +61,8 @@ const Login = () => {
             const data = await loginRequest(enteredEmail, enteredPassword);
             localStorage.setItem('token', data.token);
 
-            dispatch(loginActions.resetAllData())
-            return navigate('/')
+            dispatch(loginActions.resetAllData());
+            return navigate('/');
         } catch (error) {
             console.log(error.message);
         }
@@ -85,7 +85,11 @@ const Login = () => {
                         alignItems: 'center',
                     }}
                 >
-                    <Typography component="h1" variant="h5">
+                    <Typography
+                        component="h1"
+                        variant="h5"
+                        sx={{ userSelect: 'none' }}
+                    >
                         Giriş yap
                     </Typography>
                     <Box
@@ -102,10 +106,15 @@ const Login = () => {
                             type="submit"
                             fullWidth
                             variant="contained"
-                            sx={{ mt: 3, mb: 2, textTransform: 'capitalize' }}
+                            sx={{
+                                mt: 3,
+                                mb: 2,
+                                textTransform: 'capitalize',
+                            }}
                         >
                             Giriş yap
                         </Button>
+
                         <Grid container className="justify-center text-center">
                             <Grid item xs={12}>
                                 <Button
@@ -130,19 +139,22 @@ const Login = () => {
                                     my: 1,
                                 }}
                             />
+
                             <Grid item marginY={2}>
-                                <Button
-                                    variant="contained"
-                                    sx={{
-                                        bgcolor: '#42b72a',
-                                        pt: '4',
-                                        ':hover': {
-                                            bgcolor: '#2D8D1A',
-                                        },
-                                    }}
-                                >
-                                    Yeni hesap oluştur
-                                </Button>
+                                <Link to={'register-test'} >
+                                    <Button
+                                        variant="contained"
+                                        sx={{
+                                            bgcolor: '#42b72a',
+                                            pt: '4',
+                                            ':hover': {
+                                                bgcolor: '#2D8D1A',
+                                            },
+                                        }}
+                                    >
+                                        Yeni hesap oluştur
+                                    </Button>
+                                </Link>
                             </Grid>
                         </Grid>
                     </Box>

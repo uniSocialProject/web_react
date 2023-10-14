@@ -65,7 +65,7 @@ const Inputs1 = (props) => {
 
     const buttonAnimation = useSpring({
         from: { opacity: 0, scale: 0.8 },
-        to: { opacity: 1, scale: 1},
+        to: { opacity: 1, scale: 1 },
         delay: isFirstLoad ? 1200 : 600,
     });
 
@@ -81,7 +81,11 @@ const Inputs1 = (props) => {
                 }}
             >
                 <animated.div style={{ ...textAnimation }}>
-                    <Typography component="h1" variant="h5">
+                    <Typography
+                        component="h1"
+                        variant="h5"
+                        sx={{ userSelect: 'none' }}
+                    >
                         Adınızı ve soyadınızı giriniz
                     </Typography>
                 </animated.div>
