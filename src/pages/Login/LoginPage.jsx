@@ -11,7 +11,7 @@ import {
 //hooks
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { animated, useSpring } from '@react-spring/web';
 //components
 import {
@@ -218,18 +218,20 @@ const LoginPage = () => {
                                     <animated.div
                                         style={{ ...registerButtonAnimation }}
                                     >
-                                        <Button
-                                            variant="contained"
-                                            sx={{
-                                                bgcolor: '#42b72a',
-                                                pt: '4',
-                                                ':hover': {
-                                                    bgcolor: '#2D8D1A',
-                                                },
-                                            }}
-                                        >
-                                            Yeni hesap oluştur
-                                        </Button>
+                                        <Link to={'/register-test'}>
+                                            <Button
+                                                variant="contained"
+                                                sx={{
+                                                    bgcolor: '#42b72a',
+                                                    pt: '4',
+                                                    ':hover': {
+                                                        bgcolor: '#2D8D1A',
+                                                    },
+                                                }}
+                                            >
+                                                Yeni hesap oluştur
+                                            </Button>
+                                        </Link>
                                     </animated.div>
                                 </Grid>
                             </Grid>
