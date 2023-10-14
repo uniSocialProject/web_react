@@ -137,6 +137,9 @@ const CustomStepper = () => {
     return (
         <Stack sx={{ width: '100%' }}>
             <Stepper
+                sx={{
+                    userSelect: 'none',
+                }}
                 alternativeLabel
                 activeStep={activeStep}
                 connector={

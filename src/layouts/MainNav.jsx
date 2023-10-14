@@ -62,12 +62,13 @@ function ResponsiveAppBar() {
                             }}
                             disableRipple
                         >
-                            <img
+                            {/* <img
                                 src={logo}
                                 alt="logo"
                                 draggable={false}
                                 style={{ maxWidth: '240px' }}
-                            />
+                            /> */}
+                            LOGO
                         </Button>
                     </NavLink>
                     {!isSmallScreen && <NavLinks />}
