@@ -17,8 +17,6 @@ const RegisterInput = () => {
     let activeStep = useSelector((state) => state.register.step);
     let isKvkk = useSelector((state) => state.register.isKvkk);
 
-    
-
     const activeStepIncrementHandler = () => {
         if (activeStep === 3) {
             return;
@@ -42,17 +40,20 @@ const RegisterInput = () => {
     const university = useSelector((state) => state.register.univercityValue);
     const department = useSelector((state) => state.register.departmentValue);
     const email = useSelector((state) => state.register.emailValue);
+    const emailExtension = useSelector(
+        (state) => state.register.emailExtension
+    );
     const password = useSelector((state) => state.register.passwordValue);
 
     const data = {
         name: name + '+' + surname,
-        email: email,
+        email: email + emailExtension,
         password: password,
         university: university,
         department: department,
     };
     const formSubmit = () => {
-        console.log(data.name);
+        console.log(data);
         registerRequest(data);
     };
 

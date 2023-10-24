@@ -7,6 +7,7 @@ import {
     TextField,
     FormControlLabel,
     Switch,
+    Divider,
 } from '@mui/material';
 //components
 import PasswordStrengthBar from '../PasswordStrengthBar';
@@ -21,9 +22,11 @@ import {
     ErrorAdornment,
     EyeEndAdornment,
 } from '../../adornments/InputErrorAdornment';
+//data
+import data from '../../../../data/univercities.json';
 
-const emailRegex =
-    /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
+// const emailRegex =
+//     /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
 
 const Inputs3 = (props) => {
     const dispatch = useDispatch();
@@ -32,6 +35,15 @@ const Inputs3 = (props) => {
     const passwordStrenght = useSelector(
         (state) => state.register.passwordStrenght
     );
+    const selectedUnivercity = useSelector(
+        (state) => state.register.univercityValue
+    );
+    let emailExtension;
+    data.forEach((e) => {
+        if (selectedUnivercity === e.universities[0].name) {
+            emailExtension = e.universities[0].email;
+        }
+    });
 
     //kvkk actions
     const isKvkk = useSelector((state) => state.register.isKvkk);
@@ -47,7 +59,9 @@ const Inputs3 = (props) => {
     const emailChangeHandler = (event) => {
         setEnteredEmail(event.currentTarget.value);
         dispatch(registerActions.emailChangeHandler(event.currentTarget.value));
-        let emailValidation = emailRegex.test(event.currentTarget.value);
+        dispatch(registerActions.emailExtensionChangeHandler(emailExtension));
+        // let emailValidation = emailRegex.test(event.currentTarget.value);
+        let emailValidation = enteredEmail > 5 ? true : false;
         setIsEmailValid(emailValidation);
     };
     const emailBlurHandler = () => {
@@ -101,7 +115,8 @@ const Inputs3 = (props) => {
     }, [passwordStrenght]);
 
     useEffect(() => {
-        let emailValidation = emailRegex.test(enteredEmail);
+        // let emailValidation = emailRegex.test(enteredEmail);
+        let emailValidation = enteredEmail > 5 ? true : false;
         setIsEmailValid(emailValidation);
 
         if (isPasswordValid && isEmailValid) {
@@ -187,19 +202,28 @@ const Inputs3 = (props) => {
                             fullWidth
                             id="email"
                             label="E-mail"
-                            name="email"
+                            name="uniEmail"
                             autoComplete="email"
                             value={enteredEmail}
                             onChange={emailChangeHandler}
                             onBlur={emailBlurHandler}
                             error={isEmailEntered && !isEmailValid}
                             InputProps={{
-                                endAdornment:
-                                    !isEmailValid && isEmailEntered ? (
-                                        <ErrorAdornment />
-                                    ) : (
-                                        ''
-                                    ),
+                                endAdornment: (
+                                    <>
+                                        <Divider
+                                            orientation="vertical"
+                                            variant="fullWidth"
+                                            sx={{
+                                                bgcolor: '#e3e5e8',
+                                                py: 3.5,
+                                            }}
+                                        />
+                                        <Typography sx={{ ml: 1.5, mr: 0.5 }}>
+                                            {emailExtension}
+                                        </Typography>
+                                    </>
+                                ),
                             }}
                             autoFocus
                         />

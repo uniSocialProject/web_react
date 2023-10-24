@@ -15,6 +15,7 @@ const registerSlice = createSlice({
         departmentValue: '',
         //third step constants
         emailValue: '',
+        emailExtension: '',
         passwordValue: '',
         isPasswordEntered: false,
         isKvkkSubmitted: false,
@@ -42,6 +43,9 @@ const registerSlice = createSlice({
         },
         emailChangeHandler(state, action) {
             state.emailValue = action.payload;
+        },
+        emailExtensionChangeHandler(state, action) {
+            state.emailExtension = action.payload;
         },
         passwordChangeHandler(state, action) {
             state.passwordValue = action.payload;
