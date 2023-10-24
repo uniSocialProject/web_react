@@ -8,6 +8,7 @@ import {
     Typography,
     Container,
 } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
 //hooks
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
@@ -26,6 +27,8 @@ import { loginRequest } from '../../util/authService';
 const LoginPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    //login button loading state
+    const [isRequestPending, setIsRequestPending] = useState(false);
 
     //is credentials invalid
     const isEmailValid = useSelector((state) => state.login.isEmailValid);
@@ -58,13 +61,15 @@ const LoginPage = () => {
                 setTimeout(() => {
                     setIsPasswordShake(false);
                 }, 500);
+            } else {
+                setIsRequestPending(true);
+                const data = await loginRequest(enteredEmail, enteredPassword);
+                localStorage.setItem('token', data.token);
+
+                dispatch(loginActions.resetAllData());
+                setIsRequestPending(false);
+                return navigate('/');
             }
-
-            const data = await loginRequest(enteredEmail, enteredPassword);
-            localStorage.setItem('token', data.token);
-
-            dispatch(loginActions.resetAllData());
-            return navigate('/');
         } catch (error) {
             console.log(error.message);
         }
@@ -166,9 +171,11 @@ const LoginPage = () => {
                                 />
                             </animated.div>
                             <animated.div style={{ ...loginButtonAnimation }}>
-                                <Button
+                                <LoadingButton
                                     type="submit"
                                     fullWidth
+                                    role='progressbar'
+                                    loading={isRequestPending}
                                     variant="contained"
                                     sx={{
                                         mt: 3,
@@ -177,7 +184,7 @@ const LoginPage = () => {
                                     }}
                                 >
                                     Giriş yap
-                                </Button>
+                                </LoadingButton>
                             </animated.div>
                             <Grid
                                 container
