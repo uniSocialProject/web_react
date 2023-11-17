@@ -9,6 +9,7 @@ import {
     Switch,
     Divider,
 } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
 //components
 import PasswordStrengthBar from '../PasswordStrengthBar';
 //hooks
@@ -30,6 +31,9 @@ import data from '../../../../data/univercities.json';
 
 const Inputs3 = (props) => {
     const dispatch = useDispatch();
+    const isRequestPending = useSelector(
+        (state) => state.register.isRequestPending
+    );
     const emailRedux = useSelector((state) => state.register.emailValue);
     const passwordRedux = useSelector((state) => state.register.passwordValue);
     const passwordStrenght = useSelector(
@@ -307,14 +311,16 @@ const Inputs3 = (props) => {
                                     justifyContent: 'end',
                                 }}
                             >
-                                <Button
+                                <LoadingButton
                                     variant="contained"
                                     color="success"
                                     onClick={props.formSubmit}
                                     disabled={!isFormValid}
+                                    role="progressbar"
+                                    loading={isRequestPending}
                                 >
                                     Kayıt Ol
-                                </Button>
+                                </LoadingButton>
                             </animated.div>
                         </Grid>
                     </Grid>

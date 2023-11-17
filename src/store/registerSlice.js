@@ -7,6 +7,7 @@ const registerSlice = createSlice({
         step: 1,
         maxStep: 1,
         isKvkk: false,
+        isRequestPending: false,
         //first step constants
         nameValue: 'Murat',
         surnameValue: 'Öztürk',
@@ -55,6 +56,9 @@ const registerSlice = createSlice({
         },
         isFirstLoadHandler(state, action) {
             state.isFirstLoad = action.payload;
+        },
+        isRequestPendingHandler(state, action) {
+            state.isRequestPending = action.payload;
         },
     },
 });

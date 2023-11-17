@@ -1,6 +1,7 @@
 //packages
 import { Grid } from '@mui/material';
 //hooks
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 //functions
 import { registerActions } from '../../../store/registerSlice';
@@ -13,6 +14,10 @@ import RegisterKvkkForm from './RegisterKvkkForm';
 
 const RegisterInput = () => {
     const dispatch = useDispatch();
+
+    //form submition loading states
+    const [isRequestPending, setIsRequestPending] = useState(false);
+    const [isRequestError, setIsRequestError] = useState(false);
 
     let activeStep = useSelector((state) => state.register.step);
     let isKvkk = useSelector((state) => state.register.isKvkk);
@@ -52,9 +57,19 @@ const RegisterInput = () => {
         university: university,
         department: department,
     };
-    const formSubmit = () => {
-        console.log(data);
-        registerRequest(data);
+
+    const formSubmit = async (event) => {
+        try {
+            event.preventDefault();
+            dispatch(registerActions.isRequestPendingHandler(true));
+            setIsRequestError(false);
+            const registerData = await registerRequest(data);
+            dispatch(registerActions.isRequestPendingHandler(false));
+            console.log(registerData);
+        } catch (err) {
+            dispatch(registerActions.isRequestPendingHandler(false));
+            console.log(err);
+        }
     };
 
     return (
@@ -81,6 +96,7 @@ const RegisterInput = () => {
                 {/* {third step} */}
                 {activeStep === 3 && (
                     <Inputs3
+                        isRequestPending={isRequestPending}
                         formSubmit={formSubmit}
                         activeStepDecrementHandler={activeStepDecrementHandler}
                     />
