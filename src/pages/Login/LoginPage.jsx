@@ -19,6 +19,7 @@ import {
     LoginEmailInput,
     LoginPasswordInput,
     ForgottenPasswordModal,
+    ButtonErrorAdornment,
 } from './components';
 //functions
 import { loginActions } from '../../store/loginSlice';
@@ -29,6 +30,7 @@ const LoginPage = () => {
     const navigate = useNavigate();
     //login button loading state
     const [isRequestPending, setIsRequestPending] = useState(false);
+    const [isRequestError, setIsRequestError] = useState(false);
 
     //is credentials invalid
     const isEmailValid = useSelector((state) => state.login.isEmailValid);
@@ -68,10 +70,13 @@ const LoginPage = () => {
 
                 dispatch(loginActions.resetAllData());
                 setIsRequestPending(false);
+                setIsRequestError(false);
                 return navigate('/');
             }
         } catch (error) {
             console.log(error.message);
+            setIsRequestPending(false);
+            setIsRequestError(true);
         }
     };
 
@@ -174,7 +179,7 @@ const LoginPage = () => {
                                 <LoadingButton
                                     type="submit"
                                     fullWidth
-                                    role='progressbar'
+                                    role="progressbar"
                                     loading={isRequestPending}
                                     variant="contained"
                                     sx={{
@@ -183,7 +188,7 @@ const LoginPage = () => {
                                         textTransform: 'capitalize',
                                     }}
                                 >
-                                    Giriş yap
+                                    Giriş Yap
                                 </LoadingButton>
                             </animated.div>
                             <Grid
