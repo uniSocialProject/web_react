@@ -8,6 +8,7 @@ import LoginEmailInput from './LoginEmailInput';
 import LoginPasswordInput from './LoginPasswordInput';
 import SmsEmailSwitch from './SmsEmailSwitch';
 import TelephoneInput from './TelephoneInput';
+import LoginAlert from './LoginAlert';
 
 export {
     ErrorAdornment,
@@ -18,4 +19,5 @@ export {
     LoginPasswordInput,
     SmsEmailSwitch,
     TelephoneInput,
+    LoginAlert,
 };

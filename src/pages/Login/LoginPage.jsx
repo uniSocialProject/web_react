@@ -19,7 +19,7 @@ import {
     LoginEmailInput,
     LoginPasswordInput,
     ForgottenPasswordModal,
-    ButtonErrorAdornment,
+    LoginAlert,
 } from './components';
 //functions
 import { loginActions } from '../../store/loginSlice';
@@ -28,6 +28,8 @@ import { loginRequest } from '../../util/authService';
 const LoginPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    //Error text state
+    const [errorText, setErrorText] = useState('');
     //login button loading state
     const [isRequestPending, setIsRequestPending] = useState(false);
     const [isRequestError, setIsRequestError] = useState(false);
@@ -64,6 +66,7 @@ const LoginPage = () => {
                     setIsPasswordShake(false);
                 }, 500);
             } else {
+                setIsRequestError(false);
                 setIsRequestPending(true);
                 const data = await loginRequest(enteredEmail, enteredPassword);
                 localStorage.setItem('token', data.token);
@@ -77,22 +80,9 @@ const LoginPage = () => {
             console.log(error.message);
             setIsRequestPending(false);
             setIsRequestError(true);
+            setErrorText(error.message);
         }
     };
-
-    //is page loaded
-    const [loaded, setLoaded] = useState(false);
-
-    useEffect(() => {
-        window.addEventListener('load', () => {
-            setLoaded(true);
-        });
-        return () => {
-            window.removeEventListener('load', () => {
-                setLoaded(true);
-            });
-        };
-    }, []);
 
     //animations
     const emailInputAnimation = useSpring({
@@ -191,6 +181,9 @@ const LoginPage = () => {
                                     Giriş Yap
                                 </LoadingButton>
                             </animated.div>
+                            {isRequestError && (
+                                <LoginAlert errorText={errorText} isRequestError={isRequestError} />
+                            )}
                             <Grid
                                 container
                                 className="justify-center text-center"
