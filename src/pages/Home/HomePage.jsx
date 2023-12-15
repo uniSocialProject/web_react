@@ -14,15 +14,16 @@ const HomePage = () => {
                 sx={{
                     display: 'flex',
                     justifyContent: 'center',
-                    backgroundImage: `url(${Clouds})`, // Use backgroundImage property
-                    backgroundSize: 'cover', // Optional: adjust based on your needs
-                    backgroundRepeat: 'no-repeat', // Optional: adjust based on your needs
+                    backgroundImage: `url(${Clouds})`,
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat',
+                    height: '100vh',
                 }}
             >
-                <Grid item xs={6} mt={12}>
+                <Grid item xs={6} mt={20}>
                     <HomeDownloandPaper />
                 </Grid>
-                <Grid item xs={6} mt={7}>
+                <Grid item xs={6} mt={15}>
                     <MobilePhoneGif />
                 </Grid>
             </Grid>

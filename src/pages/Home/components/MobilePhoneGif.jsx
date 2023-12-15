@@ -13,13 +13,7 @@ const MobilePhoneGif = () => {
                 }}
             ></div> */}
             <Grid item sx={{ display: 'flex', justifyContent: 'center' }}>
-                <img
-                    style={{
-                        maxWidth: '40%',
-                    }}
-                    src={Phone}
-                    alt="tel"
-                />
+                <img style={{ height:"80vh" }} src={Phone} alt="tel" />
             </Grid>
         </>
     );
